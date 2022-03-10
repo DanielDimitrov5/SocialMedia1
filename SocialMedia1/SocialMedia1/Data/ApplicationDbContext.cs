@@ -22,6 +22,8 @@ namespace SocialMedia1.Data
 
         public DbSet<UserProfileGroup> UserProfilesGroups { get; set; }
 
+        public DbSet<UserGroupRequest> JoinGroupRequest { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -31,10 +33,12 @@ namespace SocialMedia1.Data
 
             builder.Entity<UserProfileGroup>().HasKey(x => new { x.UserProfileId, x.GroupId });
 
-            builder.Entity<UserProfileGroup>().HasOne(x => x.Group).WithMany(x => x.Users).HasForeignKey(x=>x.GroupId).OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<UserProfileGroup>().HasOne(x => x.UserProfile).WithMany(x => x.Groups).HasForeignKey(x=>x.UserProfileId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<UserProfileGroup>().HasOne(x => x.Group).WithMany(x => x.Users).HasForeignKey(x => x.GroupId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<UserProfileGroup>().HasOne(x => x.UserProfile).WithMany(x => x.Groups).HasForeignKey(x => x.UserProfileId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserGroupRequest>().HasKey(x => new { x.GroupId, x.UserProfileId });
         }
 
-        public DbSet<SocialMedia1.Models.CreatePostViewModel> CreatePostViewModel { get; set; }
+        public DbSet<SocialMedia1.Models.JoinGroupRequestViewModel> JoinGroupRequestViewModel { get; set; }
     }
 }

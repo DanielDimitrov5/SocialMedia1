@@ -11,11 +11,13 @@ namespace SocialMedia1.Controllers
     {
 
         private readonly IUserProfileService userProfileService;
+        private readonly IGroupService groupService;
         private readonly UserManager<IdentityUser> userManager;
 
-        public UserProfilesController(IUserProfileService userProfileService, UserManager<IdentityUser> userManager)
+        public UserProfilesController(IUserProfileService userProfileService, IGroupService groupService,UserManager<IdentityUser> userManager)
         {
             this.userProfileService = userProfileService;
+            this.groupService = groupService;
             this.userManager = userManager;
         }
 
@@ -99,7 +101,11 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult Search(string searchTerm)
         {
-            var model = userProfileService.GetProfilesBySearchTerm(searchTerm);
+            var model = new SearchResultsViewModel
+            {
+                Profiles = userProfileService.GetProfilesBySearchTerm(searchTerm),
+                Groups = groupService.GetGroupsBySearchTerm(searchTerm)
+            };
 
             return View(model);
         }

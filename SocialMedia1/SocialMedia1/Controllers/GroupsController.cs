@@ -46,9 +46,35 @@ namespace SocialMedia1.Controllers
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
+            if (groupService.IsGroupPrivate(id))
+            {
+                if (groupService.IsJoinRequstSent(id, userId) == false)
+                {
+                    return SendJoinRequest(id);
+                }
+
+                return Redirect($"/Group/{id}");
+            }
+
             groupService.JoinGroup(id, userId);
 
             return Redirect($"/Group/{id}");
+        }
+
+        public IActionResult SendJoinRequest(string id)
+        {
+            var userId = userManager.GetUserId(HttpContext.User);
+
+            groupService.SendJoinRequest(id, userId);
+
+            return Redirect($"/Group/{id}");
+        }
+
+        public IActionResult JoinRequests(string id)
+        {
+            var model = groupService.GetJoinGroupRequests(id);
+
+            return View(model);
         }
 
         public IActionResult LeaveGroup(string id)

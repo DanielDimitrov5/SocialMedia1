@@ -9,6 +9,7 @@ namespace SocialMedia1.Data.Models
             Id = Guid.NewGuid().ToString();
             Users = new HashSet<UserProfileGroup>();
             Posts = new HashSet<Post>();
+            JoinRequests = new HashSet<UserGroupRequest>();
         }
 
         [Key]
@@ -27,5 +28,7 @@ namespace SocialMedia1.Data.Models
         public ICollection<UserProfileGroup> Users { get; set; }
 
         public ICollection<Post> Posts { get; set; }
+
+        public ICollection<UserGroupRequest> JoinRequests { get; set; }
     }
 }

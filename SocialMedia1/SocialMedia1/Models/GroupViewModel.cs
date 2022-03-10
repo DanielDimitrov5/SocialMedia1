@@ -10,6 +10,8 @@
 
         public int Members { get; set; }
 
+        public string Status { get; set; } //IsPublic
+
         public ICollection<PostViewModel> Posts { get; set; }
     }
 }

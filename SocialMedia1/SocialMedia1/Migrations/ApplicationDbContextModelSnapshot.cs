@@ -295,6 +295,21 @@ namespace SocialMedia1.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("SocialMedia1.Data.Models.UserGroupRequest", b =>
+                {
+                    b.Property<string>("GroupId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserProfileId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GroupId", "UserProfileId");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("JoinGroupRequest");
+                });
+
             modelBuilder.Entity("SocialMedia1.Data.Models.UserProfile", b =>
                 {
                     b.Property<string>("Id")
@@ -343,20 +358,6 @@ namespace SocialMedia1.Migrations
                     b.HasIndex("GroupId");
 
                     b.ToTable("UserProfilesGroups");
-                });
-
-            modelBuilder.Entity("SocialMedia1.Models.CreatePostViewModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CreatePostViewModel");
                 });
 
             modelBuilder.Entity("UserProfileUserProfile", b =>
@@ -459,6 +460,25 @@ namespace SocialMedia1.Migrations
                     b.Navigation("UserProfile");
                 });
 
+            modelBuilder.Entity("SocialMedia1.Data.Models.UserGroupRequest", b =>
+                {
+                    b.HasOne("SocialMedia1.Data.Models.Group", "Groups")
+                        .WithMany("JoinRequests")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialMedia1.Data.Models.UserProfile", "UserProfile")
+                        .WithMany("JoinRequests")
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Groups");
+
+                    b.Navigation("UserProfile");
+                });
+
             modelBuilder.Entity("SocialMedia1.Data.Models.UserProfileGroup", b =>
                 {
                     b.HasOne("SocialMedia1.Data.Models.Group", "Group")
@@ -495,6 +515,8 @@ namespace SocialMedia1.Migrations
 
             modelBuilder.Entity("SocialMedia1.Data.Models.Group", b =>
                 {
+                    b.Navigation("JoinRequests");
+
                     b.Navigation("Posts");
 
                     b.Navigation("Users");
@@ -505,6 +527,8 @@ namespace SocialMedia1.Migrations
                     b.Navigation("FollowRequests");
 
                     b.Navigation("Groups");
+
+                    b.Navigation("JoinRequests");
 
                     b.Navigation("Posts");
                 });
