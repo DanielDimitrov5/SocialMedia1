@@ -12,6 +12,8 @@
 
         public string Status { get; set; } //IsPublic
 
+        public ICollection<ProfileViewModel> Profiles { get; set; }
+
         public ICollection<PostViewModel> Posts { get; set; }
     }
 }

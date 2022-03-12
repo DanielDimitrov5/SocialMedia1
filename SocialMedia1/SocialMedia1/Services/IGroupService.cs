@@ -8,6 +8,8 @@ namespace SocialMedia1.Services
 
         ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId);
 
+        ICollection<ProfileViewModel> GetMembers(string groupId);
+
         void CreateGroup(string name, string description, bool isPrivate ,string creatorId);
 
         GroupViewModel GetGroup(string id);
@@ -15,6 +17,10 @@ namespace SocialMedia1.Services
         void JoinGroup(string groupId, string userId);
 
         void SendJoinRequest(string groupId, string userId);
+
+        void ApproveJoinRequest(string requesterId, string groupId);
+
+        void DeleteJoinRequest(string requesterId, string groupId);
 
         void LeaveGroup(string groupId, string userId);
 
@@ -25,6 +31,8 @@ namespace SocialMedia1.Services
         bool IsGroupPrivate(string groupId);
 
         bool IsJoinRequstSent(string groupId, string userId);
+
+        bool IsUserGroupCreator(string userId, string groupId);
 
         ICollection<GroupViewModel> GetGroupsBySearchTerm(string searchTerm);
     }

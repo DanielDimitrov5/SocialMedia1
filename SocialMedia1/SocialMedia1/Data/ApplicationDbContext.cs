@@ -39,6 +39,6 @@ namespace SocialMedia1.Data
             builder.Entity<UserGroupRequest>().HasKey(x => new { x.GroupId, x.UserProfileId });
         }
 
-        public DbSet<SocialMedia1.Models.JoinGroupRequestViewModel> JoinGroupRequestViewModel { get; set; }
+        public DbSet<SocialMedia1.Models.ProfileViewModel> ProfileViewModel { get; set; }
     }
 }

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SocialMedia1.Models.ProfileViewModel>
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+<h1>Members</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nickname)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td onclick="window.location='/UserProfiles/Profile/@item.Id';">
+                    @Html.DisplayFor(modelItem => item.Nickname)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -31,22 +31,33 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Members)
-        </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Members)
+            <a href="/Groups/Members/@Model.Id" class="btn btn-outline-success">Members: @Model.Members</a>
         </dd>
     </dl>
 </div>
 
 @if (groupService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
 {
-    <a href="/Groups/JoinGroup/@Model.Id" class="btn-success btn">Join Group</a>
+    @if (groupService.IsJoinRequstSent(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
+    {
+        <button type="button" class="btn-dark" disabled>Request Sent</button>
+    }
+    else
+    {
+        <a href="/Groups/JoinGroup/@Model.Id" class="btn-success btn">Join Group</a>
+    }
 }
 else
 {
-    <a href="/Groups/LeaveGroup/@Model.Id" class="btn-danger btn">Leave Group</a>
+    if (groupService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+    {
+        <a href="/Groups/JoinRequests/@Model.Id" class="btn-success btn">Join Requests</a>
+    }
+    else
+    {
+        <a href="/Groups/LeaveGroup/@Model.Id" class="btn-danger btn">Leave Group</a>
+    }
 
     <div>
         <form method="post" asp-action="CreatePost">

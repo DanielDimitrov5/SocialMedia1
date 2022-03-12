@@ -13,6 +13,25 @@ namespace SocialMedia1.Services
             this.context = context;
         }
 
+        public void ApproveJoinRequest(string requesterId, string groupId)
+        {
+            UserProfile requester = context.UserProfiles.Find(requesterId);
+            Group group = context.Groups.Find(groupId);
+
+            if (requester == null || group == null)
+            {
+                return;
+            }
+
+            JoinGroup(groupId, requesterId);
+
+            UserGroupRequest followRequest = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
+
+            context.JoinGroupRequest.Remove(followRequest);
+
+            context.SaveChanges();
+        }
+
         public void CreateGroup(string name, string description, bool isPrivate, string creatorId)
         {
             Group group = new Group
@@ -50,6 +69,20 @@ namespace SocialMedia1.Services
             };
 
             group.Posts.Add(post);
+
+            context.SaveChanges();
+        }
+
+        public void DeleteJoinRequest(string requesterId, string groupId)
+        {
+            var request = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
+
+            if (request == null)
+            {
+                return;
+            }
+
+            context.JoinGroupRequest.Remove(request);
 
             context.SaveChanges();
         }
@@ -115,6 +148,29 @@ namespace SocialMedia1.Services
 
             return groups;
         }
+        public ICollection<ProfileViewModel> GetMembers(string groupId)
+        {
+            var group = context.Groups.Find(groupId);
+
+            context.Entry(group).Collection(x => x.Users).Load();
+
+            List<ProfileViewModel> members = new();
+
+            foreach (var member in group.Users)
+            {
+                context.Entry(member).Reference(x => x.UserProfile).Load();
+
+                var memberViewModel = new ProfileViewModel
+                {
+                    Id = member.UserProfileId,
+                    Nickname = member.UserProfile.Nickname,
+                };
+
+                members.Add(memberViewModel);
+            }
+
+            return members;
+        }
 
         public ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId)
         {
@@ -151,6 +207,11 @@ namespace SocialMedia1.Services
         public bool IsJoinRequstSent(string groupId, string userId)
         {
             return context.JoinGroupRequest.Any(x => x.UserProfileId == userId && x.GroupId == groupId);
+        }
+
+        public bool IsUserGroupCreator(string userId, string groupId)
+        {
+            return context.Groups.Any(x => x.Id == groupId && x.CreaterId == userId);
         }
 
         public bool IsUserGroupMember(string userId, string groupId)
