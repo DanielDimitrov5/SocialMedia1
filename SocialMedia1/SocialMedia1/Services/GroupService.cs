@@ -96,13 +96,20 @@ namespace SocialMedia1.Services
                 return null;
             }
 
+            var joinRequestsCount = context.Entry(group)
+                           .Collection(b => b.JoinRequests)
+                           .Query()
+                           .Count();
+
             GroupViewModel groupViewModel = new GroupViewModel
             {
                 Id = id,
                 Name = group.Name,
                 Description = group.Description,
                 Members = group.MembersCount,
+                JoinRequests = joinRequestsCount,
                 Posts = GetPosts(id),
+                Creator = context.UserProfiles.Find(group.CreaterId).Nickname,
             };
 
             return groupViewModel;
@@ -148,7 +155,7 @@ namespace SocialMedia1.Services
 
             return groups;
         }
-        public ICollection<ProfileViewModel> GetMembers(string groupId)
+        public GroupMembersViewModel GetMembers(string groupId)
         {
             var group = context.Groups.Find(groupId);
 
@@ -169,7 +176,14 @@ namespace SocialMedia1.Services
                 members.Add(memberViewModel);
             }
 
-            return members;
+            GroupMembersViewModel groupMembers = new GroupMembersViewModel
+            {
+                GroupCreatorId = group.CreaterId,
+                GroupId = groupId,
+                Members = members,
+            };
+
+            return groupMembers;
         }
 
         public ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId)

@@ -31,6 +31,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Creator)
+        </dd>
         <dd class="col-sm-10">
             <a href="/Groups/Members/@Model.Id" class="btn btn-outline-success">Members: @Model.Members</a>
         </dd>
@@ -52,7 +58,7 @@ else
 {
     if (groupService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
     {
-        <a href="/Groups/JoinRequests/@Model.Id" class="btn-success btn">Join Requests</a>
+        <a href="/Groups/JoinRequests/@Model.Id" class="btn-success btn">Join Requests: @Model.JoinRequests</a>
     }
     else
     {

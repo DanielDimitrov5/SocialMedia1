@@ -10,7 +10,11 @@
 
         public int Members { get; set; }
 
+        public int JoinRequests { get; set; }
+
         public string Status { get; set; } //IsPublic
+
+        public string Creator { get; set; }
 
         public ICollection<ProfileViewModel> Profiles { get; set; }
 

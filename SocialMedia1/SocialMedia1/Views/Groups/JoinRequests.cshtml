@@ -4,7 +4,7 @@
     ViewData["Title"] = "JoinRequests";
 }
 
-<h1>JoinRequests</h1>
+<h1>@ViewData["Title"]</h1>
 
 <table class="table table-hover table-stripted">
     <thead>
@@ -31,9 +31,9 @@
                 </td>
                 <td>
                     <a href="/Groups/ApproveJoinRequest?requesterId=@item.UserId&groupId=@item.GroupId" class="btn-success btn">Approve</a>
+                    <a href="/Groups/DeleteJoinRequest?requesterId=@item.UserId&groupId=@item.GroupId" class="btn-danger btn">Delete</a>
                 </td>
                 <td>
-                    <a href="/Groups/DeleteJoinRequest?requesterId=@item.UserId&groupId=@item.GroupId" class="btn-danger btn">Delete</a>
                 </td>
             </tr>
         }

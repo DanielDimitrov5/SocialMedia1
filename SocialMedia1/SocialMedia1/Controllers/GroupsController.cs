@@ -108,7 +108,7 @@ namespace SocialMedia1.Controllers
 
             groupService.ApproveJoinRequest(requesterId, groupId);
 
-            return Redirect($"/Group/{groupId}");
+            return Redirect($"/Groups/JoinRequests/{groupId}");
         }
 
         [Authorize]
@@ -142,6 +142,14 @@ namespace SocialMedia1.Controllers
             groupService.LeaveGroup(id, userId);
 
             return Redirect($"/Group/{id}");
+        }
+
+        [Authorize]
+        public IActionResult KickUser(string userId, string groupId)
+        {
+            groupService.LeaveGroup(groupId, userId);
+
+            return Redirect($"/Groups/Members/{groupId}");
         }
 
 

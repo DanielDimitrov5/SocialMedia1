@@ -1,4 +1,11 @@
-﻿@model IEnumerable<SocialMedia1.Models.ProfileViewModel>
+﻿@*@using Microsoft.AspNetCore.Identity*@
+@using SocialMedia1.Services
+@using System.Security.Claims
+@model SocialMedia1.Models.GroupMembersViewModel
+@inject IGroupService groupService
+@inject IUserProfileService userProfileService
+
+
 
 @{
     ViewData["Title"] = "Members";
@@ -10,19 +17,35 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nickname)
+                Nickname
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Members)
         {
             <tr>
                 <td onclick="window.location='/UserProfiles/Profile/@item.Id';">
-                    @Html.DisplayFor(modelItem => item.Nickname)
+                    @if (item.Id == @User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        <b>@Html.DisplayFor(modelItem => item.Nickname)</b>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    }
                 </td>
+                @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.GroupCreatorId && groupService.IsUserGroupCreator(item.Id, Model.GroupId) == false)
+                {
+                    <td>
+                        <a href="/Groups/KickUser?userId=@item.Id&groupId=@Model.GroupId" class="btn-danger btn">Kick</a>
+                    </td>
+                }
+                <td>
 
+
+                </td>
             </tr>
         }
     </tbody>

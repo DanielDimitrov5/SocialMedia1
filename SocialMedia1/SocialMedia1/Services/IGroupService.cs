@@ -8,7 +8,7 @@ namespace SocialMedia1.Services
 
         ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId);
 
-        ICollection<ProfileViewModel> GetMembers(string groupId);
+        GroupMembersViewModel GetMembers(string groupId);
 
         void CreateGroup(string name, string description, bool isPrivate ,string creatorId);
 
