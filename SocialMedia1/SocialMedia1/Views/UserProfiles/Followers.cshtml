@@ -14,7 +14,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr onclick="window.location='Profile/@item.Id';">
+            <tr onclick="window.location='/UserProfiles/Profile/@item.Id';">
                 <td>
                     @Html.DisplayFor(modelItem => item.Nickname)
                 </td>

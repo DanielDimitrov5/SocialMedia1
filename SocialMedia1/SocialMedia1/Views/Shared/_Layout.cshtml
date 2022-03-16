@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,51 +11,73 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SocialMedia1.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <title>Lazy - Bootstrap UI Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A new design system for developing with less effort.">
+    <meta name="author" content="BootstrapBay">
+
+    <link href="assets/img/favicon.ico" rel="icon" type="image/png">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lazy.css">
+    <link rel="stylesheet" href="/css/demo.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SocialMedia1</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">SocialMedia1</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserProfiles" asp-action="EditUserProfile">Edit Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UserProfiles" asp-action="MyProfile">My Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="CreatePost">Create Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="FollowRequests">Follow Requests</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Groups">Groups</a>
-                        </li>
-                        <li>
-                            <div class="navbar-left" style="margin-top:8px;">
-                                @using (Html.BeginForm("Search", "UserProfiles", FormMethod.Get))
-                                {
-                                    <ul class="nav navbar-nav">
-                                        <li>@Html.TextBox("SearchTerm", ViewBag.CurrentFilter as string)</li>
-                                        <li><input type="submit" value="Search" /></li>
-                                    </ul>
-                                }
-                            </div>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse mr-auto text-center" id="navbarNavDropdown-3">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/UserProfiles/MyProfile">
+                                    My Profile
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Posts/CreatePost">
+                                    Create Post
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/FollowRequests">
+                                    Follow Requests
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Groups">
+                                    Groups
+                                </a>
+                            </li>
+                            <li>
+                                <div class="navbar-left" style="margin-top:3px;">
+                                    @using (Html.BeginForm("Search", "UserProfiles", FormMethod.Get))
+                                    {
+                                        <ul class="nav navbar-nav">
+
+                                            <li>@Html.TextBox("SearchTerm", ViewBag.CurrentFilter as string, new { @class = "form-control me-1", type = "search", placeholder = "Search", } )</li>
+                                            <button type="submit" class="btn btn-light">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+
+                                        </ul>
+                                    }
+                                </div>
+                            </li>
+                        </ul>
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -71,6 +97,16 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/popper/popper.min.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="/vendor/nouislider/js/nouislider.min.js"></script>
+
+    <!--   lazy javascript -->
+    <script src="/js/lazy.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

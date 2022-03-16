@@ -27,10 +27,10 @@ namespace SocialMedia1.Services
 
         public ICollection<ProfileViewModel> GetProfilesBySearchTerm(string searchTerm);
 
-        public ICollection<ProfileViewModel> GetAllFollowers(string currentUserId);
+        public ICollection<ProfileViewModel> GetAllFollowers(string userId);
 
         public void RemoveFollower(string currentUserId, string followerId);
 
-        public ICollection<ProfileViewModel> GetAllFollowing(string currentUserId);
+        public ICollection<ProfileViewModel> GetAllFollowing(string userId);
     }
 }

@@ -111,9 +111,9 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult Followers()
+        public IActionResult Followers(string id)
         {
-            var model = userProfileService.GetAllFollowers(userManager.GetUserId(HttpContext.User));
+            var model = userProfileService.GetAllFollowers(id);
 
             return View(model);
         }
@@ -123,23 +123,25 @@ namespace SocialMedia1.Controllers
         {
             userProfileService.RemoveFollower(userManager.GetUserId(HttpContext.User), id);
 
-            return Redirect("/UserProfiles/Followers");
+            return Redirect($"/UserProfiles/Followers/{id}");
         }
 
         [Authorize]
-        public IActionResult Following()
+        public IActionResult Following(string id)
         {
-            var model = userProfileService.GetAllFollowing(userManager.GetUserId(HttpContext.User));
+            var model = userProfileService.GetAllFollowing(id);
 
             return View(model);
         }
 
         [Authorize]
         public IActionResult UnfollowUser(string id)
-        {
-            userProfileService.UnfollowUser(id, userManager.GetUserId(HttpContext.User));
+         {
+            string currentUser = userManager.GetUserId(HttpContext.User);
 
-            return Redirect("/UserProfiles/Following");
+            userProfileService.UnfollowUser(id, currentUser);
+
+            return Redirect($"/UserProfiles/Following/{currentUser}");
         }
     }
 }
