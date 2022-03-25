@@ -9,11 +9,13 @@ namespace SocialMedia1.Controllers
     public class GroupsController : Controller
     {
         private readonly IGroupService groupService;
+        private readonly IPostService postService;
         private readonly UserManager<IdentityUser> userManager;
 
-        public GroupsController(IGroupService groupService, UserManager<IdentityUser> userManager)
+        public GroupsController(IGroupService groupService, IPostService postService, UserManager<IdentityUser> userManager)
         {
             this.groupService = groupService;
+            this.postService = postService;
             this.userManager = userManager;
         }
 
@@ -153,16 +155,16 @@ namespace SocialMedia1.Controllers
         }
 
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult CreatePost(CreatePostViewModel model, string id)
-        {
-            var userId = userManager.GetUserId(HttpContext.User);
+        //[HttpPost]
+        //[Authorize]
+        //public IActionResult CreatePost(CreatePostViewModel model, string id)
+        //{
+        //    var userId = userManager.GetUserId(HttpContext.User);
 
-            groupService.CreatePost(id, userId, model.Content);
+        //    postService.CreateGroupPost(id, userId, model.Content);
 
-            return Redirect($"/Group/{id}"); //!!!
-        }
+        //    return Redirect($"/Group/{id}"); //!!!
+        //}
 
         [Authorize]
         public IActionResult Members(string id)

@@ -1,81 +1,167 @@
-﻿@model SocialMedia1.Models.ProfileViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using SocialMedia1.Services
+@using System.Security.Claims
+@inject SignInManager<IdentityUser> SignInManager
+@model SocialMedia1.Models.ProfileViewModel
+@inject IUserProfileService userProfileService
+@inject UserManager<IdentityUser> userManager
 
-@{
-    ViewData["Title"] = "MyProfile";
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Lazy - Bootstrap UI Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A new design system for developing with less effort.">
+    <meta name="author" content="BootstrapBay">
 
-<h1>My Profile</h1>
+    <link href="assets/img/favicon.ico" rel="icon" type="image/png">
 
-<a href="/UserProfiles/Followers/@Model.Id" class="btn btn-outline-success">Followers: @Model.FollowersCount</a>
-<a href="/UserProfiles/Following/@Model.Id" class="btn btn-outline-success">Following: @Model.FollowingCount</a>
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lazy.css">
+    <link rel="stylesheet" href="/css/demo.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nickname)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nickname)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Birthday)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Birthday)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EmailAddress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-    </dl>
-</div>
-<hr />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body class="profile">
+    <div class="container">
+        <div class="info">
+            <div class="row">
+                <div class="col-12 col-md-4 text-center">
+                    <img src="/img/lorde.png" alt="Raised circle image" class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
+                </div>
+                <div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
+                    <div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
+                        <div class="name">
+                            <h2 class="mb-0">@Model.Nickname</h2>
+                        </div>
+                        <a href="/UserProfiles/EditUserProfile/" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Edit</a>
+                    </div>
+                    <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
+                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b>134</b> posts</p></div>
+                        <a href="/UserProfiles/Followers/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowersCount</b> followers</p></div></a>
+                        <a href="/UserProfiles/Following/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowingCount</b> following</p></div></a>
+                    </div>
+                    <p class="lead mb-0 mt-2"><b>@Model.Name</b></p>
+                    <p class="lead text-center text-lg-left">@Model.Bio</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation d-flex justify-content-center">
+            <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#photos">
+                        <i class="fas fa-th"></i> Photos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#saved">
+                        <i class="far fa-bookmark"></i> Saved
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tagged">
+                        <i class="far fa-id-badge"></i> Tagged
+                    </a>
+                </li>
+            </ul>
+        </div>
+        @foreach (var item in Model.Posts)
+        {
+            <div class="container">
 
-<h2>Posts:</h2>
+                <div class="row">
+                    <div class="col-sm-6 offset-sm-3">
+                        <div class="post-block">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex mb-3">
+                                    <div class="mr-2">
+                                        <a href="#!" class="text-dark"><img src="/img/lorde.png" alt="User" class="author-img"></a>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0"><a href="#!" class="text-dark">@item.Author</a></h5>
+                                        <p class="mb-0 text-muted">@item.CreatedOn</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                        <i class="fa fa-ellipsis-v" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="Edit">Edit</a></li>                @*!!!!!*@
+                                        <li><a class="dropdown-item" href="Delete">Delete</a></li>           @*!!!!!*@
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="post-block__content mb-2">
+                                <p>@item.Content</p>
+                                @*<img src="img/food1.jpg" alt="Content img">*@
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div class="d-flex">
+                                        <a href="#!" class="text-danger mr-2"><span><i class="fa fa-heart"></i></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
 
-@foreach (var post in Model.Posts.OrderByDescending(x => x.CreatedOn))
-{
-    <div>
-        <h4><b>@post.Author</b></h4>
-        <h5>@post.CreatedOn</h5>
-        <p>
-            @post.Content
-        </p>
     </div>
-}
 
-<hr />
 
+    @*<footer class="footer-1 bg-light text-dark">
+        <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="links">
+        <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
+        <li><a href="https://bootstrapbay.com/" target="_blank">Store</a></li>
+        <li><a href="https://bootstrapbay.com/about" target="_blank">About Us</a></li>
+        <li><a href="https://bootstrapbay.com/blog/" target="_blank">Blog</a></li>
+        <li><a href="https://bootstrapbay.com/terms" target="_blank">Terms & Conditions</a></li>
+        </ul>
+        </div>
+        <div class="social mt-4 mt-md-0">
+        <a class="twitter btn btn-outline-primary btn-icon" href="https://twitter.com/bootstrapbay" target="_blank">
+        <i class="fab fa-twitter"></i>
+        <span class="sr-only">View our Twitter Profile</span>
+        </a>
+        <a class="facebook btn btn-outline-primary btn-icon" href="https://www.facebook.com/bootstrapbayofficial/" target="_blank">
+        <i class="fab fa-facebook"></i>
+        <span class="sr-only">
+        View our Facebook Profile
+        <span>
+        </a>
+        <a class="github btn btn-outline-primary btn-icon" href="https://github.com/bootstrapbay" target="_blank">
+        <i class="fab fa-github"></i>
+        <span class="sr-only">View our GitHub Profile</span>
+        </a>
+        </div>
+        </div>
+        <div class="copyright text-center">
+        <hr />
+        <p class="small">&copy; 2019, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by BootstrapBay</p>
+        </div>
+        </div>
+        </footer>*@
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/popper/popper.min.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="/vendor/nouislider/js/nouislider.min.js"></script>
+
+    <!--   lazy javascript -->
+    <script src="/js/lazy.js"></script>
+</body>
+</html>

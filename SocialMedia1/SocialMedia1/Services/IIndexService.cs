@@ -4,6 +4,6 @@ namespace SocialMedia1.Services
 {
     public interface IIndexService
     {
-        ICollection<IndexViewModel> GetIndexViewModel();
+        IndexViewModel GetIndexView(string userId);
     }
 }

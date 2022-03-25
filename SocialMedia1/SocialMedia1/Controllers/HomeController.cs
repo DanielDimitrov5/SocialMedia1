@@ -14,23 +14,25 @@ namespace SocialMedia1.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly IUserProfileService userProfileService;
         private readonly IGroupService groupService;
+        private readonly IIndexService indexService;
 
-        public HomeController(ILogger<HomeController> logger, IPostService postService, UserManager<IdentityUser> userManager, IUserProfileService userProfileService, IGroupService groupService)
+        public HomeController(ILogger<HomeController> logger, IPostService postService, UserManager<IdentityUser> userManager, IUserProfileService userProfileService, IGroupService groupService, IIndexService indexService)
         {
             _logger = logger;
             this.postService = postService;
             this.userManager = userManager;
             this.userProfileService = userProfileService;
             this.groupService = groupService;
+            this.indexService = indexService;
         }
 
         public IActionResult Index()
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
-            var postModel = postService.GetAllPostsByFollowedUsers(userId);
+            var model = indexService.GetIndexView(userId);
 
-            return View(postModel);
+            return View(model);
         }
 
         [Authorize]

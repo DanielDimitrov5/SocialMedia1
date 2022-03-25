@@ -26,6 +26,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IUserProfileService, UserProfileService>();
 builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.AddTransient<IGroupService, GroupService>();
+builder.Services.AddTransient<IIndexService, IndexService>();
 
 
 var app = builder.Build();

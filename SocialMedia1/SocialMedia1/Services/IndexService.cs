@@ -1,25 +1,22 @@
-﻿using SocialMedia1.Data;
-using SocialMedia1.Models;
+﻿using SocialMedia1.Models;
 
 namespace SocialMedia1.Services
 {
-    public class IndexService/* : IIndexService*/
+    public class IndexService : IIndexService
     {
-        private readonly IUserProfileService userProfileService;
         private readonly IPostService postService;
 
-        public IndexService(IUserProfileService userProfileService, IPostService postService, ApplicationDbContext context)
+        public IndexService(IPostService postService)
         {
-            this.userProfileService = userProfileService;
             this.postService = postService;
         }
 
-        //public ICollection<IndexViewModel> GetIndexViewModel()
-        //{
-        //    return postService.GetAllPostsByFollowedUsers("31231").Select(x => new IndexViewModel
-        //    {
-                
-        //    }
-        //}
+        public IndexViewModel GetIndexView(string userId)
+        {
+            return new IndexViewModel
+            {
+                Posts = postService.GetAllPostsByFollowedUsers(userId),
+            };
+        }
     }
 }

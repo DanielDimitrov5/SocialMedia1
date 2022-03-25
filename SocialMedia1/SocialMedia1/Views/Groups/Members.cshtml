@@ -6,47 +6,113 @@
 @inject IUserProfileService userProfileService
 
 
+<head>
+    <link rel="stylesheet" href="/css/listOfProfilesStyle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="people-nearby">
 
-@{
-    ViewData["Title"] = "Members";
-}
-
-<h1>Members</h1>
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>
-                Nickname
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Members)
-        {
-            <tr>
-                <td onclick="window.location='/UserProfiles/Profile/@item.Id';">
-                    @if (item.Id == @User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    @foreach (var member in Model.Members
+                    .OrderByDescending(x => groupService.IsUserGroupCreator(x.Id, Model.GroupId))
+                    .ThenByDescending(x => x.Id == @User.FindFirstValue(ClaimTypes.NameIdentifier)))
                     {
-                        <b>@Html.DisplayFor(modelItem => item.Nickname)</b>
+                        if (Model.GroupCreatorId == @User.FindFirstValue(ClaimTypes.NameIdentifier))
+                        {
+                            if (groupService.IsUserGroupCreator(member.Id, Model.GroupId))
+                            {
+
+                                <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link"><b>@member.Nickname</b> <i class="fa-solid fa-crown"></i></a></h5>
+                                            <p>@member.Bio</p>
+                                            <p class="text-muted"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link">@member.Nickname</a></h5>
+                                            <p>@member.Bio</p>
+                                            <p class="text-muted"></p>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3">
+                                            <a href="/Groups/KickUser?userId=@member.Id&groupId=@Model.GroupId" class="btn btn-danger btn-pill">Kick</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            if (groupService.IsUserGroupCreator(member.Id, Model.GroupId))
+                            {
+
+                                <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link">@member.Nickname <i class="fa-solid fa-crown"></i></a></h5>
+                                            <p>@member.Bio</p>
+                                            <p class="text-muted"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == member.Id)
+                            {
+                                <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link"><b>@member.Nickname</b> <i class="fa-solid fa-hand-point-left"></i></a></h5>
+                                            <p>@member.Bio</p>
+                                            <p class="text-muted"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link">@member.Nickname</a></h5>
+                                            <p>@member.Bio</p>
+                                            <p class="text-muted"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
                     }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.Nickname)
-                    }
-                </td>
-                @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.GroupCreatorId && groupService.IsUserGroupCreator(item.Id, Model.GroupId) == false)
-                {
-                    <td>
-                        <a href="/Groups/KickUser?userId=@item.Id&groupId=@Model.GroupId" class="btn-danger btn">Kick</a>
-                    </td>
-                }
-                <td>
 
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/4123d5e637.js" crossorigin="anonymous"></script>
+</body>

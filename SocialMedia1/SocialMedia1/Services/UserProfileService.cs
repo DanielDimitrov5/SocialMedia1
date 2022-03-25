@@ -228,7 +228,7 @@ namespace SocialMedia1.Services
             return profiles;
         }
 
-        public ICollection<ProfileViewModel> GetAllFollowers(string currentUserId)
+        public UsersProfilesViewModel GetAllFollowers(string currentUserId)
         {
             var followers = context.UserProfiles.Where(x => x.Follows.Any(x => x.Id == currentUserId))
                 .Select(x => new ProfileViewModel
@@ -237,7 +237,13 @@ namespace SocialMedia1.Services
                     Nickname = x.Nickname,
                 }).ToList();
 
-            return followers;
+            UsersProfilesViewModel model = new UsersProfilesViewModel
+            {
+                Id = currentUserId,
+                Profiles = followers,
+            };
+
+            return model;
         }
 
         public void RemoveFollower(string currentUserId, string followerId)
@@ -253,7 +259,7 @@ namespace SocialMedia1.Services
             context.SaveChanges();
         }
 
-        public ICollection<ProfileViewModel> GetAllFollowing(string currentUserId)
+        public UsersProfilesViewModel GetAllFollowing(string currentUserId)
         {
             var user = context.UserProfiles.Find(currentUserId);
 
@@ -266,7 +272,13 @@ namespace SocialMedia1.Services
                      Nickname = x.Nickname,
                  }).ToList();
 
-            return following;
+            UsersProfilesViewModel model = new UsersProfilesViewModel
+            {
+                Id = currentUserId,
+                Profiles = following,
+            };
+
+            return model;
         }
     }
 }

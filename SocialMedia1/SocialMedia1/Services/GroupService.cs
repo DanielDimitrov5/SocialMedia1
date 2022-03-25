@@ -52,26 +52,26 @@ namespace SocialMedia1.Services
             context.SaveChanges();
         }
 
-        public void CreatePost(string groupId, string userId, string content)
-        {
-            Group group = context.Groups.Find(groupId);
+        //public void CreateGroupPost(string groupId, string userId, string content)
+        //{
+        //    Group group = context.Groups.Find(groupId);
 
-            if (group is null)
-            {
-                return;
-            }
+        //    if (group is null)
+        //    {
+        //        return;
+        //    }
 
-            Post post = new Post
-            {
-                UserProfileId = userId,
-                Content = content,
-                CreatedOn = DateTime.UtcNow,
-            };
+        //    Post post = new Post
+        //    {
+        //        UserProfileId = userId,
+        //        Content = content,
+        //        CreatedOn = DateTime.UtcNow,
+        //    };
 
-            group.Posts.Add(post);
+        //    group.Posts.Add(post);
 
-            context.SaveChanges();
-        }
+        //    context.SaveChanges();
+        //}
 
         public void DeleteJoinRequest(string requesterId, string groupId)
         {
@@ -110,12 +110,13 @@ namespace SocialMedia1.Services
                 JoinRequests = joinRequestsCount,
                 Posts = GetPosts(id),
                 Creator = context.UserProfiles.Find(group.CreaterId).Nickname,
+                CreatorId = group.CreaterId
             };
 
             return groupViewModel;
         }
 
-        public ICollection<GroupViewModel> GetGroups(string userId)
+        public GroupViewModel[] GetGroups(string userId)
         {
             var groups = context.UserProfilesGroups.Where(x => x.UserProfileId == userId).ToList();
 
@@ -125,16 +126,22 @@ namespace SocialMedia1.Services
             {
                 context.Entry(group).Reference(x => x.Group).Load();
 
+                var name = group.Group.Name.Length > 40 
+                    ? string.Concat(group.Group.Name.Substring(0, 40), "...") : group.Group.Name;
+
+                var description = group.Group.Description.Length > 300 
+                    ? string.Concat(group.Group.Description.Substring(0, 300), "...") : group.Group.Description;
+
                 model.Add(new GroupViewModel
                 {
                     Id = group.GroupId,
-                    Name = group.Group.Name,
-                    Description = group.Group.Description,
+                    Name = name,
+                    Description = description,
                     Members = group.Group.MembersCount,
                 });
             }
 
-            return model;
+            return model.ToArray();
         }
 
         public ICollection<GroupViewModel> GetGroupsBySearchTerm(string searchTerm)
@@ -171,6 +178,7 @@ namespace SocialMedia1.Services
                 {
                     Id = member.UserProfileId,
                     Nickname = member.UserProfile.Nickname,
+                    Bio = member.UserProfile.Bio,
                 };
 
                 members.Add(memberViewModel);

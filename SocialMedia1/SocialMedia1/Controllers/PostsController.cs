@@ -32,7 +32,18 @@ namespace SocialMedia1.Controllers
 
             postService.CreatePost(userId, model.Content);
 
-            return Redirect("/Posts/CreatePost"); //!!!
+            return Redirect("/"); //!!!
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult CreateGroupPost(CreatePostViewModel model)
+        {
+            var userId = userManager.GetUserId(HttpContext.User);
+
+            postService.CreateGroupPost(model.Id, userId, model.Content);
+
+            return Redirect($"/Group/{model.Id}"); //!!!
         }
     }
 }

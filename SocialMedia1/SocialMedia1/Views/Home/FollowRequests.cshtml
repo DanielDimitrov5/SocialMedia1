@@ -1,26 +1,41 @@
 ﻿@model IEnumerable<SocialMedia1.Models.FollowRequestViewModel>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nickname)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr onclick="window.location='/UserProfiles/Profile/@item.RequesterId';">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nickname)
-                </td>
-                <td>
-                    <a href="/UserProfiles/ApproveFollowRequest?requesterId=@item.RequesterId&currentUserId=@item.CurrentUserId" class="btn-success btn">Approve Request</a>
-                    <a href="/UserProfiles/DeleteFollowRequest?requesterId=@item.RequesterId" class="btn-danger btn">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<head>
+    <link rel="stylesheet" href="/css/listOfProfilesStyle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="people-nearby">
+
+
+                    @foreach (var profile in Model)
+                    {
+                        <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@profile.RequesterId';">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                </div>
+                                <div class="col-md-7 col-sm-7">
+                                    <h5><a href="/UserProfiles/Profile/@profile.RequesterId" class="profile-link">@profile.Nickname</a></h5>
+                                    <p></p>
+                                    <p class="text-muted"></p>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <div>
+                                        <a href="/UserProfiles/ApproveFollowRequest?requesterId=@profile.RequesterId&currentUserId=@profile.CurrentUserId" class="btn btn-success btn-pill">Approve</a>
+                                    </div>
+                                    <div>
+                                        <a href="/UserProfiles/DeleteFollowRequest?requesterId=@profile.RequesterId" class="btn btn-danger btn-pill">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

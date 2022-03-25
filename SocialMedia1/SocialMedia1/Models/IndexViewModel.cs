@@ -1,17 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace SocialMedia1.Models
+﻿namespace SocialMedia1.Models
 {
     public class IndexViewModel
     {
-        public string Id { get; set; }
+        public ICollection<PostViewModel> Posts { get; set; }
 
-        public string Author { get; set; }
-
-        public string Content { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public string FollowRequestNickname { get; set; }
+        public CreatePostViewModel CreatePost { get; set; }
     }
 }

@@ -16,6 +16,10 @@
 
         public string Creator { get; set; }
 
+        public string CreatorId { get; set; }
+
+        public CreatePostViewModel CreatePost { get; set; }
+
         public ICollection<ProfileViewModel> Profiles { get; set; }
 
         public ICollection<PostViewModel> Posts { get; set; }

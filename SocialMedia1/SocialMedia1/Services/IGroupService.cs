@@ -4,7 +4,7 @@ namespace SocialMedia1.Services
 {
     public interface IGroupService
     {
-        ICollection<GroupViewModel> GetGroups(string userId);
+        GroupViewModel[] GetGroups(string userId);
 
         ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId);
 
@@ -24,7 +24,7 @@ namespace SocialMedia1.Services
 
         void LeaveGroup(string groupId, string userId);
 
-        void CreatePost(string groupId, string userId, string content);
+        //void CreateGroupPost(string groupId, string userId, string content);
 
         bool IsUserGroupMember(string userId, string groupId);
 

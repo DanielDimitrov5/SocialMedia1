@@ -27,6 +27,28 @@ namespace SocialMedia1.Services
             context.SaveChanges();
         }
 
+        public void CreateGroupPost(string groupId, string userId, string content)
+        {
+            Group group = context.Groups.Find(groupId);
+
+            if (group is null)
+            {
+                return;
+            }
+
+            Post post = new Post
+            {
+                UserProfileId = userId,
+                Content = content,
+                CreatedOn = DateTime.UtcNow,
+                GroupId = groupId
+            };
+
+            group.Posts.Add(post);
+
+            context.SaveChanges();
+        }
+
         public ICollection<PostViewModel> GetAllPosts(string userId)
         {
             return context.Posts.Where(x => x.UserProfileId == userId).Select(x => new PostViewModel
