@@ -86,7 +86,7 @@
                 </li>
             </ul>
         </div>
-        @foreach (var item in Model.Posts)
+        @foreach (var item in Model.Posts.OrderByDescending(x=>x.CreatedOn))
         {
             <div class="container">
 

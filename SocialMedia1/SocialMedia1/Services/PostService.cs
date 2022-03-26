@@ -56,7 +56,7 @@ namespace SocialMedia1.Services
                 Author = x.UserProfile.Nickname,
                 AuthorId = x.UserProfile.Id,
                 Content = x.Content,
-                CreatedOn = x.CreatedOn
+                CreatedOn = x.CreatedOn,
             }).ToList();
         }
 

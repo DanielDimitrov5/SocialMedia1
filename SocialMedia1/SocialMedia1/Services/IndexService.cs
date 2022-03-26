@@ -12,10 +12,18 @@ namespace SocialMedia1.Services
         }
 
         public IndexViewModel GetIndexView(string userId)
-        {
+        { 
+            var postsByFollowedUsers  = postService.GetAllPostsByFollowedUsers(userId);
+            var myPosts = postService.GetAllPosts(userId);
+
+            var allPosts = new List<PostViewModel>();
+
+            allPosts.AddRange(postsByFollowedUsers);
+            allPosts.AddRange(myPosts);
+
             return new IndexViewModel
             {
-                Posts = postService.GetAllPostsByFollowedUsers(userId),
+                Posts = allPosts,
             };
         }
     }

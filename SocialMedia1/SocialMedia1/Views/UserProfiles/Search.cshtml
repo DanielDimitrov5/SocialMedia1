@@ -3,81 +3,61 @@
 @{
     ViewData["Title"] = "Search";
 }
+<head>
+    <link rel="stylesheet" href="/css/listOfProfilesStyle.css">
+</head>
 
-<div class="row">
-    <div class="table-responsive col-md-6">
-        <h2 class="text-center">Users</h2>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Nickname
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Surname
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Profiles)
-                {
-                    <tr onclick="window.location='Profile/@item.Id';">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nickname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Surname)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center">Users: @Model.Profiles.Count</h2>
 
-    <div class="table-responsive col-md-6">
-        <h2 class="text-center">Groups</h2>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Members
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Groups)
-                {
-                    <tr onclick="window.location='/Group/@item.Id';">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Members)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            @foreach (var profile in Model.Profiles)
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="people-nearby">
+                                <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@profile.Id';">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                        </div>
+                                        <div class="col-md-7 col-sm-7">
+                                            <h5><a href="/UserProfiles/Profile/@profile.Id" class="profile-link">@profile.Nickname</a></h5>
+                                            <p>@profile.Bio</p>
+                                            <p class="text-muted">@profile.Bio</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-6">
+            <h2 class="text-center">Groups: @Model.Groups.Count</h2>
+
+            @foreach (var group in Model.Groups)
+            {
+                <div class="col-md-12">
+                    <div class="component">
+                        <div class="card">
+                            <div class="card-body" onclick="window.location='/Group/@group.Id';">
+                                <span class="badge badge-secondary">Hobby</span>
+                                <h4 class="card-title mt-2">@group.Name</h4>
+                                <p class="card-text">@group.Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#a" class="btn btn-outline-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+            }
+        </div>
     </div>
-</div>
+</body>

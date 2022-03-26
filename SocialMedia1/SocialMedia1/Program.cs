@@ -27,6 +27,7 @@ builder.Services.AddTransient<IUserProfileService, UserProfileService>();
 builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.AddTransient<IGroupService, GroupService>();
 builder.Services.AddTransient<IIndexService, IndexService>();
+builder.Services.AddTransient<INavBarService, NavBarService>();
 
 
 var app = builder.Build();

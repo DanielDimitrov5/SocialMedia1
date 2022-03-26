@@ -23,19 +23,24 @@
                                     <p></p>
                                     <p class="text-muted"></p>
                                 </div>
-                                <div class="col-md-3 col-sm-3">
-                                    <div>
-                                        <a href="/UserProfiles/ApproveFollowRequest?requesterId=@profile.RequesterId&currentUserId=@profile.CurrentUserId" class="btn btn-success btn-pill">Approve</a>
+                                <div class="col-md-3 col-sm-3 btn-group">
+                                    <div class="col-md-11">
+                                        <a href="/UserProfiles/ApproveFollowRequest?requesterId=@profile.RequesterId&currentUserId=@profile.CurrentUserId" class="btn btn-success btn-pill">Approve <i class="fa-regular fa-circle-check"></i></a>
                                     </div>
-                                    <div>
-                                        <a href="/UserProfiles/DeleteFollowRequest?requesterId=@profile.RequesterId" class="btn btn-danger btn-pill">Delete</a>
+                                    <div class="col-md-15">
+                                        <a href="/UserProfiles/DeleteFollowRequest?requesterId=@profile.RequesterId" class="btn btn-danger btn-pill"><i class="fa-regular fa-trash-can"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                     }
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://kit.fontawesome.com/4123d5e637.js" crossorigin="anonymous"></script>
+
 </body>

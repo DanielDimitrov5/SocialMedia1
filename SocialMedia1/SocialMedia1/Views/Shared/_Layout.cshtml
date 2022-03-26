@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using SocialMedia1.Services
+@using System.Security.Claims
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject INavBarService navBarService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +50,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" href="/Home/FollowRequests">
-                                    Follow Requests
+                                    Follow Requests <sup><span class="badge badge-pill badge-danger">@navBarService.FollowRequestsCount(@User.FindFirstValue(ClaimTypes.NameIdentifier))</span></sup>
                                 </a>
                             </li>
                             <li class="nav-item">

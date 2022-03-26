@@ -222,6 +222,7 @@ namespace SocialMedia1.Services
                     Nickname = x.Nickname,
                     Name = x.Name,
                     Surname = x.Surname,
+                    Bio = x.Bio,
                 })
                 .ToList();
 

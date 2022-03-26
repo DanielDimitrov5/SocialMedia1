@@ -14,5 +14,9 @@ namespace SocialMedia1.Models
         public string Content { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string GroupId { get; set; }
+
+        public string GroupName { get; set; }
     }
 }
