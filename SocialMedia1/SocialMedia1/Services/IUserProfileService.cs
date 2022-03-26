@@ -7,31 +7,14 @@ namespace SocialMedia1.Services
     {
         Task AddUserProfileAsync(string Id);
 
-        Task EditUserProfileAsync(string id, string nickname, string name, string surename,bool IsPrivate ,string city, DateTime birthday, string emailaddress, string bio);
+        void EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio);
 
         ProfileViewModel GetUserProfileData(string id);
 
-        void FollowUser(string id, string currentUserId);
+        ICollection<FollowRequestViewModel> GetAllFollowRequests(string currentUserId);
 
-        void UnfollowUser(string id, string currentUserId);
+        UsersProfilesViewModel GetAllFollowers(string userId);
 
-        bool IsUserFollowed(string currentUserId, string userId);
-
-        void ApproveFollowRequest(string requesterId, string currentUser);
-
-        void DeleteRequest(string requesterId);
-
-        bool CheckIfFollowRequestIsSent(string userId, string currentsUserId);
-
-        public ICollection<FollowRequestViewModel> GetAllFollowRequests(string currentUserId);
-
-        public ICollection<ProfileViewModel> GetProfilesBySearchTerm(string searchTerm);
-
-        public UsersProfilesViewModel GetAllFollowers(string userId);
-
-        public UsersProfilesViewModel GetAllFollowing(string userId);
-
-        public void RemoveFollower(string currentUserId, string followerId);
-
+        UsersProfilesViewModel GetAllFollowing(string userId);
     }
 }

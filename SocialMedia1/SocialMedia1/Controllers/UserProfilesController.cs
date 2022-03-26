@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia1.Models;
 using SocialMedia1.Services;
-using System.Security.Claims;
 
 namespace SocialMedia1.Controllers
 {
@@ -11,13 +10,13 @@ namespace SocialMedia1.Controllers
     {
 
         private readonly IUserProfileService userProfileService;
-        private readonly IGroupService groupService;
+        private readonly IUserActionsService userActionsService;
         private readonly UserManager<IdentityUser> userManager;
 
-        public UserProfilesController(IUserProfileService userProfileService, IGroupService groupService,UserManager<IdentityUser> userManager)
+        public UserProfilesController(IUserProfileService userProfileService, IUserActionsService userActionsService, UserManager<IdentityUser> userManager)
         {
             this.userProfileService = userProfileService;
-            this.groupService = groupService;
+            this.userActionsService = userActionsService;
             this.userManager = userManager;
         }
 
@@ -69,7 +68,7 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult Follow(string id)
         {
-            userProfileService.FollowUser(id, userManager.GetUserId(HttpContext.User));
+            userActionsService.FollowUser(id, userManager.GetUserId(HttpContext.User));
 
             return Redirect($"/UserProfiles/Profile/{id}");
         }
@@ -77,7 +76,7 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult Unfollow(string id)
         {
-            userProfileService.UnfollowUser(id, userManager.GetUserId(HttpContext.User));
+            userActionsService.UnfollowUser(id, userManager.GetUserId(HttpContext.User));
 
             return Redirect($"/UserProfiles/Profile/{id}");
         }
@@ -85,7 +84,7 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult ApproveFollowRequest(string requesterId, string currentUserId)
         {
-            userProfileService.ApproveFollowRequest(requesterId, currentUserId);
+            userActionsService.ApproveFollowRequest(requesterId, currentUserId);
 
             return Redirect("/Home/FollowRequests");
         }
@@ -93,21 +92,9 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult DeleteFollowRequest(string requesterId)
         {
-            userProfileService.DeleteRequest(requesterId);
+            userActionsService.DeleteRequest(requesterId);
 
             return Redirect("/Home/FollowRequests");
-        }
-
-        [Authorize]
-        public IActionResult Search(string searchTerm)
-        {
-            var model = new SearchResultsViewModel
-            {
-                Profiles = userProfileService.GetProfilesBySearchTerm(searchTerm),
-                Groups = groupService.GetGroupsBySearchTerm(searchTerm)
-            };
-
-            return View(model);
         }
 
         [Authorize]
@@ -121,9 +108,11 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult RemoveFollower(string id)
         {
-            userProfileService.RemoveFollower(userManager.GetUserId(HttpContext.User), id);
+            var currentUser = userManager.GetUserId(HttpContext.User);
 
-            return Redirect($"/UserProfiles/Followers/{id}");
+            userActionsService.RemoveFollower(currentUser, id);
+
+            return Redirect($"/UserProfiles/Followers/{currentUser}");
         }
 
         [Authorize]
@@ -139,7 +128,7 @@ namespace SocialMedia1.Controllers
          {
             string currentUser = userManager.GetUserId(HttpContext.User);
 
-            userProfileService.UnfollowUser(id, currentUser);
+            userActionsService.UnfollowUser(id, currentUser);
 
             return Redirect($"/UserProfiles/Following/{currentUser}");
         }

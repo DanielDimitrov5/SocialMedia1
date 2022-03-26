@@ -4,7 +4,7 @@
 
 @model SocialMedia1.Models.GroupViewModel
 
-@inject IGroupService groupService
+@inject IGroupMemberActionsService groupMemberActionsService
 @inject UserManager<IdentityUser> userManager
 @inject SignInManager<IdentityUser> SignInManager
 
@@ -24,9 +24,9 @@
     <br />
 
     <p class="lead">
-        @if (groupService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
+        @if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
         {
-            @if (groupService.IsJoinRequstSent(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            @if (groupMemberActionsService.IsJoinRequstSent(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 <button type="button" class="btn-dark" disabled>Request Sent</button>
             }
@@ -37,7 +37,7 @@
         }
         else
         {
-            if (groupService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+            if (groupMemberActionsService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
             {
                 <a href="/Groups/JoinRequests/@Model.Id" class="btn btn-outline-info btn-pill">Join Requests: @Model.JoinRequests</a>
             }
@@ -49,7 +49,7 @@
     </p>
 </div>
 
-@if (groupService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
+@if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
 {
 
     <div class="row">

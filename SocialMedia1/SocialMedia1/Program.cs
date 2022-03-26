@@ -28,6 +28,9 @@ builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.AddTransient<IGroupService, GroupService>();
 builder.Services.AddTransient<IIndexService, IndexService>();
 builder.Services.AddTransient<INavBarService, NavBarService>();
+builder.Services.AddTransient<ISearchService, SearchService>();
+builder.Services.AddTransient<IUserActionsService, UserActionsService>();
+builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
 
 
 var app = builder.Build();

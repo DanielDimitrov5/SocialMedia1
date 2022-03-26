@@ -3,7 +3,7 @@
 @using System.Security.Claims
 @inject SignInManager<IdentityUser> SignInManager
 @model SocialMedia1.Models.ProfileViewModel
-@inject IUserProfileService userProfileService
+@inject IUserActionsService userActionsService
 @inject UserManager<IdentityUser> userManager
 
 <!DOCTYPE html>
@@ -40,13 +40,13 @@
                         <div class="name">
                             <h2 class="mb-0">@Model.Nickname</h2>
                         </div>
-                        @if (userProfileService.IsUserFollowed(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+                        @if (userActionsService.IsUserFollowed(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
                         {
                             <a href="/UserProfiles/Unfollow/@Model.Id" class="btn btn-danger btn-pill btn-sm ml-3 mt-1">Unfollow</a>
                         }
                         else
                         {
-                            @if (userProfileService.CheckIfFollowRequestIsSent(@Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                            @if (userActionsService.CheckIfFollowRequestIsSent(@Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
                             {
                                 <button type="button" disabled>Request Sent</button>
                             }

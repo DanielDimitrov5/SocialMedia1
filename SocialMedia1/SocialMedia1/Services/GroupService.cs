@@ -13,25 +13,6 @@ namespace SocialMedia1.Services
             this.context = context;
         }
 
-        public void ApproveJoinRequest(string requesterId, string groupId)
-        {
-            UserProfile requester = context.UserProfiles.Find(requesterId);
-            Group group = context.Groups.Find(groupId);
-
-            if (requester == null || group == null)
-            {
-                return;
-            }
-
-            JoinGroup(groupId, requesterId);
-
-            UserGroupRequest followRequest = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
-
-            context.JoinGroupRequest.Remove(followRequest);
-
-            context.SaveChanges();
-        }
-
         public void CreateGroup(string name, string description, bool isPrivate, string creatorId)
         {
             Group group = new Group
@@ -48,41 +29,6 @@ namespace SocialMedia1.Services
             context.Groups.Add(group);
 
             context.UserProfilesGroups.Add(profileGroup);
-
-            context.SaveChanges();
-        }
-
-        //public void CreateGroupPost(string groupId, string userId, string content)
-        //{
-        //    Group group = context.Groups.Find(groupId);
-
-        //    if (group is null)
-        //    {
-        //        return;
-        //    }
-
-        //    Post post = new Post
-        //    {
-        //        UserProfileId = userId,
-        //        Content = content,
-        //        CreatedOn = DateTime.UtcNow,
-        //    };
-
-        //    group.Posts.Add(post);
-
-        //    context.SaveChanges();
-        //}
-
-        public void DeleteJoinRequest(string requesterId, string groupId)
-        {
-            var request = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
-
-            if (request == null)
-            {
-                return;
-            }
-
-            context.JoinGroupRequest.Remove(request);
 
             context.SaveChanges();
         }
@@ -144,24 +90,6 @@ namespace SocialMedia1.Services
             return model.ToArray();
         }
 
-        public ICollection<GroupViewModel> GetGroupsBySearchTerm(string searchTerm)
-        {
-            var groups = context.Groups
-               .Where(x => x.Name.Contains(searchTerm)
-                        || x.Description.Contains(searchTerm)
-                        || (x.Name + x.Description).Contains(searchTerm))
-               .Select(x => new GroupViewModel
-               {
-                   Id = x.Id,
-                   Name = x.Name,
-                   Description = x.Description,
-                   Members = x.MembersCount,
-                   Status = x.IsPrivate ? "Private" : "Public",
-               })
-               .ToList();
-
-            return groups;
-        }
         public GroupMembersViewModel GetMembers(string groupId)
         {
             var group = context.Groups.Find(groupId);
@@ -221,76 +149,7 @@ namespace SocialMedia1.Services
             return requests;
         }
 
-        public bool IsGroupPrivate(string groupId)
-        {
-            return context.Groups.FirstOrDefault(x => x.Id == groupId).IsPrivate;
-        }
-
-        public bool IsJoinRequstSent(string groupId, string userId)
-        {
-            return context.JoinGroupRequest.Any(x => x.UserProfileId == userId && x.GroupId == groupId);
-        }
-
-        public bool IsUserGroupCreator(string userId, string groupId)
-        {
-            return context.Groups.Any(x => x.Id == groupId && x.CreaterId == userId);
-        }
-
-        public bool IsUserGroupMember(string userId, string groupId)
-        {
-            return context.UserProfilesGroups.Any(x => x.GroupId == groupId && x.UserProfileId == userId);
-        }
-
-        public void JoinGroup(string groupId, string userId)
-        {
-            Group group = context.Groups.Find(groupId);
-
-            UserProfile user = context.UserProfiles.Find(userId);
-
-            if (group == null || user == null)
-            {
-                return;
-            }
-
-            context.UserProfilesGroups.Add(new UserProfileGroup { GroupId = groupId, UserProfileId = userId });
-
-            group.MembersCount++;
-
-            context.SaveChanges();
-        }
-
-        public void LeaveGroup(string groupId, string userId)
-        {
-            Group group = context.Groups.Find(groupId);
-
-            UserProfileGroup user = context.UserProfilesGroups.FirstOrDefault(x => x.UserProfileId == userId && x.GroupId == groupId);
-
-            if (group == null || user == null)
-            {
-                return;
-            }
-
-            group.MembersCount--;
-
-            group.Users.Remove(user);
-
-            context.SaveChanges();
-        }
-
-        public void SendJoinRequest(string groupId, string userId)
-        {
-            UserGroupRequest userGroupRequest = new UserGroupRequest
-            {
-                UserProfileId = userId,
-                GroupId = groupId,
-            };
-
-            context.JoinGroupRequest.Add(userGroupRequest);
-
-            context.SaveChanges();
-        }
-
-        //Private methods:
+        // private methods:
 
         private ICollection<PostViewModel> GetPosts(string groupId)
         {

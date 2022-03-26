@@ -9,13 +9,13 @@ namespace SocialMedia1.Controllers
     public class GroupsController : Controller
     {
         private readonly IGroupService groupService;
-        private readonly IPostService postService;
+        private readonly IGroupMemberActionsService groupMemberActionsService;
         private readonly UserManager<IdentityUser> userManager;
 
-        public GroupsController(IGroupService groupService, IPostService postService, UserManager<IdentityUser> userManager)
+        public GroupsController(IGroupService groupService, IGroupMemberActionsService groupMemberActionsService, UserManager<IdentityUser> userManager)
         {
             this.groupService = groupService;
-            this.postService = postService;
+            this.groupMemberActionsService = groupMemberActionsService;
             this.userManager = userManager;
         }
 
@@ -50,9 +50,9 @@ namespace SocialMedia1.Controllers
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
-            if (groupService.IsGroupPrivate(id))
+            if (groupMemberActionsService.IsGroupPrivate(id))
             {
-                if (groupService.IsJoinRequstSent(id, userId) == false)
+                if (groupMemberActionsService.IsJoinRequstSent(id, userId) == false)
                 {
                     return SendJoinRequest(id);
                 }
@@ -60,7 +60,7 @@ namespace SocialMedia1.Controllers
                 return Redirect($"/Group/{id}");
             }
 
-            groupService.JoinGroup(id, userId);
+            groupMemberActionsService.JoinGroup(id, userId);
 
             return Redirect($"/Group/{id}");
         }
@@ -70,7 +70,7 @@ namespace SocialMedia1.Controllers
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
-            groupService.SendJoinRequest(id, userId);
+            groupMemberActionsService.SendJoinRequest(id, userId);
 
             return Redirect($"/Group/{id}");
         }
@@ -80,7 +80,7 @@ namespace SocialMedia1.Controllers
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
-            if (groupService.IsUserGroupCreator(userId, id) == false)
+            if (groupMemberActionsService.IsUserGroupCreator(userId, id) == false)
             {
                 return Redirect($"/Group/{id}");
             }
@@ -93,22 +93,22 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult ApproveJoinRequest(string requesterId, string groupId)
         {
-            if (groupService.IsGroupPrivate(groupId) == false)
+            if (groupMemberActionsService.IsGroupPrivate(groupId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupService.IsUserGroupMember(requesterId, groupId))
+            if (groupMemberActionsService.IsUserGroupMember(requesterId, groupId))
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupService.IsJoinRequstSent(groupId, requesterId) == false)
+            if (groupMemberActionsService.IsJoinRequstSent(groupId, requesterId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            groupService.ApproveJoinRequest(requesterId, groupId);
+            groupMemberActionsService.ApproveJoinRequest(requesterId, groupId);
 
             return Redirect($"/Groups/JoinRequests/{groupId}");
         }
@@ -116,22 +116,22 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult DeleteJoinRequest(string requesterId, string groupId)
         {
-            if (groupService.IsGroupPrivate(groupId) == false)
+            if (groupMemberActionsService.IsGroupPrivate(groupId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupService.IsUserGroupMember(requesterId, groupId))
+            if (groupMemberActionsService.IsUserGroupMember(requesterId, groupId))
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupService.IsJoinRequstSent(groupId, requesterId) == false)
+            if (groupMemberActionsService.IsJoinRequstSent(groupId, requesterId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            groupService.DeleteJoinRequest(requesterId, groupId);
+            groupMemberActionsService.DeleteJoinRequest(requesterId, groupId);
 
             return Redirect($"/Group/{groupId}");
         }
@@ -141,7 +141,7 @@ namespace SocialMedia1.Controllers
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
-            groupService.LeaveGroup(id, userId);
+            groupMemberActionsService.LeaveGroup(id, userId);
 
             return Redirect($"/Group/{id}");
         }
@@ -149,22 +149,10 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult KickUser(string userId, string groupId)
         {
-            groupService.LeaveGroup(groupId, userId);
+            groupMemberActionsService.LeaveGroup(groupId, userId);
 
             return Redirect($"/Groups/Members/{groupId}");
         }
-
-
-        //[HttpPost]
-        //[Authorize]
-        //public IActionResult CreatePost(CreatePostViewModel model, string id)
-        //{
-        //    var userId = userManager.GetUserId(HttpContext.User);
-
-        //    postService.CreateGroupPost(id, userId, model.Content);
-
-        //    return Redirect($"/Group/{id}"); //!!!
-        //}
 
         [Authorize]
         public IActionResult Members(string id)
