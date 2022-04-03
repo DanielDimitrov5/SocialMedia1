@@ -45,5 +45,33 @@ namespace SocialMedia1.Controllers
 
             return Redirect($"/Group/{model.Id}"); //!!!
         }
+
+        [Authorize]
+        public IActionResult GroupFeed()
+        {
+            var userId = userManager.GetUserId(HttpContext.User);
+
+            var model = postService.GetAllPostsInUsersGroups(userId);
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(string Id)
+        {
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
+
+            await postService.DeletePostAsync(Id, userId);
+
+            return Redirect("/");
+        }
+
+        public async Task<IActionResult> Report(string id)
+        {
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
+
+            await postService.ReportPostAsync(id, userId);
+
+            return Redirect("/");
+        }
     }
 }

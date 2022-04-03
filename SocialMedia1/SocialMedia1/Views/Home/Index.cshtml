@@ -1,9 +1,41 @@
 ﻿@model IndexViewModel
 
-@{
+
+    @{
     await Html.RenderPartialAsync("CreatePost", Model.CreatePost);
 }
+<div class="col-sm-6 offset-sm-3">
 
-@{
-    await Html.RenderPartialAsync("_PostFeed", Model.Posts);
-}
+    <ul class="nav nav-info nav-tabs mt-3 d-flex flex-row flex-md-row text-center justify-content-center">
+
+        <li class="nav-item">
+            <a class="nav-link active" role="tab" data-toggle="tab" href="#posts">
+                <i class="fa-solid fa-handshake-simple"></i> Following
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" role="tab" data-toggle="tab" href="#groupPosts">
+                <i class="fa-solid fa-people-roof"></i> Groups
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">
+                <i class="far fa-stop-circle"></i> Suggested
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade show active" id="posts">
+            <partial name="_PostFeed" model="Model.Posts"></partial>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="groupPosts">
+            <partial name="_GroupFeed" model="Model.GroupPosts"></partial>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/4123d5e637.js" crossorigin="anonymous"></script>
+
+
+

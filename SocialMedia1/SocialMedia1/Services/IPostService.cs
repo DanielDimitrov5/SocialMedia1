@@ -8,8 +8,14 @@ namespace SocialMedia1.Services
 
         void CreateGroupPost(string groupId, string userId, string content);
 
+        Task DeletePostAsync(string postId, string userId);
+
+        Task ReportPostAsync(string postId, string userId);
+
         ICollection<PostViewModel> GetAllPosts(string userId);
 
         ICollection<PostViewModel> GetAllPostsByFollowedUsers(string userId);
+
+        ICollection<PostViewModel> GetAllPostsInUsersGroups(string userId);
     }
 }

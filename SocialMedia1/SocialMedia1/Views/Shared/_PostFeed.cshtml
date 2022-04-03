@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SocialMedia1.Models.PostViewModel>
+﻿@using System.Security.Claims
+@model IEnumerable<SocialMedia1.Models.PostViewModel>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
 </head>
 <body class="profile">
     @foreach (var item in Model.OrderByDescending(x => x.CreatedOn))
@@ -22,9 +25,30 @@
                                     <a href="#!" class="text-dark"><img src="/img/lorde.png" alt="User" class="author-img"></a>
                                 </div>
                                 <div>
-                                    <h5 class="mb-0"><a href="#!" class="text-dark">@item.Author</a></h5>
+                                    @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == @item.AuthorId)
+                                    {
+
+                                        <h5 class="mb-0"><a href="/UserProfiles/MyProfile" class="text-dark">You</a></h5>
+                                    }
+                                    else
+                                    {
+                                        <h5 class="mb-0"><a href="/UserProfiles/Profile/@item.AuthorId" class="text-dark">@item.Author</a></h5>
+                                    }
                                     <p class="mb-0 text-muted">@item.CreatedOn</p>
                                 </div>
+                            </div>
+                            <div class="dropdown">
+                                <i class="fa fa-ellipsis-v" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == @item.AuthorId)
+                                    {
+                                        <li><a class="dropdown-item" data-toggle="modal" data-target="#delete">Delete</a></li>           @*!!!!!*@
+                                    }
+                                    else
+                                    {
+                                        <li><a class="dropdown-item" data-toggle="modal" data-target="#report">Report</a></li>           @*!!!!!*@
+                                    }
+                                </ul>
                             </div>
                         </div>
                         <div class="post-block__content mb-2">
@@ -34,11 +58,54 @@
                         <div class="mb-3">
                             <div class="d-flex justify-content-between mb-2">
                                 <div class="d-flex">
-                                    <a href="#!" class="text-danger mr-2"><span><i class="fa fa-heart"></i></span></a>
+                                    <a href="#!" class="text-danger mr-2"><span><i class="fa-solid fa-heart"></i></span></a>
                                 </div>
                             </div>
                         </div>
                         <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete -->
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this post?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/Posts/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Modal Report -->
+        <div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="report" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Report post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to report this post for inappropriate content?
+                        It would be send for a manuel review.
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/Posts/Report/@item.Id" class="btn btn-danger">Report</a>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
                     </div>
                 </div>
             </div>

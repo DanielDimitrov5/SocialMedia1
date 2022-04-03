@@ -153,7 +153,7 @@ namespace SocialMedia1.Services
 
         private ICollection<PostViewModel> GetPosts(string groupId)
         {
-            var posts = context.Posts.Where(x => x.GroupId == groupId).Select(x => new PostViewModel
+            var posts = context.Posts.Where(x => x.GroupId == groupId && !x.IsDeleted).Select(x => new PostViewModel
             {
                 Id = x.Id,
                 AuthorId = x.UserProfileId,

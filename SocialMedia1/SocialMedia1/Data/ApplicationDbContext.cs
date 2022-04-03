@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia1.Data.Models;
-using SocialMedia1.Models;
 
 namespace SocialMedia1.Data
 {
@@ -24,6 +23,8 @@ namespace SocialMedia1.Data
 
         public DbSet<UserGroupRequest> JoinGroupRequest { get; set; }
 
+        public DbSet<PostCommunityReport> PostCommunityReports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -37,8 +38,8 @@ namespace SocialMedia1.Data
             builder.Entity<UserProfileGroup>().HasOne(x => x.UserProfile).WithMany(x => x.Groups).HasForeignKey(x => x.UserProfileId).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<UserGroupRequest>().HasKey(x => new { x.GroupId, x.UserProfileId });
-        }
 
-        public DbSet<SocialMedia1.Models.ProfileViewModel> ProfileViewModel { get; set; }
+            builder.Entity<PostCommunityReport>().HasOne(x => x.Reporter).WithMany(x => x.PostReports).HasForeignKey(x => x.ReporterId).OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

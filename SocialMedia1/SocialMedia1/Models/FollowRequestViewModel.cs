@@ -9,6 +9,8 @@ namespace SocialMedia1.Models
 
         public string Nickname { get; set; }
 
+        public string Bio { get; set; }
+
         public string CurrentUserId { get; set; }
     }
 }

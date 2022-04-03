@@ -51,12 +51,14 @@ namespace SocialMedia1.Services
 
         public ICollection<PostViewModel> GetAllPosts(string userId)
         {
-            return context.Posts.Where(x => x.UserProfileId == userId).Select(x => new PostViewModel
+            return context.Posts.Where(x => x.UserProfileId == userId && !x.IsDeleted).Select(x => new PostViewModel
             {
                 Author = x.UserProfile.Nickname,
                 AuthorId = x.UserProfile.Id,
+                Id = x.Id,
                 Content = x.Content,
                 CreatedOn = x.CreatedOn,
+                GroupId = x.GroupId
             }).ToList();
         }
 
@@ -72,7 +74,7 @@ namespace SocialMedia1.Services
             var posts = context.UserProfiles.Where(x => x.FollowedBy.Contains(currentUser))
             .SelectMany(x => x.Posts)
             .ToList()
-            .Where(x => x.GroupId is null)
+            .Where(x => x.GroupId is null && !x.IsDeleted)
             .Select(x => new PostViewModel
             {
                 Author = context.UserProfiles.Find(x.UserProfileId).Nickname,
@@ -84,6 +86,64 @@ namespace SocialMedia1.Services
             .ToList();
 
             return posts;
+        }
+
+        public ICollection<PostViewModel> GetAllPostsInUsersGroups(string userId)
+        {
+            if (userId is null)
+            {
+                return new List<PostViewModel>();
+            }
+
+            var posts = context.Groups.Where(x => x.Users.Any(x => x.UserProfileId == userId))
+                .SelectMany(x => x.Posts)
+                .ToList()
+                .Where(x => !x.IsDeleted)
+                .Select(x => new PostViewModel
+                {
+                    Author = context.UserProfiles.Find(x.UserProfileId).Nickname,
+                    AuthorId = x.UserProfile.Id,
+                    Content = x.Content,
+                    Id = x.Id,
+                    CreatedOn = x.CreatedOn,
+                    GroupId = x.GroupId,
+                    GroupName = context.Groups.Find(x.GroupId).Name,
+                })
+                .ToList();
+
+            return posts;
+        }
+
+        public async Task DeletePostAsync(string postId, string userId)
+        {
+            var post = await context.Posts.FindAsync(postId);
+
+            if (post.UserProfileId != userId)
+            {
+                return;
+            }
+
+            post.IsDeleted = true;
+
+            await context.SaveChangesAsync();
+        }
+
+        public async Task ReportPostAsync(string postId, string userId)
+        {
+            if (context.PostCommunityReports.Any(x=>x.PostId == postId && x.ReporterId == userId))
+            {
+                return;
+            }
+
+            PostCommunityReport report = new PostCommunityReport
+            {
+                PostId = postId,
+                ReporterId = userId,
+            };
+
+            await context.PostCommunityReports.AddAsync(report);
+
+            await context.SaveChangesAsync();
         }
     }
 }

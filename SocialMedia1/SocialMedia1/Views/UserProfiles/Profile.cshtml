@@ -58,7 +58,7 @@
                         @*<a href="#a" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>*@
                     </div>
                     <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
-                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b>134</b> posts</p></div>
+                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.Posts.Count()</b> posts</p></div>
                         <a href="/UserProfiles/Followers/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowersCount</b> followers</p></div></a>
                         <a href="/UserProfiles/Following/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowingCount</b> following</p></div></a>
                     </div>

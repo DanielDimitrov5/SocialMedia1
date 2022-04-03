@@ -29,6 +29,16 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult Create(GroupInputModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+
+            }
+
+            if (ModelState.IsValid)
+            {
+
+            }
+
             var userId = userManager.GetUserId(HttpContext.User);
 
             groupService.CreateGroup(model.Name, model.Description, model.IsPrivate, userId);

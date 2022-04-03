@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SocialMedia1.Areas.Admin.Services;
 using SocialMedia1.Data;
 using SocialMedia1.Services;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 4;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -31,7 +34,7 @@ builder.Services.AddTransient<INavBarService, NavBarService>();
 builder.Services.AddTransient<ISearchService, SearchService>();
 builder.Services.AddTransient<IUserActionsService, UserActionsService>();
 builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
-
+builder.Services.AddTransient<IReportService, ReportService>();
 
 var app = builder.Build();
 
@@ -55,9 +58,22 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
+    db.Database.Migrate();
+}
 
 app.Run();

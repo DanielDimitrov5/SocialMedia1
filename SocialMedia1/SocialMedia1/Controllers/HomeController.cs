@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SocialMedia1.Data;
 using SocialMedia1.Models;
 using SocialMedia1.Services;
 using System.Diagnostics;
@@ -9,26 +10,40 @@ namespace SocialMedia1.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly ILogger<HomeController> _logger;
-        private readonly IPostService postService;
         private readonly UserManager<IdentityUser> userManager;
         private readonly IUserProfileService userProfileService;
         private readonly IGroupService groupService;
         private readonly IIndexService indexService;
 
-        public HomeController(ILogger<HomeController> logger, IPostService postService, UserManager<IdentityUser> userManager, IUserProfileService userProfileService, IGroupService groupService, IIndexService indexService)
+        public HomeController
+            (RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, UserManager<IdentityUser> userManager, 
+            IUserProfileService userProfileService, IGroupService groupService, IIndexService indexService)
         {
+            this.roleManager = roleManager;
             _logger = logger;
-            this.postService = postService;
             this.userManager = userManager;
             this.userProfileService = userProfileService;
             this.groupService = groupService;
             this.indexService = indexService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = userManager.GetUserId(HttpContext.User);
+
+            if (userId == null)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+
+            //await roleManager.CreateAsync(new IdentityRole
+            //{
+            //    Name = "Admin"
+            //});
+
+            //await userManager.AddToRoleAsync(await userManager.GetUserAsync(this.User), "Admin");
 
             var model = indexService.GetIndexView(userId);
 

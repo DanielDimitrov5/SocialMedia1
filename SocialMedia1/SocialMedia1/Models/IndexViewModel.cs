@@ -4,6 +4,8 @@
     {
         public ICollection<PostViewModel> Posts { get; set; }
 
+        public ICollection<PostViewModel> GroupPosts { get; set; }
+
         public CreatePostViewModel CreatePost { get; set; }
     }
 }

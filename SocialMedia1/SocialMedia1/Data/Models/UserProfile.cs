@@ -12,11 +12,14 @@ namespace SocialMedia1.Data.Models
             FollowRequests = new HashSet<FollowRequest>();
             Groups = new HashSet<UserProfileGroup>();
             JoinRequests = new HashSet<UserGroupRequest>();
+            PostReports = new HashSet<PostCommunityReport>();
         }
 
         [Key]
         public string Id { get; set; }
 
+        [Required]
+        [StringLength(40)]
         public string Nickname { get; set; }
 
         public string? Name { get; set; }
@@ -45,6 +48,8 @@ namespace SocialMedia1.Data.Models
 
         public virtual ICollection<UserProfileGroup> Groups { get; set; }
 
-        public ICollection<UserGroupRequest> JoinRequests { get; set; }
+        public virtual ICollection<UserGroupRequest> JoinRequests { get; set; }
+
+        public virtual ICollection<PostCommunityReport> PostReports { get; set; }
     }
 }

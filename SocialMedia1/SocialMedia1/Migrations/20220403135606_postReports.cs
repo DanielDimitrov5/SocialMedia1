@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SocialMedia1.Migrations
 {
-    public partial class addPost_GroupIdNullable : Migration
+    public partial class postReports : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,25 +49,14 @@ namespace SocialMedia1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CreatePostViewModel",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CreatePostViewModel", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Groups",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     CreaterId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPrivate = table.Column<bool>(type: "bit", nullable: false),
                     MembersCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -80,7 +69,7 @@ namespace SocialMedia1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nickname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nickname = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -225,14 +214,39 @@ namespace SocialMedia1.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "JoinGroupRequest",
+                columns: table => new
+                {
+                    UserProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JoinGroupRequest", x => new { x.GroupId, x.UserProfileId });
+                    table.ForeignKey(
+                        name: "FK_JoinGroupRequest_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JoinGroupRequest_UserProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -297,6 +311,31 @@ namespace SocialMedia1.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PostCommunityReports",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PostId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ReporterId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostCommunityReports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PostCommunityReports_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostCommunityReports_UserProfiles_ReporterId",
+                        column: x => x.ReporterId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -342,6 +381,21 @@ namespace SocialMedia1.Migrations
                 column: "UserRequesterId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_JoinGroupRequest_UserProfileId",
+                table: "JoinGroupRequest",
+                column: "UserProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostCommunityReports_PostId",
+                table: "PostCommunityReports",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostCommunityReports_ReporterId",
+                table: "PostCommunityReports",
+                column: "ReporterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_GroupId",
                 table: "Posts",
                 column: "GroupId");
@@ -380,13 +434,13 @@ namespace SocialMedia1.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CreatePostViewModel");
-
-            migrationBuilder.DropTable(
                 name: "FollowRequests");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "JoinGroupRequest");
+
+            migrationBuilder.DropTable(
+                name: "PostCommunityReports");
 
             migrationBuilder.DropTable(
                 name: "UserProfilesGroups");
@@ -399,6 +453,9 @@ namespace SocialMedia1.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Groups");

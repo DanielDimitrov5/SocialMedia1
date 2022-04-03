@@ -1,0 +1,81 @@
+﻿@using System.Security.Claims
+@model IEnumerable<SocialMedia1.Areas.Admin.Models.ReportedPostViewModel>
+<head>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
+</head>
+<body>
+
+    <br />
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-circle"></i>
+        <strong>Mr. Administrator.</strong> Take a look on this reported posts!
+    </div>
+
+    @foreach (var item in Model.OrderByDescending(x => x.CreatedOn))
+    {
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-6 offset-sm-3">
+                    <div class="post-block">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex mb-3">
+                                <div class="mr-2">
+                                    <a href="#!" class="text-dark"><img src="/img/lorde.png" alt="User" class="author-img"></a>
+                                </div>
+                                <div>
+                                    @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == @item.AuthorId)
+                                    {
+                                        <h5 class="mb-0"><a href="/UserProfiles/MyProfile" class="text-dark">You</a></h5>
+                                    }
+                                    else
+                                    {
+                                        if (@item.GroupId == null)
+                                        {
+
+                                            <h5 class="mb-0"><a href="/UserProfiles/Profile/@item.AuthorId" class="text-dark">@item.Author</a></h5>
+                                        }
+                                        else
+                                        {
+                                            <h5 class="mb-0"><a href="/UserProfiles/Profile/@item.AuthorId" class="text-dark">@item.Author</a> in <a href="Group/@item.GroupId">@item.GroupName</a></h5>
+                                        }
+                                    }
+                                    <p class="mb-0 text-muted">@item.CreatedOn</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-block__content mb-2">
+                            <p>@item.Content</p>
+                            @*<img src="img/food1.jpg" alt="Content img">*@
+                        </div>
+                        <hr>
+                        <div>
+                            <a href="/Admin/Reports/Delete/@item.PostId" class="btn btn-outline-danger">Delete</a>
+                            <a href="/Admin/Reports/Approve/@item.PostId" class="btn btn-outline-success">Approve</a>
+                        </div>
+                        <br>
+                        <h6>Reports: @item.ReportsCount</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/popper/popper.min.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="/vendor/nouislider/js/nouislider.min.js"></script>
+
+    <!--   lazy javascript -->
+    <script src="/js/lazy.js"></script>
+</body>

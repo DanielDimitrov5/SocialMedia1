@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia1.Models;
@@ -33,8 +35,23 @@ namespace SocialMedia1.Controllers
         public IActionResult EditUserProfile(ProfileViewModel model)
         {
             userProfileService
-                .EditUserProfileAsync(userManager
+                .EditUserProfile(userManager
                 .GetUserId(HttpContext.User), model.Nickname, model.Name, model.Surname, model.IsPrivate, model.City, model.Birthday, model.EmailAddress, model.Bio);
+
+  //          Account account = new Account(
+  //"dani03",
+  //"714726182434833",
+  //"BuFfSQmUk6tZXXZk0tM88CZM3nM");
+
+  //          Cloudinary cloudinary = new Cloudinary(account);
+
+  //          var uploadParams = new ImageUploadParams()
+  //          {
+  //              File = new FileDescription(@"https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg"),
+  //              PublicId = "olympic_flag"
+  //          };
+  //          var uploadResult = cloudinary.Upload(uploadParams);
+
 
             return View();
         }
@@ -125,7 +142,7 @@ namespace SocialMedia1.Controllers
 
         [Authorize]
         public IActionResult UnfollowUser(string id)
-         {
+        {
             string currentUser = userManager.GetUserId(HttpContext.User);
 
             userActionsService.UnfollowUser(id, currentUser);

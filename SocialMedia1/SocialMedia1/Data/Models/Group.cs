@@ -15,10 +15,15 @@ namespace SocialMedia1.Data.Models
         [Key]
         public string Id { get; set; }
 
+        [Required]
+        [StringLength(40)]
         public string Name { get; set; }
 
+        [Required]
+        [StringLength(500)]
         public string Description { get; set; }
 
+        [Required]
         public string CreaterId { get; set; }
 
         public bool IsPrivate { get; set; }

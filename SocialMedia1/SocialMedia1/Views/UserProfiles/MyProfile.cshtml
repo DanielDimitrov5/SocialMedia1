@@ -42,7 +42,7 @@
                         <a href="/UserProfiles/EditUserProfile/" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Edit</a>
                     </div>
                     <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
-                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b>134</b> posts</p></div>
+                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.Posts.Count</b> posts</p></div>
                         <a href="/UserProfiles/Followers/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowersCount</b> followers</p></div></a>
                         <a href="/UserProfiles/Following/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowingCount</b> following</p></div></a>
                     </div>
@@ -70,7 +70,7 @@
                 </li>
             </ul>
         </div>
-        @foreach (var item in Model.Posts.OrderByDescending(x=>x.CreatedOn))
+        @foreach (var item in Model.Posts.OrderByDescending(x => x.CreatedOn))
         {
             <div class="container">
 
@@ -88,10 +88,9 @@
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                        <i class="fa fa-ellipsis-v" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <i class="fa fa-ellipsis-v" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="Edit">Edit</a></li>                @*!!!!!*@
-                                        <li><a class="dropdown-item" href="Delete">Delete</a></li>           @*!!!!!*@
+                                        <li><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Delete</a></li>           @*!!!!!*@
                                     </ul>
                                 </div>
                             </div>
@@ -107,6 +106,27 @@
                                 </div>
                             </div>
                             <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this post?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/Posts/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
                         </div>
                     </div>
                 </div>

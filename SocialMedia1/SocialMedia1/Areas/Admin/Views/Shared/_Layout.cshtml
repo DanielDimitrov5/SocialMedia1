@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SocialMedia1.Services
+@using System.Security.Claims
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject INavBarService navBarService
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SocialMedia1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SocialMedia1.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <title>Lazy - Bootstrap UI Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A new design system for developing with less effort.">
+    <meta name="author" content="BootstrapBay">
+
+    <link href="assets/img/favicon.ico" rel="icon" type="image/png">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lazy.css">
+    <link rel="stylesheet" href="/css/demo.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">SocialMedia1</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse mr-auto text-center" id="navbarNavDropdown-3">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer-1 bg-light text-dark">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="links">
+                    <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
+                        @*<li><a href="https://bootstrapbay.com/about" target="_blank">About Us</a></li>*@
+                        <li><a href="/Home/Privacy" target="_blank">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="social mt-4 mt-md-0">
+                    <a class="twitter btn btn-outline-danger btn-icon" href="https://twitter.com/Daniel03Ruse" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                        <span class="sr-only">View our Twitter Profile</span>
+                    </a>
+                    <a class="facebook btn btn-outline-danger btn-icon" href="https://www.facebook.com/daniel.dimitrov.9028" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                        <span class="sr-only">
+                            View our Facebook Profile
+                            <span>
+                    </a>
+                    <a class="github btn btn-outline-danger btn-icon" href="https://github.com/DanielDimitrov5" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span class="sr-only">View our GitHub Profile</span>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <hr />
+                <p class="small">&copy; 2019, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by BootstrapBay</p>
+            </div>
+        </div>
+    </footer>
+
+    <partial name="_ValidationScriptsPartial"></partial>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/popper/popper.min.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="/vendor/nouislider/js/nouislider.min.js"></script>
+
+    <!--   lazy javascript -->
+    <script src="/js/lazy.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

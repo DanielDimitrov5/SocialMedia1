@@ -30,7 +30,7 @@ namespace SocialMedia1.Services
             await context.SaveChangesAsync();
         }
 
-        public async void EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio)
+        public void EditUserProfile(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio)
         {
             UserProfile userProfile = context.UserProfiles.First(x => x.Id == id);
 
@@ -85,6 +85,7 @@ namespace SocialMedia1.Services
             {
                 RequesterId = x.UserRequester.Id,
                 Nickname = x.UserRequester.Nickname,
+                Bio = x.UserRequester.Bio,
                 CurrentUserId = currentUserId,
             }).ToList();
         }
