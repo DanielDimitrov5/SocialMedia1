@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SocialMedia1.Data;
 using SocialMedia1.Models;
 using SocialMedia1.Services;
 using System.Diagnostics;
@@ -29,13 +28,18 @@ namespace SocialMedia1.Controllers
             this.indexService = indexService;
         }
 
+        public IActionResult Landing()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
             if (userId == null)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect("Home/Landing");
             }
 
             //await roleManager.CreateAsync(new IdentityRole

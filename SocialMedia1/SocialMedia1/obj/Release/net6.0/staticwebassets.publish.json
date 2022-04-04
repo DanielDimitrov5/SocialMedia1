@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Yf5jw5DybW4zueivXKGvQAh36noc6nc2Me2gcUnm+H0=",
+  "Hash": "Hkk90wFylH0aH40DvlgE0+64PiKmXupHtJIOPpofOdQ=",
   "Source": "SocialMedia1",
   "BasePath": "_content/SocialMedia1",
   "Mode": "Default",
@@ -1681,6 +1681,23 @@
       "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\register.png"
+    },
+    {
+      "Identity": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\img\\TechCrunch_Disrupt_2019_(48834434641)_(cropped).jpg",
+      "SourceId": "SocialMedia1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\",
+      "BasePath": "_content/SocialMedia1",
+      "RelativePath": "img/TechCrunch_Disrupt_2019_(48834434641)_(cropped).jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\TechCrunch_Disrupt_2019_(48834434641)_(cropped).jpg"
     },
     {
       "Identity": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\img\\user1.jpg",
