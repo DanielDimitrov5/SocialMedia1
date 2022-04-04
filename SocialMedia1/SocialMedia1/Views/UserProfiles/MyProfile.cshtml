@@ -9,23 +9,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Lazy - Bootstrap UI Kit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="A new design system for developing with less effort.">
-    <meta name="author" content="BootstrapBay">
-
-    <link href="assets/img/favicon.ico" rel="icon" type="image/png">
-
-    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/lazy.css">
-    <link rel="stylesheet" href="/css/demo.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body class="profile">
     <div class="container">
@@ -39,7 +22,7 @@
                         <div class="name">
                             <h2 class="mb-0">@Model.Nickname</h2>
                         </div>
-                        <a href="/UserProfiles/EditUserProfile/" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Edit</a>
+                        <a href="/UserProfiles/EditUserProfile/" class="btn btn-info btn-pill btn-sm ml-3 mt-1">Edit</a>
                     </div>
                     <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
                         <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.Posts.Count</b> posts</p></div>
@@ -52,7 +35,7 @@
             </div>
         </div>
         <div class="navigation d-flex justify-content-center">
-            <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+            <ul class="nav nav-info nav-tabs mt-3 d-flex flex-column flex-md-row">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#photos">
                         <i class="fas fa-th"></i> Photos
@@ -134,17 +117,5 @@
         }
 
     </div>
-
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/popper/popper.min.js"></script>
-    <script src="/vendor/bootstrap/bootstrap.min.js"></script>
-
-    <!-- optional plugins -->
-    <script src="/vendor/nouislider/js/nouislider.min.js"></script>
-
-    <!--   lazy javascript -->
-    <script src="/js/lazy.js"></script>
 </body>
 </html>

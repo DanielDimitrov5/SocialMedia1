@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qG6IMgaVW430sms6VChRWZmfB7Wodkvibhodh24zeMA=",
+  "Hash": "wxC0tsZVSiL1BIY9ZyqDxklZIjSV4HAB+h8lGTLoVJo=",
   "Source": "SocialMedia1",
   "BasePath": "_content/SocialMedia1",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\SocialMedia1.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\css\\chat.css",
+      "SourceId": "SocialMedia1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\",
+      "BasePath": "_content/SocialMedia1",
+      "RelativePath": "css/chat.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chat.css"
     },
     {
       "Identity": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\css\\demo.css",

@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @*<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">*@
 </head>
 <body class="profile">
     @foreach (var item in Model.OrderByDescending(x => x.CreatedOn))
@@ -90,7 +90,7 @@
     }
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   @* <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/popper/popper.min.js"></script>
     <script src="/vendor/bootstrap/bootstrap.min.js"></script>
@@ -99,6 +99,6 @@
     <script src="/vendor/nouislider/js/nouislider.min.js"></script>
 
     <!--   lazy javascript -->
-    <script src="/js/lazy.js"></script>
+    <script src="/js/lazy.js"></script>*@
 </body>
 </html>
