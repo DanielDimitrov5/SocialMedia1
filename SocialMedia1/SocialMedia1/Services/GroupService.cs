@@ -13,7 +13,7 @@ namespace SocialMedia1.Services
             this.context = context;
         }
 
-        public void CreateGroup(string name, string description, bool isPrivate, string creatorId)
+        public async Task CreateGroupAsync(string name, string description, bool isPrivate, string creatorId)
         {
             Group group = new Group
             {
@@ -26,11 +26,11 @@ namespace SocialMedia1.Services
 
             UserProfileGroup profileGroup = new() { GroupId = group.Id, UserProfileId = creatorId };
 
-            context.Groups.Add(group);
+            await context.Groups.AddAsync(group);
 
-            context.UserProfilesGroups.Add(profileGroup);
+            await context.UserProfilesGroups.AddAsync(profileGroup);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public GroupViewModel GetGroup(string id)
@@ -72,10 +72,10 @@ namespace SocialMedia1.Services
             {
                 context.Entry(group).Reference(x => x.Group).Load();
 
-                var name = group.Group.Name.Length > 40 
+                var name = group.Group.Name.Length > 40
                     ? string.Concat(group.Group.Name.Substring(0, 40), "...") : group.Group.Name;
 
-                var description = group.Group.Description.Length > 300 
+                var description = group.Group.Description.Length > 300
                     ? string.Concat(group.Group.Description.Substring(0, 300), "...") : group.Group.Description;
 
                 model.Add(new GroupViewModel
@@ -90,17 +90,17 @@ namespace SocialMedia1.Services
             return model.ToArray();
         }
 
-        public GroupMembersViewModel GetMembers(string groupId)
+        public async Task<GroupMembersViewModel> GetMembersAsync(string groupId)
         {
-            var group = context.Groups.Find(groupId);
+            var group = await context.Groups.FindAsync(groupId);
 
-            context.Entry(group).Collection(x => x.Users).Load();
+            await context.Entry(group).Collection(x => x.Users).LoadAsync();
 
             List<ProfileViewModel> members = new();
 
             foreach (var member in group.Users)
             {
-                context.Entry(member).Reference(x => x.UserProfile).Load();
+                await context.Entry(member).Reference(x => x.UserProfile).LoadAsync();
 
                 var memberViewModel = new ProfileViewModel
                 {
@@ -122,17 +122,17 @@ namespace SocialMedia1.Services
             return groupMembers;
         }
 
-        public ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId)
+        public async Task<ICollection<JoinGroupRequestViewModel>> GetJoinGroupRequestsAsync(string groupId)
         {
-            var group = context.Groups.Find(groupId);
+            var group = await context.Groups.FindAsync(groupId);
 
-            context.Entry(group).Collection(x => x.JoinRequests).Load();
+            await context.Entry(group).Collection(x => x.JoinRequests).LoadAsync();
 
             List<JoinGroupRequestViewModel> requests = new();
 
             foreach (var req in group.JoinRequests)
             {
-                context.Entry(req).Reference(x => x.UserProfile).Load();
+                await context.Entry(req).Reference(x => x.UserProfile).LoadAsync();
 
                 var request = new JoinGroupRequestViewModel
                 {

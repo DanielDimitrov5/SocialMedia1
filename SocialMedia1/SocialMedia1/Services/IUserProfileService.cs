@@ -7,14 +7,14 @@ namespace SocialMedia1.Services
     {
         Task AddUserProfileAsync(string Id);
 
-        void EditUserProfile(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio);
+        Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio);
 
-        ProfileViewModel GetUserProfileData(string id);
+        Task<ProfileViewModel> GetUserProfileDataAsync(string id);
 
         ICollection<FollowRequestViewModel> GetAllFollowRequests(string currentUserId);
 
         UsersProfilesViewModel GetAllFollowers(string userId);
 
-        UsersProfilesViewModel GetAllFollowing(string userId);
+        Task<UsersProfilesViewModel> GetAllFollowingAsync(string userId);
     }
 }

@@ -13,7 +13,7 @@ namespace SocialMedia1.Services
             this.context = context;
         }
 
-        public void CreatePost(string userId, string content)
+        public async Task CreatePostAsync(string userId, string content)
         {
             Post post = new Post
             {
@@ -22,14 +22,14 @@ namespace SocialMedia1.Services
                 CreatedOn = DateTime.UtcNow,
             };
 
-            context.Posts.Add(post);
+            await context.Posts.AddAsync(post);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void CreateGroupPost(string groupId, string userId, string content)
+        public async Task CreateGroupPostAsync(string groupId, string userId, string content)
         {
-            Group group = context.Groups.Find(groupId);
+            Group group = await context.Groups.FindAsync(groupId);
 
             if (group is null)
             {
@@ -46,7 +46,7 @@ namespace SocialMedia1.Services
 
             group.Posts.Add(post);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public ICollection<PostViewModel> GetAllPosts(string userId)
@@ -130,7 +130,7 @@ namespace SocialMedia1.Services
 
         public async Task ReportPostAsync(string postId, string userId)
         {
-            if (context.PostCommunityReports.Any(x=>x.PostId == postId && x.ReporterId == userId))
+            if (context.PostCommunityReports.Any(x => x.PostId == postId && x.ReporterId == userId))
             {
                 return;
             }

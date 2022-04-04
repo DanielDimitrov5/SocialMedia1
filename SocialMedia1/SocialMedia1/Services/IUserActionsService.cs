@@ -2,18 +2,20 @@
 {
     public interface IUserActionsService
     {
-        void FollowUser(string id, string currentUserId);
+        Task FollowUserAsync(string id, string currentUserId);
 
-        void UnfollowUser(string id, string currentUserId);
+        Task UnfollowUserAsync(string id, string currentUserId);
 
-        bool IsUserFollowed(string currentUserId, string userId);
+        Task SendFollowRequest(string id, string currentUserId);
 
-        void ApproveFollowRequest(string requesterId, string currentUser);
+        Task<bool> IsUserFollowedAsync(string currentUserId, string userId);
 
-        void DeleteRequest(string requesterId);
+        Task ApproveFollowRequestAsync(string requesterId, string currentUser);
+
+        Task DeleteRequestAsync(string requesterId);
 
         bool CheckIfFollowRequestIsSent(string userId, string currentsUserId);
 
-        public void RemoveFollower(string currentUserId, string followerId);
+        Task RemoveFollowerAsync(string currentUserId, string followerId);
     }
 }

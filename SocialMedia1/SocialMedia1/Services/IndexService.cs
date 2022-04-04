@@ -11,7 +11,7 @@ namespace SocialMedia1.Services
             this.postService = postService;
         }
 
-        public IndexViewModel GetIndexView(string userId)
+        public IndexViewModel GetIndexViewAsync(string userId)
         {
             var postsByFollowedUsers = postService.GetAllPostsByFollowedUsers(userId);
             var myPosts = postService.GetAllPosts(userId).Where(x => x.GroupId == null).ToList();

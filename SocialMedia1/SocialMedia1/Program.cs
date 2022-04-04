@@ -69,11 +69,11 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-    db.Database.Migrate();
-}
+//    db.Database.Migrate();
+//}
 
 app.Run();

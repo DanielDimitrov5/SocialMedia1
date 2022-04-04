@@ -29,7 +29,7 @@ namespace SocialMedia1.Controllers
             this.indexService = indexService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var userId = userManager.GetUserId(HttpContext.User);
 
@@ -45,15 +45,15 @@ namespace SocialMedia1.Controllers
 
             //await userManager.AddToRoleAsync(await userManager.GetUserAsync(this.User), "Admin");
 
-            var model = indexService.GetIndexView(userId);
+            var model = indexService.GetIndexViewAsync(userId);
 
             return View(model);
         }
 
         [Authorize]
-        public IActionResult FollowRequests()
+        public async Task<IActionResult> FollowRequests()
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
             var model = userProfileService.GetAllFollowRequests(userId);
 

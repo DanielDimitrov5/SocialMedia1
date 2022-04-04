@@ -14,7 +14,7 @@
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_DbContextTypeFullName>SocialMedia1.Data.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
-    <NameOfLastUsedPublishProfile>C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\Properties\PublishProfiles\SocialMedia1 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\Properties\PublishProfiles\SocialMedia1 - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_DependencyDialogWidth>650.4</WebStackScaffolding_DependencyDialogWidth>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

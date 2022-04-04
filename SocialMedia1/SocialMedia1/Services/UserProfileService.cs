@@ -30,7 +30,7 @@ namespace SocialMedia1.Services
             await context.SaveChangesAsync();
         }
 
-        public void EditUserProfile(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio)
+        public async Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio)
         {
             UserProfile userProfile = context.UserProfiles.First(x => x.Id == id);
 
@@ -43,10 +43,10 @@ namespace SocialMedia1.Services
             userProfile.EmailAddress = emailaddress;
             userProfile.Bio = bio;
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public ProfileViewModel GetUserProfileData(string id)
+        public async Task<ProfileViewModel> GetUserProfileDataAsync(string id)
         {
             UserProfile user = context.UserProfiles.FirstOrDefault(x => x.Id == id);
 
@@ -55,8 +55,8 @@ namespace SocialMedia1.Services
                 return null;
             }
 
-            context.Entry(user).Collection(x => x.FollowedBy).Load();
-            context.Entry(user).Collection(x => x.Follows).Load();
+            await context.Entry(user).Collection(x => x.FollowedBy).LoadAsync();
+            await context.Entry(user).Collection(x => x.Follows).LoadAsync();
 
             var posts = postService.GetAllPosts(id);
 
@@ -108,11 +108,11 @@ namespace SocialMedia1.Services
             return model;
         }
 
-        public UsersProfilesViewModel GetAllFollowing(string currentUserId)
+        public async Task<UsersProfilesViewModel> GetAllFollowingAsync(string currentUserId)
         {
-            var user = context.UserProfiles.Find(currentUserId);
+            var user = await context.UserProfiles.FindAsync(currentUserId);
 
-            context.Entry(user).Collection(x => x.Follows).Load();
+            await context.Entry(user).Collection(x => x.Follows).LoadAsync();
 
             var following = user.Follows
                  .Select(x => new ProfileViewModel

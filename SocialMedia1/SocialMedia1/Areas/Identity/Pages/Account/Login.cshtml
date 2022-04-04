@@ -1,0 +1,58 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lazy - Bootstrap UI Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A new design system for developing with less effort.">
+    <meta name="author" content="BootstrapBay">
+
+    <link href="assets/img/favicon.ico" rel="icon" type="image/png">
+
+    @*<link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/lazy.css">
+    <link rel="stylesheet" href="assets/css/demo.css">*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-18 col-md-4 offset-md-4">
+                <div class="register-form">
+                    <div class="mb-6">
+                        <h1>Log in</h1>
+                    </div>
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email" for="exampleInputEmail1">Email address</label>
+                            <input asp-for="Input.Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password" for="exampleInputPassword1">Password</label>
+                            <input asp-for="Input.Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                             <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <button id="loginSubmit" type="submit" class="btn btn-block btn-info">Log In</button>
+                    </form>
+
+                    <p class="small my-4 text-center">Don't have an account? <a href="Registe">Register</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

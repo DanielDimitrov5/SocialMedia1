@@ -26,22 +26,22 @@ namespace SocialMedia1.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult CreatePost(CreatePostViewModel model)
+        public async Task<IActionResult> CreatePost(CreatePostViewModel model)
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            postService.CreatePost(userId, model.Content);
+            await postService.CreatePostAsync(userId, model.Content);
 
             return Redirect("/"); //!!!
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult CreateGroupPost(CreatePostViewModel model)
+        public async Task<IActionResult> CreateGroupPost(CreatePostViewModel model)
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            postService.CreateGroupPost(model.Id, userId, model.Content);
+            await postService.CreateGroupPostAsync(model.Id, userId, model.Content);
 
             return Redirect($"/Group/{model.Id}"); //!!!
         }

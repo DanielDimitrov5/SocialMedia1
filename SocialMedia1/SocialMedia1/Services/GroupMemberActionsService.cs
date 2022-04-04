@@ -12,26 +12,26 @@ namespace SocialMedia1.Services
             this.context = context;
         }
 
-        public void ApproveJoinRequest(string requesterId, string groupId)
+        public async Task ApproveJoinRequestAsync(string requesterId, string groupId)
         {
-            UserProfile requester = context.UserProfiles.Find(requesterId);
-            Group group = context.Groups.Find(groupId);
-
+            UserProfile requester = await context.UserProfiles.FindAsync(requesterId);
+            Group group = await context.Groups.FindAsync(groupId);
+            
             if (requester == null || group == null)
             {
                 return;
             }
 
-            JoinGroup(groupId, requesterId);
+            await JoinGroupAsync(groupId, requesterId);
 
             UserGroupRequest followRequest = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
 
             context.JoinGroupRequest.Remove(followRequest);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void DeleteJoinRequest(string requesterId, string groupId)
+        public async Task DeleteJoinRequestAsync(string requesterId, string groupId)
         {
             var request = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
 
@@ -42,7 +42,7 @@ namespace SocialMedia1.Services
 
             context.JoinGroupRequest.Remove(request);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public bool IsGroupPrivate(string groupId)
@@ -65,27 +65,27 @@ namespace SocialMedia1.Services
             return context.UserProfilesGroups.Any(x => x.GroupId == groupId && x.UserProfileId == userId);
         }
 
-        public void JoinGroup(string groupId, string userId)
+        public async Task JoinGroupAsync(string groupId, string userId)
         {
-            Group group = context.Groups.Find(groupId);
+            Group group = await context.Groups.FindAsync(groupId);
 
-            UserProfile user = context.UserProfiles.Find(userId);
+            UserProfile user = await context.UserProfiles.FindAsync(userId);
 
             if (group == null || user == null)
             {
                 return;
             }
 
-            context.UserProfilesGroups.Add(new UserProfileGroup { GroupId = groupId, UserProfileId = userId });
+            await context.UserProfilesGroups.AddAsync(new UserProfileGroup { GroupId = groupId, UserProfileId = userId });
 
             group.MembersCount++;
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void LeaveGroup(string groupId, string userId)
+        public async Task LeaveGroupAsync(string groupId, string userId)
         {
-            Group group = context.Groups.Find(groupId);
+            Group group = await context.Groups.FindAsync(groupId);
 
             UserProfileGroup user = context.UserProfilesGroups.FirstOrDefault(x => x.UserProfileId == userId && x.GroupId == groupId);
 
@@ -98,10 +98,10 @@ namespace SocialMedia1.Services
 
             group.Users.Remove(user);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void SendJoinRequest(string groupId, string userId)
+        public async Task SendJoinRequestAsync(string groupId, string userId)
         {
             UserGroupRequest userGroupRequest = new UserGroupRequest
             {
@@ -109,9 +109,9 @@ namespace SocialMedia1.Services
                 GroupId = groupId,
             };
 
-            context.JoinGroupRequest.Add(userGroupRequest);
+            await context.JoinGroupRequest.AddAsync(userGroupRequest);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

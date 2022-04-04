@@ -40,7 +40,7 @@
                         <div class="name">
                             <h2 class="mb-0">@Model.Nickname</h2>
                         </div>
-                        @if (userActionsService.IsUserFollowed(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+                        @if (await userActionsService.IsUserFollowedAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
                         {
                             <a href="/UserProfiles/Unfollow/@Model.Id" class="btn btn-danger btn-pill btn-sm ml-3 mt-1">Unfollow</a>
                         }
@@ -86,7 +86,7 @@
                 </li>
             </ul>
         </div>
-        @foreach (var item in Model.Posts.OrderByDescending(x=>x.CreatedOn))
+        @foreach (var item in Model.Posts.OrderByDescending(x => x.CreatedOn))
         {
             <div class="container">
 

@@ -2,15 +2,15 @@
 {
     public interface IGroupMemberActionsService
     {
-        void JoinGroup(string groupId, string userId);
+        Task JoinGroupAsync(string groupId, string userId);
 
-        void SendJoinRequest(string groupId, string userId);
+        Task SendJoinRequestAsync(string groupId, string userId);
 
-        void ApproveJoinRequest(string requesterId, string groupId);
+        Task ApproveJoinRequestAsync(string requesterId, string groupId);
 
-        void DeleteJoinRequest(string requesterId, string groupId);
+        Task DeleteJoinRequestAsync(string requesterId, string groupId);
 
-        void LeaveGroup(string groupId, string userId);
+        Task LeaveGroupAsync(string groupId, string userId);
 
         bool IsUserGroupMember(string userId, string groupId);
 

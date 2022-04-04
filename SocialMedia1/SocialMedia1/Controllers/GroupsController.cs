@@ -27,21 +27,11 @@ namespace SocialMedia1.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create(GroupInputModel model)
+        public async Task<IActionResult> Create(GroupInputModel model)
         {
-            if (!this.ModelState.IsValid)
-            {
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            }
-
-            if (ModelState.IsValid)
-            {
-
-            }
-
-            var userId = userManager.GetUserId(HttpContext.User);
-
-            groupService.CreateGroup(model.Name, model.Description, model.IsPrivate, userId);
+            await groupService.CreateGroupAsync(model.Name, model.Description, model.IsPrivate, userId);
 
             return Redirect("/Home/Groups");
         }
@@ -56,52 +46,54 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult JoinGroup(string id)
+        public async Task<IActionResult> JoinGroup(string id)
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
             if (groupMemberActionsService.IsGroupPrivate(id))
             {
                 if (groupMemberActionsService.IsJoinRequstSent(id, userId) == false)
                 {
-                    return SendJoinRequest(id);
+                    await groupMemberActionsService.SendJoinRequestAsync(id, userId);
+
+                    return Redirect($"/Group/{id}");
                 }
 
                 return Redirect($"/Group/{id}");
             }
 
-            groupMemberActionsService.JoinGroup(id, userId);
+            await groupMemberActionsService.JoinGroupAsync(id, userId);
 
             return Redirect($"/Group/{id}");
         }
 
         [Authorize]
-        public IActionResult SendJoinRequest(string id)
+        public async Task<IActionResult> SendJoinRequest(string id)
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            groupMemberActionsService.SendJoinRequest(id, userId);
+            await groupMemberActionsService.SendJoinRequestAsync(id, userId);
 
             return Redirect($"/Group/{id}");
         }
 
         [Authorize]
-        public IActionResult JoinRequests(string id)
+        public async Task<IActionResult> JoinRequests(string id)
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
             if (groupMemberActionsService.IsUserGroupCreator(userId, id) == false)
             {
                 return Redirect($"/Group/{id}");
             }
 
-            var model = groupService.GetJoinGroupRequests(id);
+            var model = await groupService.GetJoinGroupRequestsAsync(id);
 
             return View(model);
         }
 
         [Authorize]
-        public IActionResult ApproveJoinRequest(string requesterId, string groupId)
+        public async Task<IActionResult> ApproveJoinRequest(string requesterId, string groupId)
         {
             if (groupMemberActionsService.IsGroupPrivate(groupId) == false)
             {
@@ -118,13 +110,13 @@ namespace SocialMedia1.Controllers
                 return Redirect($"/Group/{groupId}");
             }
 
-            groupMemberActionsService.ApproveJoinRequest(requesterId, groupId);
+            await groupMemberActionsService.ApproveJoinRequestAsync(requesterId, groupId);
 
             return Redirect($"/Groups/JoinRequests/{groupId}");
         }
 
         [Authorize]
-        public IActionResult DeleteJoinRequest(string requesterId, string groupId)
+        public async Task<IActionResult> DeleteJoinRequest(string requesterId, string groupId)
         {
             if (groupMemberActionsService.IsGroupPrivate(groupId) == false)
             {
@@ -141,33 +133,33 @@ namespace SocialMedia1.Controllers
                 return Redirect($"/Group/{groupId}");
             }
 
-            groupMemberActionsService.DeleteJoinRequest(requesterId, groupId);
+            await groupMemberActionsService.DeleteJoinRequestAsync(requesterId, groupId);
 
             return Redirect($"/Group/{groupId}");
         }
 
         [Authorize]
-        public IActionResult LeaveGroup(string id)
+        public async Task<IActionResult> LeaveGroup(string id)
         {
-            var userId = userManager.GetUserId(HttpContext.User);
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            groupMemberActionsService.LeaveGroup(id, userId);
+            await groupMemberActionsService.LeaveGroupAsync(id, userId);
 
             return Redirect($"/Group/{id}");
         }
 
         [Authorize]
-        public IActionResult KickUser(string userId, string groupId)
+        public async Task<IActionResult> KickUser(string userId, string groupId)
         {
-            groupMemberActionsService.LeaveGroup(groupId, userId);
+            await groupMemberActionsService.LeaveGroupAsync(groupId, userId);
 
             return Redirect($"/Groups/Members/{groupId}");
         }
 
         [Authorize]
-        public IActionResult Members(string id)
+        public async Task<IActionResult> Members(string id)
         {
-            var model = groupService.GetMembers(id);
+            var model = await groupService.GetMembersAsync(id);
 
             return View(model);
         }

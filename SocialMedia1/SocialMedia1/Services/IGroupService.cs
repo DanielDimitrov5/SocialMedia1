@@ -6,11 +6,11 @@ namespace SocialMedia1.Services
     {
         GroupViewModel[] GetGroups(string userId);
 
-        ICollection<JoinGroupRequestViewModel> GetJoinGroupRequests(string groupId);
+        Task<ICollection<JoinGroupRequestViewModel>> GetJoinGroupRequestsAsync(string groupId);
 
-        GroupMembersViewModel GetMembers(string groupId);
+        Task<GroupMembersViewModel> GetMembersAsync(string groupId);
 
-        void CreateGroup(string name, string description, bool isPrivate ,string creatorId);
+        Task CreateGroupAsync(string name, string description, bool isPrivate ,string creatorId);
 
         GroupViewModel GetGroup(string id);
     }

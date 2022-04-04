@@ -23,19 +23,19 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult EditUserProfile()
+        public async Task<IActionResult> EditUserProfile()
         {
-            var model = userProfileService.GetUserProfileData(userManager.GetUserId(HttpContext.User));
+            var model = await userProfileService.GetUserProfileDataAsync(userManager.GetUserId(HttpContext.User));
 
             return View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult EditUserProfile(ProfileViewModel model)
+        public async Task<IActionResult> EditUserProfile(ProfileViewModel model)
         {
-            userProfileService
-                .EditUserProfile(userManager
+            await userProfileService
+                .EditUserProfileAsync(userManager
                 .GetUserId(HttpContext.User), model.Nickname, model.Name, model.Surname, model.IsPrivate, model.City, model.Birthday, model.EmailAddress, model.Bio);
 
   //          Account account = new Account(
@@ -57,22 +57,22 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult MyProfile()
+        public async Task<IActionResult> MyProfile()
         {
-            var model = userProfileService.GetUserProfileData(userManager.GetUserId(HttpContext.User));
+            var model = await userProfileService.GetUserProfileDataAsync(userManager.GetUserId(HttpContext.User));
 
             return View(model);
         }
 
         [Authorize]
-        public IActionResult Profile(string id)
+        public async Task<IActionResult> Profile(string id)
         {
             if (id == userManager.GetUserId(HttpContext.User))
             {
                 return Redirect("/UserProfiles/MyProfile");
             }
 
-            var model = userProfileService.GetUserProfileData(id);
+            var model = await userProfileService.GetUserProfileDataAsync(id);
 
             if (model is null)
             {
@@ -83,33 +83,33 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult Follow(string id)
+        public async Task<IActionResult> Follow(string id)
         {
-            userActionsService.FollowUser(id, userManager.GetUserId(HttpContext.User));
+            await userActionsService.FollowUserAsync(id, userManager.GetUserId(HttpContext.User));
 
             return Redirect($"/UserProfiles/Profile/{id}");
         }
 
         [Authorize]
-        public IActionResult Unfollow(string id)
+        public async Task<IActionResult> Unfollow(string id)
         {
-            userActionsService.UnfollowUser(id, userManager.GetUserId(HttpContext.User));
+            await userActionsService.UnfollowUserAsync(id, userManager.GetUserId(HttpContext.User));
 
             return Redirect($"/UserProfiles/Profile/{id}");
         }
 
         [Authorize]
-        public IActionResult ApproveFollowRequest(string requesterId, string currentUserId)
+        public async Task<IActionResult> ApproveFollowRequest(string requesterId, string currentUserId)
         {
-            userActionsService.ApproveFollowRequest(requesterId, currentUserId);
+            await userActionsService.ApproveFollowRequestAsync(requesterId, currentUserId);
 
             return Redirect("/Home/FollowRequests");
         }
 
         [Authorize]
-        public IActionResult DeleteFollowRequest(string requesterId)
+        public async Task<IActionResult> DeleteFollowRequest(string requesterId)
         {
-            userActionsService.DeleteRequest(requesterId);
+            await userActionsService.DeleteRequestAsync(requesterId);
 
             return Redirect("/Home/FollowRequests");
         }
@@ -123,29 +123,29 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult RemoveFollower(string id)
+        public async Task<IActionResult> RemoveFollower(string id)
         {
             var currentUser = userManager.GetUserId(HttpContext.User);
 
-            userActionsService.RemoveFollower(currentUser, id);
+            await userActionsService.RemoveFollowerAsync(currentUser, id);
 
             return Redirect($"/UserProfiles/Followers/{currentUser}");
         }
 
         [Authorize]
-        public IActionResult Following(string id)
+        public async Task<IActionResult> Following(string id)
         {
-            var model = userProfileService.GetAllFollowing(id);
+            var model = await userProfileService.GetAllFollowingAsync(id);
 
             return View(model);
         }
 
         [Authorize]
-        public IActionResult UnfollowUser(string id)
+        public async Task<IActionResult> UnfollowUser(string id)
         {
             string currentUser = userManager.GetUserId(HttpContext.User);
 
-            userActionsService.UnfollowUser(id, currentUser);
+            await userActionsService.UnfollowUserAsync(id, currentUser);
 
             return Redirect($"/UserProfiles/Following/{currentUser}");
         }
