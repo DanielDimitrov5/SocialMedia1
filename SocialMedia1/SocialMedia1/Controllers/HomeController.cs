@@ -28,6 +28,11 @@ namespace SocialMedia1.Controllers
             this.indexService = indexService;
         }
 
+        public IActionResult Chat()
+        {
+            return View();
+        }
+
         public IActionResult Landing()
         {
             return View();

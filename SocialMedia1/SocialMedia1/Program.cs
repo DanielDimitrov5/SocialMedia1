@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia1.Areas.Admin.Services;
 using SocialMedia1.Data;
+using SocialMedia1.Hubs;
 using SocialMedia1.Services;
 using System.Security.Claims;
 
@@ -36,6 +37,8 @@ builder.Services.AddTransient<IUserActionsService, UserActionsService>();
 builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
 builder.Services.AddTransient<IReportService, ReportService>();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,6 +61,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHub<ChatHub>("/chat");
 
 app.MapControllerRoute(
     name: "Admin",
