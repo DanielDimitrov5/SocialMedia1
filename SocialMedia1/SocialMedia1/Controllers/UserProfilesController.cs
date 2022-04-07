@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialMedia1.Models;
 using SocialMedia1.Services;
 
+
 namespace SocialMedia1.Controllers
 {
     public class UserProfilesController : Controller
@@ -13,12 +14,14 @@ namespace SocialMedia1.Controllers
 
         private readonly IUserProfileService userProfileService;
         private readonly IUserActionsService userActionsService;
+        private readonly IImageService imageService;
         private readonly UserManager<IdentityUser> userManager;
 
-        public UserProfilesController(IUserProfileService userProfileService, IUserActionsService userActionsService, UserManager<IdentityUser> userManager)
+        public UserProfilesController(IUserProfileService userProfileService, IUserActionsService userActionsService, IImageService imageService, UserManager<IdentityUser> userManager)
         {
             this.userProfileService = userProfileService;
             this.userActionsService = userActionsService;
+            this.imageService = imageService;
             this.userManager = userManager;
         }
 
@@ -34,24 +37,17 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public async Task<IActionResult> EditUserProfile(ProfileViewModel model)
         {
+            var user = userManager.GetUserId(HttpContext.User);
+
+            var imageUrl = await imageService.UploadImageToCloudinary(model.Image, user);
+
+            if (imageUrl == null)
+            {
+                imageUrl = model.ImageUrl;
+            }
+
             await userProfileService
-                .EditUserProfileAsync(userManager
-                .GetUserId(HttpContext.User), model.Nickname, model.Name, model.Surname, model.IsPrivate, model.City, model.Birthday, model.EmailAddress, model.Bio);
-
-  //          Account account = new Account(
-  //"dani03",
-  //"714726182434833",
-  //"BuFfSQmUk6tZXXZk0tM88CZM3nM");
-
-  //          Cloudinary cloudinary = new Cloudinary(account);
-
-  //          var uploadParams = new ImageUploadParams()
-  //          {
-  //              File = new FileDescription(@"https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg"),
-  //              PublicId = "olympic_flag"
-  //          };
-  //          var uploadResult = cloudinary.Upload(uploadParams);
-
+                .EditUserProfileAsync(user, model.Nickname, model.Name, model.Surname, model.IsPrivate, model.Bio, imageUrl);
 
             return View();
         }

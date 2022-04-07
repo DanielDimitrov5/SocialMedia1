@@ -27,12 +27,12 @@
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
                                     <div class="row">
                                         <div class="col-md-2 col-sm-2">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                            <img src="@member.ImageUrl" alt="user" class="profile-photo-lg">
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link"><b>@member.Nickname</b> <i class="fa-solid fa-crown"></i></a></h5>
-                                            <p>@member.Bio</p>
-                                            <p class="text-muted"></p>
+                                            <p>@member.Name</p>
+                                            <p class="text-muted">@member.Bio</p>
                                         </div>
                                     </div>
                                 </div>
@@ -42,12 +42,12 @@
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
                                     <div class="row">
                                         <div class="col-md-2 col-sm-2">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                            <img src="@member.ImageUrl" alt="user" class="profile-photo-lg">
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link">@member.Nickname</a></h5>
-                                            <p>@member.Bio</p>
-                                            <p class="text-muted"></p>
+                                            <p>@member.Name</p>
+                                            <p class="text-muted">@member.Bio</p>
                                         </div>
                                         <div class="col-md-3 col-sm-3">
                                             <a href="/Groups/KickUser?userId=@member.Id&groupId=@Model.GroupId" class="btn btn-danger btn-pill">Kick</a>
@@ -64,12 +64,12 @@
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
                                     <div class="row">
                                         <div class="col-md-2 col-sm-2">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                            <img src="@member.ImageUrl" alt="user" class="profile-photo-lg">
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link">@member.Nickname <i class="fa-solid fa-crown"></i></a></h5>
-                                            <p>@member.Bio</p>
-                                            <p class="text-muted"></p>
+                                            <p>@member.Name</p>
+                                            <p class="text-muted">@member.Bio</p>
                                         </div>
                                     </div>
                                 </div>
@@ -79,12 +79,12 @@
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
                                     <div class="row">
                                         <div class="col-md-2 col-sm-2">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                            <img src="@member.ImageUrl" alt="user" class="profile-photo-lg">
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link"><b>@member.Nickname</b> <i class="fa-solid fa-hand-point-left"></i></a></h5>
-                                            <p>@member.Bio</p>
-                                            <p class="text-muted"></p>
+                                            <p>@member.Name</p>
+                                            <p class="text-muted">@member.Bio</p>
                                         </div>
                                     </div>
                                 </div>
@@ -94,18 +94,17 @@
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
                                     <div class="row">
                                         <div class="col-md-2 col-sm-2">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                            <img src="@member.ImageUrl" alt="user" class="profile-photo-lg">
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <h5><a href="/UserProfiles/Profile/@member.Id" class="profile-link">@member.Nickname</a></h5>
-                                            <p>@member.Bio</p>
-                                            <p class="text-muted"></p>
+                                            <p>@member.Name</p>
+                                            <p class="text-muted">@member.Bio</p>
                                         </div>
                                     </div>
                                 </div>
                             }
                         }
-
                     }
                 </div>
             </div>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SocialMedia1.Migrations
 {
-    public partial class postReports : Migration
+    public partial class createAzureDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,8 +72,7 @@ namespace SocialMedia1.Migrations
                     Nickname = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPrivate = table.Column<bool>(type: "bit", nullable: false)

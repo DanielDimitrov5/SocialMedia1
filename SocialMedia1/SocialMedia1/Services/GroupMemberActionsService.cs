@@ -89,7 +89,7 @@ namespace SocialMedia1.Services
 
             UserProfileGroup user = context.UserProfilesGroups.FirstOrDefault(x => x.UserProfileId == userId && x.GroupId == groupId);
 
-            if (group == null || user == null)
+            if (group == null || user == null || group.CreaterId == userId)
             {
                 return;
             }

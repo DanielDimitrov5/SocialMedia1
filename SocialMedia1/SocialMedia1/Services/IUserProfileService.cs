@@ -7,7 +7,7 @@ namespace SocialMedia1.Services
     {
         Task AddUserProfileAsync(string Id);
 
-        Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio);
+        Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string bio, string image);
 
         Task<ProfileViewModel> GetUserProfileDataAsync(string id);
 

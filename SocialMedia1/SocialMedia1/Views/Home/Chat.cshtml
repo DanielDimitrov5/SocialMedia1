@@ -3,19 +3,43 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/chat.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    @*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+
 </head>
 <body>
 
-
-    <div id="message-holder" class="mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">Community all chat :)</div>
+                <div class="panel-body">
+                    <div class="container" id="messagesList">
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="messageInput" type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button id="sendButton" class="btn btn-default" type="button">Send</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <div id="message-holder" class="mt-3">
         <input class="form-control min-width-size ml-3" type="text" id="messageInput" placeholder="Message..." />
         <button id="sendButton" class="ml-4 btn btn-primary">Send</button>
-    </div>
-    <div id="messagesList" class="mt-5">
-    </div>
+        </div>
+        <div id="messagesList" class="mt-5">
+        </div>*@
 </body>
 @section Scripts {
+    @*<script src="/js/chat.js"></script>*@
+
 <script>
     var connection =
         new signalR.HubConnectionBuilder()
@@ -23,10 +47,7 @@
             .build();
     connection.on("NewMessage",
         function (message) {
-            //var chatInfo = `<div class="green">[${message.user}] ${escapeHtml(message.text)}</div>`;
-            var chatInfo = `<div class="media-body">
-                            <p>[${message.user}] ${escapeHtml(message.text)}</p>
-                        </div>`;
+            var chatInfo = `<div>${message.user}: ${escapeHtml(message.text)}</div>`;
             $("#messagesList").append(chatInfo);
         });
     $("#sendButton").click(function () {

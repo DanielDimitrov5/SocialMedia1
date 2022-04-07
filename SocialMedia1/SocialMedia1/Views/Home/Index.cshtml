@@ -28,10 +28,27 @@
 
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade show active" id="posts">
-            <partial name="_PostFeed" model="Model.Posts"></partial>
+
+        @if (!Model.Posts.Any())
+        {
+            <div class="d-flex justify-content-center">
+                <h4>Still no posts? Follow some users in order to catch up!</h4>
+            </div>
+        }
+
+        <partial name="_PostFeed" model="Model.Posts"></partial>
     </div>
+
     <div role="tabpanel" class="tab-pane fade" id="groupPosts">
-            <partial name="_GroupFeed" model="Model.GroupPosts"></partial>
+
+        @if (!Model.GroupPosts.Any())
+        {
+            <div class="d-flex justify-content-center">
+                <h4>Join some groups! Pretty useful content out there.</h4>
+            </div>
+        }
+
+        <partial name="_GroupFeed" model="Model.GroupPosts"></partial>
     </div>
 </div>
 

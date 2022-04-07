@@ -15,12 +15,12 @@
                         <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@joinRequest.UserId';">
                             <div class="row">
                                 <div class="col-md-2 col-sm-2">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                    <img src="@joinRequest.ImageUrl" alt="user" class="profile-photo-lg">
                                 </div>
                                 <div class="col-md-7 col-sm-7">
                                     <h5><a href="/UserProfiles/Profile/@joinRequest.UserId" class="profile-link">@joinRequest.Nickname</a></h5>
-                                    <p></p>
-                                    <p class="text-muted"></p>
+                                    <p>@joinRequest.Name</p>
+                                    <p class="text-muted">@joinRequest.Bio</p>
                                 </div>
                                 <div class="col-md-3 col-sm-3 btn-group">
                                     <div class="col-md-11">
@@ -33,8 +33,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     }
                 </div>
             </div>

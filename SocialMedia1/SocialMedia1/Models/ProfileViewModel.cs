@@ -20,21 +20,21 @@ namespace SocialMedia1.Models
         [Display(Name = "Private Profile")]
         public bool IsPrivate { get; set; }
 
-        public string? City { get; set; }
-
-        public int Age { get; set; }
-
-        public DateTime Birthday { get; set; }
-
-        [Display(Name = "Email Address")]
-        public string? EmailAddress { get; set; }
+        //[Display(Name = "Email Address")]
+        //public string? EmailAddress { get; set; }
 
         public string? Bio { get; set; }
 
         public ICollection<PostViewModel> Posts { get; set; }
 
+        public ICollection<PostViewModel> GroupPosts { get; set; }
+
         public int FollowersCount { get; set; }
 
         public int FollowingCount { get; set; }
+
+        public IFormFile? Image { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

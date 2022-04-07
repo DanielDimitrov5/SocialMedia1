@@ -45,6 +45,7 @@ namespace SocialMedia1.Services
                     Name = x.Name,
                     Surname = x.Surname,
                     Bio = x.Bio,
+                    ImageUrl = x.ImageUrl,
                 })
                 .ToList();
 

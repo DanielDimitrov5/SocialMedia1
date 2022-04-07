@@ -28,6 +28,7 @@ namespace SocialMedia1.Controllers
             this.indexService = indexService;
         }
 
+        [Authorize]
         public IActionResult Chat()
         {
             return View();
@@ -54,7 +55,7 @@ namespace SocialMedia1.Controllers
 
             //await userManager.AddToRoleAsync(await userManager.GetUserAsync(this.User), "Admin");
 
-            var model = indexService.GetIndexViewAsync(userId);
+            var model = indexService.GetIndexView(userId);
 
             return View(model);
         }

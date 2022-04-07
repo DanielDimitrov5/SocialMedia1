@@ -20,7 +20,6 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\dog-8.jpg
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\dog-9.jpg
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\favicon.ico
-C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\landing.png
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\landing_devices.png
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\logo.svg
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\logo_black.svg
@@ -349,3 +348,5 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\ref\SocialMedia1.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\SocialMedia1.pdb
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\SocialMedia1.genruntimeconfig.cache
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\css\chat.css
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\wwwroot\img\ProfilePictures\9af12897-a9cb-46f1-b8c1-80b9d2bea803.jpg

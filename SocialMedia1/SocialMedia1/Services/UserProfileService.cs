@@ -30,7 +30,7 @@ namespace SocialMedia1.Services
             await context.SaveChangesAsync();
         }
 
-        public async Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string city, DateTime birthday, string emailaddress, string bio)
+        public async Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string bio, string image)
         {
             UserProfile userProfile = context.UserProfiles.First(x => x.Id == id);
 
@@ -38,10 +38,12 @@ namespace SocialMedia1.Services
             userProfile.Name = name;
             userProfile.Surname = surename;
             userProfile.IsPrivate = IsPrivate;
-            userProfile.City = city;
-            userProfile.Birthday = birthday;
-            userProfile.EmailAddress = emailaddress;
             userProfile.Bio = bio;
+
+            if (image != null)
+            {
+                userProfile.ImageUrl = image;
+            }
 
             await context.SaveChangesAsync();
         }
@@ -58,7 +60,8 @@ namespace SocialMedia1.Services
             await context.Entry(user).Collection(x => x.FollowedBy).LoadAsync();
             await context.Entry(user).Collection(x => x.Follows).LoadAsync();
 
-            var posts = postService.GetAllPosts(id);
+            var posts = postService.GetAllPosts(id).Where(x => x.GroupId == null).ToList();
+            var groupPosts = postService.GetAllPosts(id).Where(x => x.GroupId != null).ToList();
 
             ProfileViewModel model = new ProfileViewModel
             {
@@ -66,14 +69,13 @@ namespace SocialMedia1.Services
                 Nickname = user.Nickname,
                 Name = user.Name,
                 Surname = user.Surname,
-                City = user.City,
-                Age = user.Age,
-                Birthday = user.Birthday,
-                EmailAddress = user.EmailAddress,
                 Bio = user.Bio,
                 Posts = posts,
                 FollowersCount = user.FollowedBy.Count(),
                 FollowingCount = user.Follows.Count(),
+                GroupPosts = groupPosts,
+                IsPrivate = user.IsPrivate,
+                ImageUrl = user.ImageUrl,
             };
 
             return model;
@@ -85,6 +87,8 @@ namespace SocialMedia1.Services
             {
                 RequesterId = x.UserRequester.Id,
                 Nickname = x.UserRequester.Nickname,
+                Name = x.User.Name + " " + x.User.Surname,
+                ImageUrl = x.UserRequester.ImageUrl,
                 Bio = x.UserRequester.Bio,
                 CurrentUserId = currentUserId,
             }).ToList();
@@ -97,6 +101,9 @@ namespace SocialMedia1.Services
                 {
                     Id = x.Id,
                     Nickname = x.Nickname,
+                    Name = x.Name + " " + x.Surname,
+                    ImageUrl = x.ImageUrl,
+                    Bio = x.Bio,
                 }).ToList();
 
             UsersProfilesViewModel model = new UsersProfilesViewModel
@@ -119,6 +126,9 @@ namespace SocialMedia1.Services
                  {
                      Id = x.Id,
                      Nickname = x.Nickname,
+                     Name = x.Name + " " + x.Surname,
+                     ImageUrl = x.ImageUrl,
+                     Bio = x.Bio,
                  }).ToList();
 
             UsersProfilesViewModel model = new UsersProfilesViewModel

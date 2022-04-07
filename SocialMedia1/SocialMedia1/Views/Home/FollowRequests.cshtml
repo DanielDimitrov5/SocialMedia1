@@ -5,41 +5,48 @@
     <link rel="stylesheet" href="/css/listOfProfilesStyle.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="people-nearby">
-
-
-                    @foreach (var profile in Model)
-                    {
-                        <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@profile.RequesterId';">
-                            <div class="row">
-                                <div class="col-md-2 col-sm-2">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
-                                </div>
-                                <div class="col-md-7 col-sm-7">
-                                    <h5><a href="/UserProfiles/Profile/@profile.RequesterId" class="profile-link">@profile.Nickname</a></h5>
-                                    <p>@profile.Bio</p>
-                                    <p class="text-muted"></p>
-                                </div>
-                                <div class="col-md-3 col-sm-3 btn-group">
-                                    <div class="col-md-11">
-                                        <a href="/UserProfiles/ApproveFollowRequest?requesterId=@profile.RequesterId&currentUserId=@profile.CurrentUserId" class="btn btn-success btn-pill">Approve <i class="fa-regular fa-circle-check"></i></a>
+    @if (!Model.Any())
+    {
+            <p></p>
+        <div class="d-flex justify-content-center">
+            <h4>There aren't any new follow requests for you.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="people-nearby">
+                        @foreach (var profile in Model)
+                        {
+                            <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@profile.RequesterId';">
+                                <div class="row">
+                                    <div class="col-md-2 col-sm-2">
+                                        <img src="@profile.ImageUrl" alt="user" class="profile-photo-lg">
                                     </div>
-                                    <div class="col-md-15">
-                                        <a href="/UserProfiles/DeleteFollowRequest?requesterId=@profile.RequesterId" class="btn btn-danger btn-pill"><i class="fa-regular fa-trash-can"></i></a>
+                                    <div class="col-md-7 col-sm-7">
+                                        <h5><a href="/UserProfiles/Profile/@profile.RequesterId" class="profile-link">@profile.Nickname</a></h5>
+                                        <p>@profile.Name</p>
+                                        <p class="text-muted">@profile.Bio</p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 btn-group">
+                                        <div class="col-md-11">
+                                            <a href="/UserProfiles/ApproveFollowRequest?requesterId=@profile.RequesterId&currentUserId=@profile.CurrentUserId" class="btn btn-success btn-pill">Approve <i class="fa-regular fa-circle-check"></i></a>
+                                        </div>
+                                        <div class="col-md-15">
+                                            <a href="/UserProfiles/DeleteFollowRequest?requesterId=@profile.RequesterId" class="btn btn-danger btn-pill"><i class="fa-regular fa-trash-can"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+
 
     <script src="https://kit.fontawesome.com/4123d5e637.js" crossorigin="anonymous"></script>
 

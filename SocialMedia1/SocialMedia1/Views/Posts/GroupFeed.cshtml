@@ -17,7 +17,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex mb-3">
                                 <div class="mr-2">
-                                    <a href="#!" class="text-dark"><img src="/img/lorde.png" alt="User" class="author-img"></a>
+                                    <a href="#!" class="text-dark"><img src="@item.ImageUrl" alt="User" class="author-img"></a>
                                 </div>
                                 <div>
                                     @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == @item.AuthorId)

@@ -51,15 +51,19 @@ namespace SocialMedia1.Services
 
         public ICollection<PostViewModel> GetAllPosts(string userId)
         {
-            return context.Posts.Where(x => x.UserProfileId == userId && !x.IsDeleted).Select(x => new PostViewModel
+            var posts = context.Posts.Where(x => x.UserProfileId == userId && !x.IsDeleted).Select(x => new PostViewModel
             {
                 Author = x.UserProfile.Nickname,
                 AuthorId = x.UserProfile.Id,
+                ImageUrl = x.UserProfile.ImageUrl,
                 Id = x.Id,
                 Content = x.Content,
                 CreatedOn = x.CreatedOn,
-                GroupId = x.GroupId
+                GroupId = x.GroupId,
+                GroupName = context.Groups.FirstOrDefault(g => g.Id == x.GroupId).Name,
             }).ToList();
+
+            return posts;
         }
 
         public ICollection<PostViewModel> GetAllPostsByFollowedUsers(string userId)
@@ -79,6 +83,7 @@ namespace SocialMedia1.Services
             {
                 Author = context.UserProfiles.Find(x.UserProfileId).Nickname,
                 AuthorId = x.UserProfile.Id,
+                ImageUrl = x.UserProfile.ImageUrl,
                 Content = x.Content,
                 Id = x.Id,
                 CreatedOn = x.CreatedOn,
@@ -103,6 +108,7 @@ namespace SocialMedia1.Services
                 {
                     Author = context.UserProfiles.Find(x.UserProfileId).Nickname,
                     AuthorId = x.UserProfile.Id,
+                    ImageUrl = x.UserProfile.ImageUrl,
                     Content = x.Content,
                     Id = x.Id,
                     CreatedOn = x.CreatedOn,

@@ -28,22 +28,22 @@
         {
             @if (groupMemberActionsService.IsJoinRequstSent(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
-                <button type="button" class="btn-dark" disabled>Request Sent</button>
+                         <button class="btn btn-info btn-pill btn-sm ml-3 mt-1" disabled>Request Sent</button>
             }
             else
             {
-                <a href="/Groups/JoinGroup/@Model.Id" class="btn btn-outline-success btn-pill">Join Group</a>
+                        <a href="/Groups/JoinGroup/@Model.Id" class="btn btn-outline-success btn-pill">Join Group</a>
             }
         }
         else
         {
             if (groupMemberActionsService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
             {
-                <a href="/Groups/JoinRequests/@Model.Id" class="btn btn-outline-info btn-pill">Join Requests: @Model.JoinRequests</a>
+                        <a href="/Groups/JoinRequests/@Model.Id" class="btn btn-outline-info btn-pill">Join Requests: @Model.JoinRequests</a>
             }
             else
             {
-                <a href="/Groups/LeaveGroup/@Model.Id" class="btn btn-outline-danger btn-pill">Leave Group</a>
+                        <a href="/Groups/LeaveGroup/@Model.Id" class="btn btn-outline-danger btn-pill">Leave Group</a>
             }
         }
     </p>
@@ -52,29 +52,32 @@
 @if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
 {
 
-    <div class="row">
-    <div class="col-md-12">
-        <form asp-controller="Posts" asp-action="CreateGroupPost" class="col-md-6 offset-md-3 ">
-            <div class="container">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-outline row justify-content-center">
-                <textarea type="text" id="content" name="content" class="form-control" rows="4" placeholder="What's new?"></textarea>
-                <span  class="text-danger"></span>
-                <input type="hidden" id="id" name="id" value="@Model.Id" />
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Posts" asp-action="CreateGroupPost" class="col-md-6 offset-md-3 ">
+                    <div class="container">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-outline row justify-content-center">
+                            <textarea type="text" id="content" name="content" class="form-control" rows="4" placeholder="What's new?"></textarea>
+                            <span class="text-danger"></span>
+                            <input type="hidden" id="id" name="id" value="@Model.Id" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Post" class="btn btn-info btn-md btn-block" />
+                    </div>
+                </form>
             </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Post" class="btn btn-info btn-md btn-block" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-@section Scripts {
+    @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    <script src="https://kit.fontawesome.com/4123d5e637.js" crossorigin="anonymous"></script>
+
 }
 }
-    await Html.RenderPartialAsync("_PostFeed", Model.Posts);
+<partial name="_PostFeed" model="Model.Posts"></partial>
 }
 

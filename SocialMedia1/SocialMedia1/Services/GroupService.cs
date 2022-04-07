@@ -106,6 +106,8 @@ namespace SocialMedia1.Services
                 {
                     Id = member.UserProfileId,
                     Nickname = member.UserProfile.Nickname,
+                    Name = member.UserProfile.Name + " " + member.UserProfile.Surname,
+                    ImageUrl = member.UserProfile.ImageUrl,
                     Bio = member.UserProfile.Bio,
                 };
 
@@ -139,7 +141,8 @@ namespace SocialMedia1.Services
                     UserId = req.UserProfile.Id,
                     GroupId = groupId,
                     Nickname = req.UserProfile.Nickname,
-                    Email = req.UserProfile.EmailAddress,
+                    Name = req.UserProfile.Name + " " + req.UserProfile.Surname,
+                    ImageUrl = req.UserProfile.ImageUrl,
                     Bio = req.UserProfile.Bio,
                 };
 
@@ -158,6 +161,7 @@ namespace SocialMedia1.Services
                 Id = x.Id,
                 AuthorId = x.UserProfileId,
                 Author = x.UserProfile.Nickname,
+                ImageUrl = x.UserProfile.ImageUrl,
                 Content = x.Content,
                 CreatedOn = x.CreatedOn,
             }).ToList();

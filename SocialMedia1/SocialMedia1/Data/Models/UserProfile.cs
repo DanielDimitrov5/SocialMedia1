@@ -13,6 +13,8 @@ namespace SocialMedia1.Data.Models
             Groups = new HashSet<UserProfileGroup>();
             JoinRequests = new HashSet<UserGroupRequest>();
             PostReports = new HashSet<PostCommunityReport>();
+
+            ImageUrl = "/img/ProfilePictures/noPicture.png";
         }
 
         [Key]
@@ -26,11 +28,7 @@ namespace SocialMedia1.Data.Models
 
         public string? Surname { get; set; }
 
-        public string? City { get; set; }
-
-        public DateTime Birthday { get; set; }
-
-        public int Age => (DateTime.Now - Birthday).Days / 365;
+        public string? ImageUrl { get; set; }
 
         public string? EmailAddress { get; set; }
 

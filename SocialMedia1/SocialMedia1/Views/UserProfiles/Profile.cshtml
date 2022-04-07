@@ -16,7 +16,7 @@
         <div class="info">
             <div class="row">
                 <div class="col-12 col-md-4 text-center">
-                    <img src="/img/lorde.png" alt="Raised circle image" class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
+                    <img src="@Model.ImageUrl" alt="Raised circle image" class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
                 </div>
                 <div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
                     <div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
@@ -31,17 +31,16 @@
                         {
                             @if (userActionsService.CheckIfFollowRequestIsSent(@Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
                             {
-                                <button type="button" disabled>Request Sent</button>
+                                <button class="btn btn-info btn-pill btn-sm ml-3 mt-1" disabled>Request Sent</button>
                             }
                             else
                             {
-                                <a href="/UserProfiles/Follow/@Model.Id" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>
+                                <a href="/UserProfiles/Follow/@Model.Id" class="btn btn-success btn-pill btn-sm ml-3 mt-1">Follow</a>
                             }
                         }
-                        @*<a href="#a" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>*@
                     </div>
                     <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
-                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.Posts.Count()</b> posts</p></div>
+                        <div class="posts ml-2 ml-lg-0"><p class="lead"><b id="postCount">@Model.Posts.Count()</b> posts</p></div>
                         <a href="/UserProfiles/Followers/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowersCount</b> followers</p></div></a>
                         <a href="/UserProfiles/Following/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowingCount</b> following</p></div></a>
                     </div>
@@ -50,16 +49,17 @@
                 </div>
             </div>
         </div>
+
         <div class="navigation d-flex justify-content-center">
-            <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+            <ul class="nav nav-info nav-tabs mt-3 d-flex flex-column flex-md-row">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#photos">
-                        <i class="fas fa-th"></i> Photos
+                    <a onclick="ChnageCountToPostCount()" class="nav-link active" role="tab" data-toggle="tab" href="#posts">
+                        <i class="fas fa-th"></i> Posts
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#saved">
-                        <i class="far fa-bookmark"></i> Saved
+                    <a onclick="ChnageCountToGroupPostCount()" class="nav-link" role="tab" data-toggle="tab" href="#groupPosts">
+                        <i class="fa-solid fa-people-roof"></i> Group posts
                     </a>
                 </li>
                 <li class="nav-item">
@@ -69,42 +69,45 @@
                 </li>
             </ul>
         </div>
-        @foreach (var item in Model.Posts.OrderByDescending(x => x.CreatedOn))
-        {
-            <div class="container">
 
-                <div class="row">
-                    <div class="col-sm-6 offset-sm-3">
-                        <div class="post-block">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex mb-3">
-                                    <div class="mr-2">
-                                        <a href="#!" class="text-dark"><img src="/img/lorde.png" alt="User" class="author-img"></a>
-                                    </div>
-                                    <div>
-                                        <h5 class="mb-0"><a href="#!" class="text-dark">@item.Author</a></h5>
-                                        <p class="mb-0 text-muted">@item.CreatedOn</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-block__content mb-2">
-                                <p>@item.Content</p>
-                                @*<img src="img/food1.jpg" alt="Content img">*@
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <div class="d-flex">
-                                        <a href="#!" class="text-danger mr-2"><span><i class="fa fa-heart"></i></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
+        @if (await userActionsService.IsUserFollowedAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id) == false && @Model.IsPrivate)
+        {
+            <br />
+            <div class="d-flex justify-content-center">
+                <h4>Sorry! This account is private. Follow him in order to see his posts. :)</h4>
+            </div>
+        }
+        else
+        {
+            
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade show active" id="posts">
+                    <partial name="_PostFeed" model="Model.Posts"></partial>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="groupPosts">
+                    <partial name="_GroupFeed" model="Model.GroupPosts"></partial>
                 </div>
             </div>
         }
 
     </div>
+
+    @section Scripts{
+
+    <script src="https://kit.fontawesome.com/4123d5e637.js" crossorigin="anonymous"></script>
+
+    <script>
+        function ChnageCountToPostCount(){
+            document.getElementById("postCount").innerText = @Model.Posts.Count;
+        }
+    </script>
+
+    <script>
+        function ChnageCountToGroupPostCount(){
+            document.getElementById("postCount").innerText = @Model.GroupPosts.Count;
+        }
+    </script>
+    }
+
 </body>
 </html>

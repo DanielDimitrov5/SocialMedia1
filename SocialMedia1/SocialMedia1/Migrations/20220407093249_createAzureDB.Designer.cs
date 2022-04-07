@@ -12,8 +12,8 @@ using SocialMedia1.Data;
 namespace SocialMedia1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220403184937_administration")]
-    partial class administration
+    [Migration("20220407093249_createAzureDB")]
+    partial class createAzureDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -348,13 +348,10 @@ namespace SocialMedia1.Migrations
                     b.Property<string>("Bio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
+                    b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPrivate")

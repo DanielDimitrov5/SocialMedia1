@@ -24,24 +24,24 @@ namespace SocialMedia1.Services
 
             if (userProfile.IsPrivate)
             {
-                SendFollowRequest(id, currentUserId);
-                return;
-            }
-
-            currentUser.Follows.Add(userProfile);
-            userProfile.FollowedBy.Add(currentUser);
-
-            await context.SaveChangesAsync();
+            await SendFollowRequest(id, currentUserId);
+            return;
         }
 
-        public async Task UnfollowUserAsync(string id, string currentUserId)
-        {
-            var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == id);
-            var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
+        currentUser.Follows.Add(userProfile);
+        userProfile.FollowedBy.Add(currentUser);
 
-            if (CheckIfUsersAreNull(userProfile, currentUser))
-            {
-                return;
+        await context.SaveChangesAsync();
+    }
+
+    public async Task UnfollowUserAsync(string id, string currentUserId)
+    {
+        var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == id);
+        var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
+
+        if (CheckIfUsersAreNull(userProfile, currentUser))
+        {
+            return;
             }
 
             await context.Entry(userProfile).Collection(x => x.FollowedBy).LoadAsync();

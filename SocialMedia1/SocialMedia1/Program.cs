@@ -36,6 +36,7 @@ builder.Services.AddTransient<ISearchService, SearchService>();
 builder.Services.AddTransient<IUserActionsService, UserActionsService>();
 builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
 builder.Services.AddTransient<IReportService, ReportService>();
+builder.Services.AddTransient<IImageService, ImageService>();
 
 builder.Services.AddSignalR();
 
@@ -73,11 +74,11 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-//    db.Database.Migrate();
-//}
+    db.Database.Migrate();
+}
 
 app.Run();

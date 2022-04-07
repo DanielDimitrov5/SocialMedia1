@@ -17,7 +17,7 @@ namespace SocialMedia1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -346,13 +346,10 @@ namespace SocialMedia1.Migrations
                     b.Property<string>("Bio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
+                    b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPrivate")
