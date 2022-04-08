@@ -1,11 +1,9 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia1.Models;
-using SocialMedia1.Services;
-
+using SocialMedia1.Models.Users;
+using SocialMedia1.Services.Users;
 
 namespace SocialMedia1.Controllers
 {

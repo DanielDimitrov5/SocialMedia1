@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WAIbpZPe8iFEuT+XioIDzAvnRyBCidkCgDL8P2ENbj63xtSdPh/Evynqn05bC8Hlg3wgh3hZ+Yvgdw/QZ2Ku8Q==",
+  "dgSpecHash": "1uAvHQ6uZEgxNlogA5Byo/9bgsNB7uIL7Z2XoHtJWsQXDIUvJ/Uej6uI2TDhBBmK+VIL37BBOVGf7r8DUuDHwA==",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\SocialMedia1.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\USER\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\6.0.3\\microsoft.aspnetcore.authentication.facebook.6.0.3.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.3\\microsoft.aspnetcore.cryptography.internal.6.0.3.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.3\\microsoft.aspnetcore.cryptography.keyderivation.6.0.3.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\6.0.1\\microsoft.aspnetcore.diagnostics.entityframeworkcore.6.0.1.nupkg.sha512",

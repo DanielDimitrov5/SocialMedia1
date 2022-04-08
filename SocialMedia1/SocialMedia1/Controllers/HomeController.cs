@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia1.Models;
-using SocialMedia1.Services;
+using SocialMedia1.Services.Groups;
 using System.Diagnostics;
+using SocialMedia1.Services.Users;
+using SocialMedia1.Services.Common;
 
 namespace SocialMedia1.Controllers
 {
@@ -17,7 +19,7 @@ namespace SocialMedia1.Controllers
         private readonly IIndexService indexService;
 
         public HomeController
-            (RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, UserManager<IdentityUser> userManager, 
+            (RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, UserManager<IdentityUser> userManager,
             IUserProfileService userProfileService, IGroupService groupService, IIndexService indexService)
         {
             this.roleManager = roleManager;
@@ -28,11 +30,6 @@ namespace SocialMedia1.Controllers
             this.indexService = indexService;
         }
 
-        [Authorize]
-        public IActionResult Chat()
-        {
-            return View();
-        }
 
         public IActionResult Landing()
         {
@@ -81,6 +78,12 @@ namespace SocialMedia1.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Chat()
         {
             return View();
         }

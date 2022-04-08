@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using SocialMedia1.Areas.Admin.Services;
 using SocialMedia1.Data;
 using SocialMedia1.Hubs;
-using SocialMedia1.Services;
-using System.Security.Claims;
+using SocialMedia1.Services.Common;
+using SocialMedia1.Services.Groups;
+using SocialMedia1.Services.Posts;
+using SocialMedia1.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 

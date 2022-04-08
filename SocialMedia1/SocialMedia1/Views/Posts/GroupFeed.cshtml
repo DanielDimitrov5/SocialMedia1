@@ -1,5 +1,5 @@
 ﻿@using System.Security.Claims
-@model IEnumerable<SocialMedia1.Models.PostViewModel>
+@model IEnumerable<SocialMedia1.Models.Posts.PostViewModel>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,6 @@
                              <div class="dropdown">
                                 <i class="fa fa-ellipsis-v" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="Edit">Edit</a></li>                @*!!!!!*@
                                     <li><a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Delete</a></li>           @*!!!!!*@
                                 </ul>
                             </div>
@@ -71,7 +70,6 @@
                     </div>
                     <div class="modal-footer">
                         <a href="/Posts/Delete/@item.Id" class="btn btn-danger">Delete</a>
-                        <button type="button" class="btn btn-secondary">Cancel</button>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia1.Models;
-using SocialMedia1.Services;
+using SocialMedia1.Models.Groups;
+using SocialMedia1.Services.Groups;
 
 namespace SocialMedia1.Controllers
 {

@@ -350,3 +350,4 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\re
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\SocialMedia1.pdb
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\wwwroot\css\chat.css
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\wwwroot\img\ProfilePictures\9af12897-a9cb-46f1-b8c1-80b9d2bea803.jpg
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll

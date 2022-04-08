@@ -1,7 +1,9 @@
-﻿@*@using Microsoft.AspNetCore.Identity*@
+﻿@using SocialMedia1.Services.Groups
 @using SocialMedia1.Services
 @using System.Security.Claims
-@model SocialMedia1.Models.GroupMembersViewModel
+@using SocialMedia1.Services.Users
+
+@model SocialMedia1.Models.Groups.GroupMembersViewModel
 @inject IGroupMemberActionsService groupMemberActionsService
 @inject IUserProfileService userProfileService
 
