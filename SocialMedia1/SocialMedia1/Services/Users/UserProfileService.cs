@@ -4,6 +4,7 @@ using SocialMedia1.Models;
 using Microsoft.AspNetCore.Identity;
 using SocialMedia1.Services.Posts;
 using SocialMedia1.Models.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace SocialMedia1.Services.Users
 {
@@ -11,13 +12,11 @@ namespace SocialMedia1.Services.Users
     {
         private readonly ApplicationDbContext context;
         private readonly IPostService postService;
-        private readonly UserManager<IdentityUser> userManager;
 
-        public UserProfileService(ApplicationDbContext context, IPostService postService, UserManager<IdentityUser> userManager)
+        public UserProfileService(ApplicationDbContext context, IPostService postService)
         {
             this.context = context;
             this.postService = postService;
-            this.userManager = userManager;
         }
 
         public async Task AddUserProfileAsync(string Id)
@@ -72,8 +71,8 @@ namespace SocialMedia1.Services.Users
                 Surname = user.Surname,
                 Bio = user.Bio,
                 Posts = posts,
-                FollowersCount = user.FollowedBy.Count(),
-                FollowingCount = user.Follows.Count(),
+                FollowersCount = user.FollowedBy.Count,
+                FollowingCount = user.Follows.Count,
                 GroupPosts = groupPosts,
                 IsPrivate = user.IsPrivate,
                 ImageUrl = user.ImageUrl,
@@ -82,9 +81,9 @@ namespace SocialMedia1.Services.Users
             return model;
         }
 
-        public ICollection<FollowRequestViewModel> GetAllFollowRequests(string currentUserId)
+        public async Task<ICollection<FollowRequestViewModel>> GetAllFollowRequests(string currentUserId)
         {
-            return context.FollowRequests.Where(x => x.UserId == currentUserId).Select(x => new FollowRequestViewModel
+            return await context.FollowRequests.Where(x => x.UserId == currentUserId).Select(x => new FollowRequestViewModel
             {
                 RequesterId = x.UserRequester.Id,
                 Nickname = x.UserRequester.Nickname,
@@ -92,7 +91,7 @@ namespace SocialMedia1.Services.Users
                 ImageUrl = x.UserRequester.ImageUrl,
                 Bio = x.UserRequester.Bio,
                 CurrentUserId = currentUserId,
-            }).ToList();
+            }).ToListAsync();
         }
 
         public UsersProfilesViewModel GetAllFollowers(string currentUserId)

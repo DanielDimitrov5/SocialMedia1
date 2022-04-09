@@ -3,7 +3,22 @@
     "mssql1": {
       "restored": true,
       "restoreTime": "2022-04-03T18:36:55.4720181Z"
+    },
+    "signalr1": {
+      "restored": true,
+      "restoreTime": "2022-04-09T13:27:36.9310365Z"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "signalr1.resourceGroupName": {
+      "Name": "signalr1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "WebProject"
+    },
+    "signalr1.subscriptionId": {
+      "Name": "signalr1.subscriptionId",
+      "Type": "subscription",
+      "Value": "ce735d21-7710-4d25-b323-f570762b442f"
+    }
+  }
 }

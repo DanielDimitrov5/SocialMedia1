@@ -12,7 +12,7 @@ namespace SocialMedia1.Services.Users
 
         Task<ProfileViewModel> GetUserProfileDataAsync(string id);
 
-        ICollection<FollowRequestViewModel> GetAllFollowRequests(string currentUserId);
+        Task<ICollection<FollowRequestViewModel>> GetAllFollowRequests(string currentUserId);
 
         UsersProfilesViewModel GetAllFollowers(string userId);
 

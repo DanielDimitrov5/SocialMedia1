@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EUgSjA9wJSBErucjHVqAQUWwYRM7No40KLH4XR+OBNc=",
+  "Hash": "kWbR5s5T0wG5lgmtl988AWj4ynMKGbFpI5VwyLeg1gU=",
   "Source": "SocialMedia1",
   "BasePath": "_content/SocialMedia1",
   "Mode": "Default",
@@ -1664,6 +1664,23 @@
       "CopyToOutputDirectory": "Always",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\profile.png"
+    },
+    {
+      "Identity": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\img\\ProfilePictures\\3dadac90-75a8-4e0d-823a-34ee051f21e8.png",
+      "SourceId": "SocialMedia1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\",
+      "BasePath": "_content/SocialMedia1",
+      "RelativePath": "img/ProfilePictures/3dadac90-75a8-4e0d-823a-34ee051f21e8.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\ProfilePictures\\3dadac90-75a8-4e0d-823a-34ee051f21e8.png"
     },
     {
       "Identity": "C:\\Users\\USER\\Desktop\\SocialMedia1\\SocialMedia1\\SocialMedia1\\wwwroot\\img\\ProfilePictures\\96816b43-6304-4b89-9925-b0a1868a63df.jpg",

@@ -4,6 +4,12 @@
       "secretStore": "AzureAppSettings",
       "type": "mssql.onprem",
       "connectionId": "ConnectionStrings:DefaultConnection"
+    },
+    "signalr1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.SignalRService/SignalR/SocialMedia1",
+      "type": "signalr.azure",
+      "connectionId": "Azure:SignalR:ConnectionString"
     }
   }
 }

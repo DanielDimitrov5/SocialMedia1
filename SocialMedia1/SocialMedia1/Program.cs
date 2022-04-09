@@ -30,15 +30,19 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IUserProfileService, UserProfileService>();
+builder.Services.AddTransient<IUserActionsService, UserActionsService>();
+
 builder.Services.AddTransient<IPostService, PostService>();
+
 builder.Services.AddTransient<IGroupService, GroupService>();
+builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
+
 builder.Services.AddTransient<IIndexService, IndexService>();
 builder.Services.AddTransient<INavBarService, NavBarService>();
 builder.Services.AddTransient<ISearchService, SearchService>();
-builder.Services.AddTransient<IUserActionsService, UserActionsService>();
-builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
-builder.Services.AddTransient<IReportService, ReportService>();
 builder.Services.AddTransient<IImageService, ImageService>();
+
+builder.Services.AddTransient<IReportService, ReportService>();
 
 builder.Services.AddSignalR();
 

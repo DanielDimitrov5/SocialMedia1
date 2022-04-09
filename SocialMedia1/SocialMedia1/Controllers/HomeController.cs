@@ -62,7 +62,7 @@ namespace SocialMedia1.Controllers
         {
             var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            var model = userProfileService.GetAllFollowRequests(userId);
+            var model = await userProfileService.GetAllFollowRequests(userId);
 
             return View(model);
         }
