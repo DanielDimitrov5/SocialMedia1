@@ -29,7 +29,12 @@ namespace SocialMedia1.ValidationAttributes
 
         public string GetErrorMessage()
         {
-            string allowedExtensions = 
+            if (!extensions.Any())
+            {
+                return "There aren't any files allowed!";
+            }
+
+            string allowedExtensions =
                 extensions.Length > 1 ? string.Join(", ", extensions, 0, extensions.Length - 1) + $" or {extensions[^1]}" : extensions[0];
 
             return $"This file extension should be {allowedExtensions}!";

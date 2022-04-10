@@ -1,78 +1,11 @@
---Section 1. DDL 
+SELECT ProductName, OrderDate,
+	DATEADD(DAY, 3, OrderDate) AS [Pay Due],
+	DATEADD(MONTH, 1, OrderDate) AS [Deliver Due]
+FROM Orders
 
-CREATE TABLE Clients
-(
-	ClientId INT PRIMARY KEY IDENTITY,
-	FirstName VARCHAR(50) NOT NULL,
-	LastName VARCHAR(50) NOT NULL,
-	Phone CHAR(12) CHECK (LEN(Phone) = 12) NOT NULL
-)
-
-CREATE TABLE Mechanics
-(
-	MechanicId INT PRIMARY KEY IDENTITY,
-	FirstName VARCHAR(50) NOT NULL,
-	LastName VARCHAR(50) NOT NULL,
-	[Address] VArCHAR(255) NOT NULL
-)
-
-CREATE TABLE Models
-(
-	ModelId INT PRIMARY KEY IDENTITY,
-	[Name] VARCHAR(50) UNIQUE NOT NULL,
-)
-
-CREATE TABLE Jobs
-(
-	JobId INT PRIMARY KEY IDENTITY,
-	ModelId INT REFERENCES Models(ModelId) NOT NULL,
-	[Status] VARCHAR(11) CHECK 
-	([Status] IN ('Pending', 'In Progress', 'Finished'))
-	DEFAULT 'Pending',
-	ClientId INT REFERENCES Clients(ClientId) NOT NULL,
-	MechanicId INT REFERENCES Mechanics(MechanicId),
-	IssueDate DATETIME NOT NULL,
-	FinishDate DATETIME
-)
-
-CREATE TABLE Orders
-(
-	OrderId INT PRIMARY KEY IDENTITY,
-	JobId INT REFERENCES Jobs(JobId) NOT NULL,
-	IssueDate DATETIME,
-	Delivered BIT DEFAULT 'False'
-)
-
-CREATE TABLE Vendors
-(
-	VendorId INT PRIMARY KEY IDENTITY,
-	[Name] VARCHAR(50) UNIQUE NOT NULL
-)
-
-CREATE TABLE Parts
-(
-	PartId INT PRIMARY KEY IDENTITY,
-	SerialNumber VARCHAR(50) UNIQUE,
-	[Description] VARCHAR(255),
-	Price DECIMAL(6, 2) CHECK(Price >= 0) NOT NULL,
-	VendorId INT REFERENCES Vendors(VendorId) NOT NULL,
-	StockQty INT CHECK(StockQty > -1) DEFAULT 0
-)
-
-CREATE TABLE OrderParts
-(
-	OrderId INT REFERENCES Orders(OrderId) NOT NULL,
-	PartId INT REFERENCES Parts(PartId) NOT NULL,
-	Quantity INT CHECK(Quantity > 0) DEFAULT 1
-
-	PRIMARY KEY(OrderId, PartId)
-)
-
-CREATE TABLE PartsNeeded
-(
-	JobId INT REFERENCES Jobs(JobId) NOT NULL,
-	PartId INT REFERENCES Parts(PartId) NOT NULL,
-	Quantity INT CHECK(Quantity > 0) DEFAULT 1
-
-	PRIMARY KEY(JobId, PartId)
-)
+SELECT [Name], Birthdate,
+	YEAR(GETDATE()) - YEAR(Birthdate) AS [Age in Years],
+	DATEDIFF(MONTH, Birthdate, GETDATE()) AS [Age in Months],
+	DATEDIFF(DAY, Birthdate, GETDATE()) AS [Age in Days],
+	DATEDIFF(MINUTE, Birthdate, GETDATE()) AS [Age in Minutes]
+FROM People

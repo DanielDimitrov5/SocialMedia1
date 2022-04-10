@@ -4,7 +4,7 @@ using SocialMedia1.Data;
 using SocialMedia1.Services.Users;
 using SocialMedia1.Tests.Data;
 
-namespace SocialMedia1.Tests.Users
+namespace SocialMedia1.Tests.Tests.UsersTests
 {
     [TestFixture]
     public class UserActionsTests

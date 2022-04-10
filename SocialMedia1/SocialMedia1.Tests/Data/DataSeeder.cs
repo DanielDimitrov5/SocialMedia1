@@ -111,6 +111,70 @@ namespace SocialMedia1.Tests.Data
             };
         }
 
+        public static Group[] Groups()
+        {
+            return new Group[]
+            {
+                new Group
+                {
+                    Id = "1ddd2e67-8b52-46d1-a82d-773f218d85d9",
+                    Name = "Dani's group",
+                    Description = "...---...",
+                    CreaterId = UserProfiles()[0].Id,
+                    IsPrivate = true,
+                    MembersCount = 1,
+                },
+                new Group
+                {
+                    Id = "c4143e16-a477-41ec-9ef0-8be09b71a457",
+                    Name = "Ivan's group",
+                    Description = "Over 5 charcaters",
+                    CreaterId = UserProfiles()[1].Id,
+                    IsPrivate = false,
+                    MembersCount = 1,
+                },
+            };
+        }
+
+        public static UserProfileGroup[] UserProfilesGroups()
+        {
+            return new UserProfileGroup[]
+            {
+                new UserProfileGroup
+                {
+                    GroupId = Groups()[1].Id,
+                    UserProfileId = UserProfiles()[0].Id,
+                },
+                new UserProfileGroup
+                {
+                    GroupId = Groups()[1].Id,
+                    UserProfileId = UserProfiles()[1].Id,
+                },
+                new UserProfileGroup
+                {
+                    GroupId = Groups()[1].Id,
+                    UserProfileId = UserProfiles()[2].Id,
+                },
+            };
+        }
+
+        public static UserGroupRequest[] JoinGroupRequests()
+        {
+            return new UserGroupRequest[]
+            {
+                new UserGroupRequest
+                {
+                    GroupId = Groups()[0].Id,
+                    UserProfileId = UserProfiles()[1].Id,
+                },
+                new UserGroupRequest
+                {
+                    GroupId = Groups()[0].Id,
+                    UserProfileId = UserProfiles()[2].Id,
+                },
+            };
+        }
+
         public static void Seed(ApplicationDbContext context)
         {
             context.Users.Add(User());
@@ -129,6 +193,12 @@ namespace SocialMedia1.Tests.Data
             {
                 privateUser.FollowRequests.Add(req);
             }
+
+            context.Groups.AddRange(Groups());
+
+            context.JoinGroupRequest.AddRange(JoinGroupRequests());
+
+            context.UserProfilesGroups.AddRange(UserProfilesGroups());
 
             context.SaveChanges();
         }

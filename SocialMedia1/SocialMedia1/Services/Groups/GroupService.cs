@@ -97,6 +97,11 @@ namespace SocialMedia1.Services.Groups
         {
             var group = await context.Groups.FindAsync(groupId);
 
+            if (group == null)
+            {
+                return null;
+            }
+
             await context.Entry(group).Collection(x => x.Users).LoadAsync();
 
             List<ProfileViewModel> members = new();
@@ -130,6 +135,11 @@ namespace SocialMedia1.Services.Groups
         public async Task<ICollection<JoinGroupRequestViewModel>> GetJoinGroupRequestsAsync(string groupId)
         {
             var group = await context.Groups.FindAsync(groupId);
+
+            if (group == null)
+            {
+                return null;
+            }
 
             await context.Entry(group).Collection(x => x.JoinRequests).LoadAsync();
 

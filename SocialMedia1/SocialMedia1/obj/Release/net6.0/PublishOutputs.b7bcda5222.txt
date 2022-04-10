@@ -8,12 +8,17 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Humanizer.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\MessagePack.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\MessagePack.Annotations.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Http.Connections.Client.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Identity.UI.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Azure.SignalR.Common.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Azure.SignalR.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Azure.SignalR.Protocols.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Build.Locator.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
@@ -35,6 +40,7 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.DotNet.Scaffolding.Shared.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll

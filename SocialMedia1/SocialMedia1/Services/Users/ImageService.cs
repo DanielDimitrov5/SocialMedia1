@@ -28,7 +28,7 @@ namespace SocialMedia1.Services.Users
 
             var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
-            if (extension != "jpeg" && extension != "png")
+            if (extension != "jpg" && extension != "png" && extension != "gif")
             {
                 return null;
             }
