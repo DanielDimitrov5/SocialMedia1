@@ -28,6 +28,11 @@ namespace SocialMedia1.Services.Users
 
             var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
+            if (extension != "jpeg" && extension != "png")
+            {
+                return null;
+            }
+
             await UploadImageToServerAsync(image, userId);
 
             var physicalPath = $@"wwwroot/img/ProfilePictures/{userId}.{extension}";

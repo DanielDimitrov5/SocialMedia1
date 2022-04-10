@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SocialMedia1.Data;
-using SocialMedia1.Data.Models;
 using SocialMedia1.Services.Posts;
 using SocialMedia1.Services.Users;
 using SocialMedia1.Tests.Data;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SocialMedia1.Tests.Users
