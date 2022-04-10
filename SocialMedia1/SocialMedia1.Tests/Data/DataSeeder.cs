@@ -50,6 +50,28 @@ namespace SocialMedia1.Tests.Data
                     Bio = "Bio",
                     IsPrivate = false,
                 },
+                new UserProfile
+                {
+                    Id = "b9a3f5d8-532d-49eb-b3f8-f0b4e95bb62e", //5
+                    Nickname = "gosho",
+                    Name = "Gosho",
+                    Surname="Goshkov",
+                    ImageUrl ="https://res.cloudinary.com/dani03/image/upload/v1649394244/b2021f98-e33e-4ca6-9f54-4adc7c205949.jpg",
+                    EmailAddress = "gosho@gamil.com",
+                    Bio = "Stay postive!",
+                    IsPrivate = false,
+                },
+                new UserProfile
+                {
+                    Id = "e3749770-6d4e-4f3c-886b-13e953eafb50", //5
+                    Nickname = "ivo",
+                    Name = "Ivo",
+                    Surname="Ivakov",
+                    ImageUrl ="https://res.cloudinary.com/dani03/image/upload/v1649394244/b2021f98-e33e-4ca6-9f54-4adc7c205949.jpg",
+                    EmailAddress = "ivo@gamil.com",
+                    Bio = "mynameisivo",
+                    IsPrivate = false,
+                },
             };
 
             return users;
@@ -62,12 +84,17 @@ namespace SocialMedia1.Tests.Data
                 new FollowRequest
                 {
                     UserId = UserProfiles()[0].Id,
-                    UserRequesterId = UserProfiles()[1].Id,
+                    UserRequesterId = UserProfiles()[2].Id,
                 },
                 new FollowRequest
                 {
                     UserId = UserProfiles()[0].Id,
-                    UserRequesterId = UserProfiles()[2].Id,
+                    UserRequesterId = UserProfiles()[3].Id,
+                },
+                new FollowRequest
+                {
+                    UserId = UserProfiles()[0].Id,
+                    UserRequesterId = UserProfiles()[4].Id,
                 },
             };
 
@@ -90,10 +117,11 @@ namespace SocialMedia1.Tests.Data
 
             var users = UserProfiles();
 
+            context.UserProfiles.AddRange(users);
+
             users.First(x => x.Id == privateUserId).Follows.Add(users[1]);
             users.First(x => x.Id == privateUserId).FollowedBy.Add(users[1]);
-
-            context.UserProfiles.AddRange(users);
+            users.First(x => x.Id == privateUserId).FollowedBy.Add(users[2]);
 
             var privateUser = users[0];
 

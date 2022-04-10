@@ -103,7 +103,9 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteFollowRequest(string requesterId)
         {
-            await userActionsService.DeleteRequestAsync(requesterId);
+            var currentUser = userManager.GetUserId(HttpContext.User);
+
+            await userActionsService.DeleteRequestAsync(requesterId, currentUser);
 
             return Redirect("/Home/FollowRequests");
         }

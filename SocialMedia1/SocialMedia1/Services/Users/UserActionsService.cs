@@ -24,24 +24,24 @@ namespace SocialMedia1.Services.Users
 
             if (userProfile.IsPrivate)
             {
-            await SendFollowRequest(id, currentUserId);
-            return;
+                await SendFollowRequest(id, currentUserId);
+                return;
+            }
+
+            currentUser.Follows.Add(userProfile);
+            userProfile.FollowedBy.Add(currentUser);
+
+            await context.SaveChangesAsync();
         }
 
-        currentUser.Follows.Add(userProfile);
-        userProfile.FollowedBy.Add(currentUser);
-
-        await context.SaveChangesAsync();
-    }
-
-    public async Task UnfollowUserAsync(string id, string currentUserId)
-    {
-        var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == id);
-        var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
-
-        if (CheckIfUsersAreNull(userProfile, currentUser))
+        public async Task UnfollowUserAsync(string id, string currentUserId)
         {
-            return;
+            var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == id);
+            var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
+
+            if (CheckIfUsersAreNull(userProfile, currentUser))
+            {
+                return;
             }
 
             await context.Entry(userProfile).Collection(x => x.FollowedBy).LoadAsync();
@@ -53,22 +53,7 @@ namespace SocialMedia1.Services.Users
             await context.SaveChangesAsync();
         }
 
-        public async Task SendFollowRequest(string id, string currentUserId)
-        {
-            var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == id);
-            var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
-
-            if (CheckIfUsersAreNull(userProfile, currentUser))
-            {
-                return;
-            }
-
-            FollowRequest followRequest = new FollowRequest { UserId = userProfile.Id, UserRequesterId = currentUser.Id };
-
-            userProfile.FollowRequests.Add(followRequest);
-
-            await context.SaveChangesAsync();
-        }
+        
 
         public async Task ApproveFollowRequestAsync(string requesterId, string currentUserId)
         {
@@ -91,16 +76,17 @@ namespace SocialMedia1.Services.Users
             await context.SaveChangesAsync();
         }
 
-        public async Task DeleteRequestAsync(string requesterId)
+        public async Task DeleteRequestAsync(string requesterId, string currentUserId)
         {
             var followRequester = context.UserProfiles.FirstOrDefault(x => x.Id == requesterId);
+            var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
 
-            if (CheckIfUsersAreNull(followRequester, followRequester))
+            if (CheckIfUsersAreNull(followRequester, currentUser))
             {
                 return;
             }
 
-            FollowRequest request = context.FollowRequests.FirstOrDefault(x => x.UserRequesterId == requesterId);
+            FollowRequest request = context.FollowRequests.FirstOrDefault(x => x.UserRequesterId == requesterId && x.UserId == currentUserId);
 
             context.FollowRequests.Remove(request);
 
@@ -110,10 +96,14 @@ namespace SocialMedia1.Services.Users
         public async Task RemoveFollowerAsync(string currentUserId, string followerId)
         {
             var currentUser = await context.UserProfiles.FindAsync(currentUserId);
+            var follower = await context.UserProfiles.FindAsync(followerId);
+
+            if (CheckIfUsersAreNull(currentUser, follower))
+            {
+                return;
+            }
 
             await context.Entry(currentUser).Collection(x => x.FollowedBy).LoadAsync();
-
-            var follower = await context.UserProfiles.FindAsync(followerId);
 
             currentUser.FollowedBy.Remove(follower);
 
@@ -125,11 +115,11 @@ namespace SocialMedia1.Services.Users
             return context.FollowRequests.Any(x => x.UserId == userId && x.UserRequesterId == currentsUserId);
         }
 
-        public async Task<bool> IsUserFollowedAsync(string currentUserId, string userId)
+        public async Task<bool> IsUserFollowingAsync(string currentUserId, string followedUserId)
         {
             var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
 
-            var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == userId);
+            var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == followedUserId);
 
             if (currentUser == null || userProfile == null)
             {
@@ -145,6 +135,23 @@ namespace SocialMedia1.Services.Users
         private bool CheckIfUsersAreNull(UserProfile user, UserProfile currentUser)
         {
             return user is null || currentUser is null;
+        }
+
+        private async Task SendFollowRequest(string id, string currentUserId)
+        {
+            var userProfile = context.UserProfiles.FirstOrDefault(x => x.Id == id);
+            var currentUser = context.UserProfiles.FirstOrDefault(x => x.Id == currentUserId);
+
+            if (CheckIfUsersAreNull(userProfile, currentUser))
+            {
+                return;
+            }
+
+            FollowRequest followRequest = new FollowRequest { UserId = userProfile.Id, UserRequesterId = currentUser.Id };
+
+            userProfile.FollowRequests.Add(followRequest);
+
+            await context.SaveChangesAsync();
         }
     }
 }

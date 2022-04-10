@@ -439,8 +439,8 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\nunit.engine.api.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\nunit.engine.core.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\testcentric.engine.metadata.dll
-C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\ref\SocialMedia1.Tests.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Client.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\Microsoft.Azure.SignalR.Common.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\Microsoft.Azure.SignalR.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\bin\Debug\net6.0\Microsoft.Azure.SignalR.Protocols.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1.Tests\obj\Debug\net6.0\refint\SocialMedia1.Tests.dll

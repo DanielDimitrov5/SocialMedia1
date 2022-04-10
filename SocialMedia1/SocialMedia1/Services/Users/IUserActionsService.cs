@@ -6,13 +6,13 @@
 
         Task UnfollowUserAsync(string id, string currentUserId);
 
-        Task SendFollowRequest(string id, string currentUserId);
+        //Task SendFollowRequest(string id, string currentUserId);
 
-        Task<bool> IsUserFollowedAsync(string currentUserId, string userId);
+        Task<bool> IsUserFollowingAsync(string currentUserId, string userId);
 
         Task ApproveFollowRequestAsync(string requesterId, string currentUser);
 
-        Task DeleteRequestAsync(string requesterId);
+        Task DeleteRequestAsync(string requesterId, string currentUser);
 
         bool CheckIfFollowRequestIsSent(string userId, string currentsUserId);
 

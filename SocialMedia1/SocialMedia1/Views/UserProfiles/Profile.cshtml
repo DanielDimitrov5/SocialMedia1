@@ -24,7 +24,7 @@
                         <div class="name">
                             <h2 class="mb-0">@Model.Nickname</h2>
                         </div>
-                        @if (await userActionsService.IsUserFollowedAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+                        @if (await userActionsService.IsUserFollowingAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
                         {
                             <a href="/UserProfiles/Unfollow/@Model.Id" class="btn btn-danger btn-pill btn-sm ml-3 mt-1">Unfollow</a>
                         }
@@ -71,7 +71,7 @@
             </ul>
         </div>
 
-        @if (await userActionsService.IsUserFollowedAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id) == false && @Model.IsPrivate)
+        @if (await userActionsService.IsUserFollowingAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id) == false && @Model.IsPrivate)
         {
             <br />
             <div class="d-flex justify-content-center">
