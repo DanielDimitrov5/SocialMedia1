@@ -16,6 +16,11 @@ namespace SocialMedia1.Services.Posts
 
         public async Task CreatePostAsync(string userId, string content)
         {
+            if (await context.UserProfiles.FindAsync(userId) == null)
+            {
+                return;
+            }
+
             Post post = new Post
             {
                 Content = content,
@@ -69,7 +74,7 @@ namespace SocialMedia1.Services.Posts
 
         public ICollection<PostViewModel> GetAllPostsByFollowedUsers(string userId)
         {
-            if (userId is null)
+            if (userId is null || context.UserProfiles.Any(x=>x.Id == userId) == false)
             {
                 return new List<PostViewModel>();
             }
@@ -96,7 +101,7 @@ namespace SocialMedia1.Services.Posts
 
         public ICollection<PostViewModel> GetAllPostsInUsersGroups(string userId)
         {
-            if (userId is null)
+            if (userId is null || context.UserProfiles.Any(x => x.Id == userId) == false)
             {
                 return new List<PostViewModel>();
             }
@@ -125,7 +130,7 @@ namespace SocialMedia1.Services.Posts
         {
             var post = await context.Posts.FindAsync(postId);
 
-            if (post.UserProfileId != userId)
+            if (post == null || post.UserProfileId != userId)
             {
                 return;
             }
@@ -137,6 +142,11 @@ namespace SocialMedia1.Services.Posts
 
         public async Task ReportPostAsync(string postId, string userId)
         {
+            if (await context.Posts.FindAsync(postId) == null || await context.UserProfiles.FindAsync(userId) == null)
+            {
+                return;
+            }
+
             if (context.PostCommunityReports.Any(x => x.PostId == postId && x.ReporterId == userId))
             {
                 return;

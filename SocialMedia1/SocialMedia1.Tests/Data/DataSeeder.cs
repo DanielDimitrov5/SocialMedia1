@@ -72,6 +72,17 @@ namespace SocialMedia1.Tests.Data
                     Bio = "mynameisivo",
                     IsPrivate = false,
                 },
+                new UserProfile
+                {
+                    Id = "57a00bd5-a366-4e57-bfb1-e45efa1ebe75", //6
+                    Nickname = "stanimor",
+                    Name = "Stancho",
+                    Surname="Stankov",
+                    ImageUrl ="https://res.cloudinary.com/dani03/image/upload/v1649394244/b2021f98-e33e-4ca6-9f54-4adc7c205949.jpg",
+                    EmailAddress = "stancho@gamil.com",
+                    Bio = "-",
+                    IsPrivate = false,
+                },
             };
 
             return users;
@@ -155,6 +166,12 @@ namespace SocialMedia1.Tests.Data
                     GroupId = Groups()[1].Id,
                     UserProfileId = UserProfiles()[2].Id,
                 },
+
+                new UserProfileGroup
+                {
+                    GroupId = Groups()[0].Id,
+                    UserProfileId = UserProfiles()[4].Id,
+                },
             };
         }
 
@@ -172,6 +189,76 @@ namespace SocialMedia1.Tests.Data
                     GroupId = Groups()[0].Id,
                     UserProfileId = UserProfiles()[2].Id,
                 },
+                new UserGroupRequest
+                {
+                    GroupId = Groups()[0].Id,
+                    UserProfileId = UserProfiles()[3].Id,
+                },
+                new UserGroupRequest
+                {
+                    GroupId = Groups()[0].Id,
+                    UserProfileId = UserProfiles()[4].Id,
+                },
+            };
+        }
+
+        public static Post[] Posts()
+        {
+            return new Post[]
+            {
+                new Post
+                {
+                    Id = "ea229b0f-5de4-48ef-919a-49c72f0597a4",
+                    UserProfileId = UserProfiles()[0].Id,
+                    Content = "cleaver post",
+                    CreatedOn = DateTime.UtcNow.AddDays(-200),
+                    GroupId = null,
+                    IsDeleted = false,
+                },
+                new Post
+                {
+                    Id = "5278d247-b231-432a-a34b-b4d18687983c",
+                    UserProfileId = UserProfiles()[0].Id,
+                    Content = "dont know what to say",
+                    CreatedOn = DateTime.UtcNow.AddDays(-250),
+                    GroupId = null,
+                    IsDeleted = false,
+                },
+            };
+        }
+
+        public static Post[] GroupPosts()
+        {
+            return new Post[]
+            {
+                new Post
+                {
+                    Id = "90a06326-dd3c-44ad-a78e-7b16067b0f05",
+                    UserProfileId = UserProfiles()[0].Id,
+                    Content = "cleaver group post",
+                    CreatedOn = DateTime.UtcNow.AddDays(-40),
+                    GroupId = Groups()[0].Id,
+                    IsDeleted = false,
+                },
+                new Post
+                {
+                    Id = "ff3b6c77-8da0-4663-abf9-0c5020365e21",
+                    UserProfileId = UserProfiles()[0].Id,
+                    Content = "dont know what to say in this group",
+                    CreatedOn = DateTime.UtcNow.AddDays(-10),
+                    GroupId = Groups()[0].Id,
+                    IsDeleted = false,
+                },
+            };
+        }
+
+        public static PostCommunityReport PostCommunityReport()
+        {
+            return new PostCommunityReport
+            {
+                Id = "25820efd-c510-495b-8c12-4dbf77d8b57b",
+                PostId = Posts()[0].Id,
+                ReporterId = UserProfiles()[1].Id,
             };
         }
 
@@ -187,6 +274,8 @@ namespace SocialMedia1.Tests.Data
             users.First(x => x.Id == privateUserId).FollowedBy.Add(users[1]);
             users.First(x => x.Id == privateUserId).FollowedBy.Add(users[2]);
 
+            context.SaveChanges();
+
             var privateUser = users[0];
 
             foreach (var req in FollowRequests())
@@ -194,11 +283,20 @@ namespace SocialMedia1.Tests.Data
                 privateUser.FollowRequests.Add(req);
             }
 
+            context.SaveChanges();
+
             context.Groups.AddRange(Groups());
 
             context.JoinGroupRequest.AddRange(JoinGroupRequests());
 
             context.UserProfilesGroups.AddRange(UserProfilesGroups());
+
+            context.SaveChanges();
+
+            context.Posts.AddRange(Posts());
+            context.Posts.AddRange(GroupPosts());
+
+            context.PostCommunityReports.Add(PostCommunityReport());
 
             context.SaveChanges();
         }

@@ -55,6 +55,7 @@ namespace SocialMedia1.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(string Id)
         {
             var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
@@ -64,6 +65,7 @@ namespace SocialMedia1.Controllers
             return Redirect("/");
         }
 
+        [Authorize]
         public async Task<IActionResult> Report(string id)
         {
             var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));

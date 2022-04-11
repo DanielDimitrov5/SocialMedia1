@@ -17,14 +17,14 @@ namespace SocialMedia1.Services.Groups
             UserProfile requester = await context.UserProfiles.FindAsync(requesterId);
             Group group = await context.Groups.FindAsync(groupId);
             
-            if (requester == null || group == null)
+            UserGroupRequest followRequest = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
+
+            if (followRequest == null)
             {
                 return;
             }
 
             await JoinGroupAsync(groupId, requesterId);
-
-            UserGroupRequest followRequest = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
 
             context.JoinGroupRequest.Remove(followRequest);
 
@@ -103,6 +103,14 @@ namespace SocialMedia1.Services.Groups
 
         public async Task SendJoinRequestAsync(string groupId, string userId)
         {
+            var group = await context.Groups.FindAsync(groupId);
+            var user = await context.UserProfiles.FindAsync(userId);
+
+            if (group == null || user == null)
+            {
+                return;
+            }
+
             UserGroupRequest userGroupRequest = new UserGroupRequest
             {
                 UserProfileId = userId,
