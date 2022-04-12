@@ -86,6 +86,7 @@ namespace SocialMedia1.Services.Groups
                     Id = group.GroupId,
                     Name = name,
                     Description = description,
+                    Status = group.Group.IsPrivate ? "Private" : "Public",
                     Members = group.Group.MembersCount,
                 });
             }

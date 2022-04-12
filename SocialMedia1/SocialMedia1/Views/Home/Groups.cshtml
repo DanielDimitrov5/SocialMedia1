@@ -19,12 +19,12 @@
             <div class="component">
                 <div class="card">
                     <div class="card-body" onclick="window.location='/Group/@Model[i].Id';">
-                        <span class="badge badge-secondary">Hobby</span>
+                        <span class="badge badge-secondary">@Model[i].Status</span>
                         <h4 class="card-title mt-2">@Model[i].Name</h4>
                         <p class="card-text">@Model[i].Description</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#a" class="btn btn-outline-primary">Read More</a>
+                        <p><b>@Model[i].Members members</b></p>
                     </div>
                 </div>
             </div>
@@ -36,12 +36,12 @@
                 <div class="component">
                     <div class="card">
                         <div class="card-body" onclick="window.location='/Group/@Model[i + 1].Id';">
-                            <span class="badge badge-secondary">Hobby</span>
+                            <span class="badge badge-secondary">@Model[i + 1].Status</span>
                             <h4 class="card-title mt-2">@Model[i + 1].Name</h4>
                             <p class="card-text">@Model[i + 1].Description </p>
                         </div>
                         <div class="card-footer">
-                            <a href="#a" class="btn btn-outline-primary">Read More</a>
+                            <p><b>@Model[i + 1].Members members</b></p>
                         </div>
                     </div>
                 </div>
