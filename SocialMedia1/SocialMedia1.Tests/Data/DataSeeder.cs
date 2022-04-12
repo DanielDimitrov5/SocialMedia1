@@ -252,13 +252,43 @@ namespace SocialMedia1.Tests.Data
             };
         }
 
-        public static PostCommunityReport PostCommunityReport()
+        public static PostCommunityReport[] PostCommunityReports()
         {
-            return new PostCommunityReport
+            return new PostCommunityReport[]
             {
-                Id = "25820efd-c510-495b-8c12-4dbf77d8b57b",
-                PostId = Posts()[0].Id,
-                ReporterId = UserProfiles()[1].Id,
+                //Report 0
+                new PostCommunityReport
+                {
+                    Id = "25820efd-c510-495b-8c12-4dbf77d8b57b",
+                    PostId = Posts()[0].Id,
+                    ReporterId = UserProfiles()[1].Id,
+                },
+
+                //REPORT 1
+                new PostCommunityReport
+                {
+                    Id = "e5ec0a03-ec1a-4a58-8a75-33797692a7c6",
+                    PostId = Posts()[1].Id,
+                    ReporterId = UserProfiles()[0].Id,
+                },
+                new PostCommunityReport
+                {
+                    Id = "cccc7155-32d3-472b-a643-708256f30307",
+                    PostId = Posts()[1].Id,
+                    ReporterId = UserProfiles()[2].Id,
+                },
+                new PostCommunityReport
+                {
+                    Id = "9f8805de-5a6d-476c-bede-ee21dc608328",
+                    PostId = Posts()[1].Id,
+                    ReporterId = UserProfiles()[3].Id,
+                },
+                new PostCommunityReport
+                {
+                    Id = "9889bdf9-cd4c-401b-b04e-9b4ddc4820e3",
+                    PostId = Posts()[0].Id,
+                    ReporterId = UserProfiles()[2].Id,
+                },
             };
         }
 
@@ -296,7 +326,7 @@ namespace SocialMedia1.Tests.Data
             context.Posts.AddRange(Posts());
             context.Posts.AddRange(GroupPosts());
 
-            context.PostCommunityReports.Add(PostCommunityReport());
+            context.PostCommunityReports.AddRange(PostCommunityReports());
 
             context.SaveChanges();
         }

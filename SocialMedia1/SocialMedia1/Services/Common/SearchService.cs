@@ -1,4 +1,5 @@
-﻿using SocialMedia1.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialMedia1.Data;
 using SocialMedia1.Models;
 using SocialMedia1.Models.Groups;
 using SocialMedia1.Models.Users;
@@ -14,9 +15,9 @@ namespace SocialMedia1.Services.Common
             this.context = context;
         }
 
-        public ICollection<GroupViewModel> GetGroupsBySearchTerm(string searchTerm)
+        public async Task<ICollection<GroupViewModel>> GetGroupsBySearchTerm(string searchTerm)
         {
-            var groups = context.Groups
+            var  groups = await context.Groups
                .Where(x => x.Name.Contains(searchTerm)
                         || x.Description.Contains(searchTerm)
                         || (x.Name + x.Description).Contains(searchTerm))
@@ -28,14 +29,14 @@ namespace SocialMedia1.Services.Common
                    Members = x.MembersCount,
                    Status = x.IsPrivate ? "Private" : "Public",
                })
-               .ToList();
+               .ToListAsync();
 
             return groups;
         }
 
-        public ICollection<ProfileViewModel> GetProfilesBySearchTerm(string searchTerm)
+        public async Task<ICollection<ProfileViewModel>> GetProfilesBySearchTerm(string searchTerm)
         {
-            var profiles = context.UserProfiles
+            var profiles = await context.UserProfiles
                 .Where(x => x.Nickname.Contains(searchTerm)
                          || x.Name.Contains(searchTerm)
                          || x.Surname.Contains(searchTerm)
@@ -49,7 +50,7 @@ namespace SocialMedia1.Services.Common
                     Bio = x.Bio,
                     ImageUrl = x.ImageUrl,
                 })
-                .ToList();
+                .ToListAsync();
 
             return profiles;
         }

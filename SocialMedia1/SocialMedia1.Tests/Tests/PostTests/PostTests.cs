@@ -201,7 +201,7 @@ namespace SocialMedia1.Tests.Tests.PostTests
         [Test]
         public void ReportPostAsyncDoesNothingIfReportIsAlreadySent()
         {
-            var report = DataSeeder.PostCommunityReport();
+            var report = DataSeeder.PostCommunityReports()[0];
 
             var IntialreportsCount = context.PostCommunityReports.Count();
 

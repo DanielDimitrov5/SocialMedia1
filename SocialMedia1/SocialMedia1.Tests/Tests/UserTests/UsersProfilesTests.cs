@@ -108,9 +108,9 @@ namespace SocialMedia1.Tests.Tests.UsersTests
         {
             var expected = context.UserProfiles.Find(userId).FollowedBy.Count;
 
-            var actual = userProfileService.GetAllFollowers(userId);
+            var actual = userProfileService.GetAllFollowersAsync(userId);
 
-            Assert.AreEqual(expected, actual.Profiles.Count);
+            Assert.AreEqual(expected, actual.Result.Profiles.Count);
         }
 
         [Test]
@@ -121,7 +121,7 @@ namespace SocialMedia1.Tests.Tests.UsersTests
 
             var expected = user.Name + " " + user.Surname;
 
-            var actual = userProfileService.GetAllFollowers(followerId).Profiles.First(x => x.Id == userId).Name;
+            var actual = userProfileService.GetAllFollowersAsync(followerId).Result.Profiles.First(x => x.Id == userId).Name;
 
             Assert.AreEqual(expected, actual);
         }

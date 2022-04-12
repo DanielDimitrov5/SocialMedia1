@@ -1,6 +1,4 @@
-﻿using SocialMedia1.Data.Models;
-using SocialMedia1.Models;
-using SocialMedia1.Models.Users;
+﻿using SocialMedia1.Models.Users;
 
 namespace SocialMedia1.Services.Users
 {
@@ -14,7 +12,7 @@ namespace SocialMedia1.Services.Users
 
         Task<ICollection<FollowRequestViewModel>> GetAllFollowRequests(string currentUserId);
 
-        UsersProfilesViewModel GetAllFollowers(string userId);
+        Task<UsersProfilesViewModel> GetAllFollowersAsync(string userId);
 
         Task<UsersProfilesViewModel> GetAllFollowingAsync(string userId);
     }

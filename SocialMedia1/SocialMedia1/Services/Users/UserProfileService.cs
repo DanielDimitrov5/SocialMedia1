@@ -21,7 +21,8 @@ namespace SocialMedia1.Services.Users
 
         public async Task AddUserProfileAsync(string Id)
         {
-            string email = context.Users.FirstOrDefault(x => x.Id == Id).Email;
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == Id);
+            string email = user.Email;
 
             string nickname = email.Split('@')[0];
 
@@ -32,7 +33,7 @@ namespace SocialMedia1.Services.Users
 
         public async Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string bio, string image)
         {
-            UserProfile userProfile = context.UserProfiles.First(x => x.Id == id);
+            UserProfile userProfile = await context.UserProfiles.FirstAsync(x => x.Id == id);
 
             userProfile.Nickname = nickname;
             userProfile.Name = name;
@@ -50,7 +51,7 @@ namespace SocialMedia1.Services.Users
 
         public async Task<ProfileViewModel> GetUserProfileDataAsync(string id)
         {
-            UserProfile user = context.UserProfiles.FirstOrDefault(x => x.Id == id);
+            UserProfile user = await context.UserProfiles.FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {
@@ -94,9 +95,9 @@ namespace SocialMedia1.Services.Users
             }).ToListAsync();
         }
 
-        public UsersProfilesViewModel GetAllFollowers(string currentUserId)
+        public async Task<UsersProfilesViewModel> GetAllFollowersAsync(string currentUserId)
         {
-            var followers = context.UserProfiles.Where(x => x.Follows.Any(x => x.Id == currentUserId))
+            var followers = await context.UserProfiles.Where(x => x.Follows.Any(x => x.Id == currentUserId))
                 .Select(x => new ProfileViewModel
                 {
                     Id = x.Id,
@@ -104,7 +105,7 @@ namespace SocialMedia1.Services.Users
                     Name = x.Name + " " + x.Surname,
                     ImageUrl = x.ImageUrl,
                     Bio = x.Bio,
-                }).ToList();
+                }).ToListAsync();
 
             UsersProfilesViewModel model = new UsersProfilesViewModel
             {

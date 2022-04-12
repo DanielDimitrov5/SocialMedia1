@@ -118,7 +118,7 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public IActionResult Followers(string id)
         {
-            var model = userProfileService.GetAllFollowers(id);
+            var model = userProfileService.GetAllFollowersAsync(id);
 
             return View(model);
         }

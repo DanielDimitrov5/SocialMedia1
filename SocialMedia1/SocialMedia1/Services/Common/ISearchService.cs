@@ -6,9 +6,8 @@ namespace SocialMedia1.Services.Common
 {
     public interface ISearchService
     {
-        ICollection<ProfileViewModel> GetProfilesBySearchTerm(string searchTerm);
+        Task<ICollection<ProfileViewModel>> GetProfilesBySearchTerm(string searchTerm);
 
-        ICollection<GroupViewModel> GetGroupsBySearchTerm(string searchTerm);
-
+        Task<ICollection<GroupViewModel>> GetGroupsBySearchTerm(string searchTerm);
     }
 }

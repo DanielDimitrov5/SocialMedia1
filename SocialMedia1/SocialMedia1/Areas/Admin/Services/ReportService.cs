@@ -1,4 +1,5 @@
-﻿using SocialMedia1.Areas.Admin.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialMedia1.Areas.Admin.Models;
 using SocialMedia1.Data;
 using SocialMedia1.Data.Models;
 
@@ -15,9 +16,14 @@ namespace SocialMedia1.Areas.Admin.Services
 
         public async Task ApproveReportedPostAsync(string postId)
         {
-            var post = context.Posts.FirstOrDefault(x => x.Id == postId);
+            var post = await context.Posts.FirstOrDefaultAsync(x => x.Id == postId);
 
-            List<PostCommunityReport> report = context.PostCommunityReports.Where(x => x.PostId == postId).ToList();
+            if (post == null)
+            {
+                return;
+            }
+
+            List<PostCommunityReport> report = await context.PostCommunityReports.Where(x => x.PostId == postId).ToListAsync();
 
             context.PostCommunityReports.RemoveRange(report);
 
@@ -26,11 +32,16 @@ namespace SocialMedia1.Areas.Admin.Services
 
         public async Task DeleteReportedPostAsync(string postId)
         {
-            var post = context.Posts.FirstOrDefault(x => x.Id == postId);
+            var post = await context.Posts.FirstOrDefaultAsync(x => x.Id == postId);
+
+            if (post == null)
+            {
+                return;
+            }
 
             post.IsDeleted = true;
 
-            List<PostCommunityReport> report = context.PostCommunityReports.Where(x => x.PostId == postId).ToList();
+            List<PostCommunityReport> report = await context.PostCommunityReports.Where(x => x.PostId == postId).ToListAsync();
 
             context.PostCommunityReports.RemoveRange(report);
 
@@ -39,14 +50,14 @@ namespace SocialMedia1.Areas.Admin.Services
 
         public async Task<ICollection<ReportedPostViewModel>> GetAllReportedPostsAsync()
         {
-            var reportedPosts = context.PostCommunityReports.Select(x => new ReportedPostViewModel
+            var reportedPosts = await context.PostCommunityReports.Select(x => new ReportedPostViewModel
             {
                 PostId = x.PostId,
                 Content = x.Post.Content,
                 AuthorId = x.Post.UserProfileId,
                 GroupId = x.Post.GroupId,
                 CreatedOn = x.Post.CreatedOn,
-            }).ToList();
+            }).ToListAsync();
 
             List<ReportedPostViewModel> uniquePosts = new();
 
@@ -57,7 +68,10 @@ namespace SocialMedia1.Areas.Admin.Services
                     var author = await context.UserProfiles.FindAsync(post.AuthorId);
 
                     post.Author = author.Nickname;
-                    post.GroupName = context.Groups.FirstOrDefault(x => x.Id == post.GroupId)?.Name;
+
+                    var group = await context.Groups.FirstOrDefaultAsync(x => x.Id == post.GroupId);
+
+                    post.GroupName = group?.Name;
 
                     uniquePosts.Add(post);
                 }

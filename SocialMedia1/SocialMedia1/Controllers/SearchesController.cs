@@ -17,12 +17,12 @@ namespace SocialMedia1.Controllers
 
 
         [Authorize]
-        public IActionResult Search(string searchTerm)
+        public async Task<IActionResult> Search(string searchTerm)
         {
             var model = new SearchResultsViewModel
             {
-                Profiles = searchService.GetProfilesBySearchTerm(searchTerm),
-                Groups = searchService.GetGroupsBySearchTerm(searchTerm)
+                Profiles = await searchService.GetProfilesBySearchTerm(searchTerm),
+                Groups = await searchService.GetGroupsBySearchTerm(searchTerm)
             };
 
             return View(model);
