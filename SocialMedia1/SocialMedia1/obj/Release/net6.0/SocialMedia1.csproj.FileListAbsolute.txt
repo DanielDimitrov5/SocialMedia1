@@ -355,3 +355,7 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\Microsoft.Azure.SignalR.Protocols.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\refint\SocialMedia1.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\Scrutor.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\SendGrid.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Release\net6.0\StarkbankEcdsa.dll

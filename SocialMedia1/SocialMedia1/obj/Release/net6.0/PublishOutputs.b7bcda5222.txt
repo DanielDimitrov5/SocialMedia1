@@ -43,6 +43,7 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Identity.Core.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Identity.Stores.dll
@@ -71,6 +72,9 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\NuGet.ProjectModel.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\NuGet.Protocol.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\NuGet.Versioning.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Scrutor.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\SendGrid.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\StarkbankEcdsa.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\System.Composition.AttributedModel.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\System.Composition.Convention.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\System.Composition.Hosting.dll
