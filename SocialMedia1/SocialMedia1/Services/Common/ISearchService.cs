@@ -4,7 +4,7 @@ using SocialMedia1.Models.Users;
 
 namespace SocialMedia1.Services.Common
 {
-    public interface ISearchService
+    public interface ISearchService : IService
     {
         Task<ICollection<ProfileViewModel>> GetProfilesBySearchTerm(string searchTerm);
 

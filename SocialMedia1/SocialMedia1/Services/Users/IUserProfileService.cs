@@ -2,11 +2,13 @@
 
 namespace SocialMedia1.Services.Users
 {
-    public interface IUserProfileService
+    public interface IUserProfileService : IService
     {
         Task AddUserProfileAsync(string Id);
 
         Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string bio, string image);
+
+        Task<string> GetUsernameAsync(string id);
 
         Task<ProfileViewModel> GetUserProfileDataAsync(string id);
 

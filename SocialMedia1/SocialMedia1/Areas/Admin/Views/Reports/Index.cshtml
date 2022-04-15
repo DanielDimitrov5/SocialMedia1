@@ -1,5 +1,9 @@
 ﻿@using System.Security.Claims
+@using SocialMedia1.Services.Common
 @model IEnumerable<SocialMedia1.Areas.Admin.Models.ReportedPostViewModel>
+
+@inject IIndexService indexService
+
 <head>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -27,7 +31,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex mb-3">
                                 <div class="mr-2">
-                                    <a href="#!" class="text-dark"><img src="/img/lorde.png" alt="User" class="author-img"></a>
+                                    <a href="#!" class="text-dark"><img src="@item.ImageUrl" alt="User" class="author-img"></a>
                                 </div>
                                 <div>
                                     @if (@User.FindFirstValue(ClaimTypes.NameIdentifier) == @item.AuthorId)
@@ -46,14 +50,13 @@
                                             <h5 class="mb-0"><a href="/UserProfiles/Profile/@item.AuthorId" class="text-dark">@item.Author</a> in <a href="Group/@item.GroupId">@item.GroupName</a></h5>
                                         }
                                     }
-                                    <p class="mb-0 text-muted">@item.CreatedOn</p>
+                                    <p class="mb-0 text-muted">@indexService.TimeSpanCalculator(item.CreatedOn)</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="post-block__content mb-2">
                             <p>@item.Content</p>
-                            @*<img src="img/food1.jpg" alt="Content img">*@
                         </div>
                         <hr>
                         <div>

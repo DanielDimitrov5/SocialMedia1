@@ -6,6 +6,8 @@ using SocialMedia1.Services.Groups;
 using System.Diagnostics;
 using SocialMedia1.Services.Users;
 using SocialMedia1.Services.Common;
+using SocialMedia1.Models.Common;
+using SocialMedia1.Services.Common.MailSender;
 
 namespace SocialMedia1.Controllers
 {
@@ -17,10 +19,11 @@ namespace SocialMedia1.Controllers
         private readonly IUserProfileService userProfileService;
         private readonly IGroupService groupService;
         private readonly IIndexService indexService;
+        private readonly IEmailSender sender;
 
         public HomeController
             (RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, UserManager<IdentityUser> userManager,
-            IUserProfileService userProfileService, IGroupService groupService, IIndexService indexService)
+            IUserProfileService userProfileService, IGroupService groupService, IIndexService indexService, IEmailSender sender)
         {
             this.roleManager = roleManager;
             _logger = logger;
@@ -28,6 +31,7 @@ namespace SocialMedia1.Controllers
             this.userProfileService = userProfileService;
             this.groupService = groupService;
             this.indexService = indexService;
+            this.sender = sender;
         }
 
 
@@ -44,6 +48,10 @@ namespace SocialMedia1.Controllers
             {
                 return Redirect("Home/Landing");
             }
+
+            //string content = System.IO.File.ReadAllText(@"C:\Users\USER\Desktop\emailSender.html");
+
+            //await sender.SendEmailAsync(GlobalConstants.email, "Dani", "dani_dimitrov2003@abv.bg", "Здр", content);
 
             //await roleManager.CreateAsync(new IdentityRole
             //{
@@ -75,6 +83,33 @@ namespace SocialMedia1.Controllers
             var model = groupService.GetGroups(userId);
 
             return View(model);
+        }
+
+        [Authorize]
+        [HttpGet("/Feedback")]
+        public IActionResult Feedback()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost("/Feedback")]
+        public async Task<IActionResult> Feedback(FeedbackInputModel model)
+        {
+            var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
+
+            var name = await userProfileService.GetUsernameAsync(userId);
+
+            bool isSuccessful = await sender.SendEmailAsync(GlobalConstants.SecondEmail, model.Email, GlobalConstants.MainEmail, "feedback", model.Message);
+
+            if (isSuccessful)
+            {
+                TempData["isSuccessfully"] = "1";
+
+                await sender.AutoSendEmail(model.Email, name);
+            }
+
+            return Redirect("/");
         }
 
         public IActionResult Privacy()

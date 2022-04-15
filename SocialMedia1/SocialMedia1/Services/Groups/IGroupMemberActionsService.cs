@@ -1,6 +1,6 @@
 ﻿namespace SocialMedia1.Services.Groups
 {
-    public interface IGroupMemberActionsService
+    public interface IGroupMemberActionsService : IService
     {
         Task JoinGroupAsync(string groupId, string userId);
 

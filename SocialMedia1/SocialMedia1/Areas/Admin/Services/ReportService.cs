@@ -57,6 +57,7 @@ namespace SocialMedia1.Areas.Admin.Services
                 AuthorId = x.Post.UserProfileId,
                 GroupId = x.Post.GroupId,
                 CreatedOn = x.Post.CreatedOn,
+                ImageUrl = x.Post.UserProfile.ImageUrl,
             }).ToListAsync();
 
             List<ReportedPostViewModel> uniquePosts = new();

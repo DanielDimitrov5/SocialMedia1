@@ -8,7 +8,6 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Humanizer.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\MessagePack.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\MessagePack.Annotations.dll
-C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll

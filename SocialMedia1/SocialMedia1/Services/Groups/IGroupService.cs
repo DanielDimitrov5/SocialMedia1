@@ -4,7 +4,7 @@ using SocialMedia1.Models.Users;
 
 namespace SocialMedia1.Services.Groups
 {
-    public interface IGroupService
+    public interface IGroupService : IService
     {
         GroupViewModel[] GetGroups(string userId);
 

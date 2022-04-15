@@ -14,7 +14,7 @@ namespace SocialMedia1.Data.Models
             JoinRequests = new HashSet<UserGroupRequest>();
             PostReports = new HashSet<PostCommunityReport>();
 
-            ImageUrl = "/img/ProfilePictures/noPicture.png";
+            ImageUrl = "/img/ProfilePictures/noPicturee.png";
         }
 
         [Key]

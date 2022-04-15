@@ -39,19 +39,23 @@ namespace SocialMedia1.Services.Common
 
             var now = DateTime.Now;
 
-            string timeSpan = string.Empty;
+            TimeSpan timeSpan = now - localTime;
 
-            if (now.Day - localTime.Day == 1)
-            {
-                return "Yesterday";
-            }
-            else if (now.Day - localTime.Day < 1 && now.Minute - localTime.Minute == 0)
+            if (timeSpan.TotalSeconds < 60)
             {
                 return "now";
             }
-            else if (now.Day - localTime.Day < 1 && now.Minute - localTime.Minute < 60)
+            else if (timeSpan.TotalMinutes < 60)
             {
-                return $"{now.Minute - localTime.Minute} mins ago";
+                string m = timeSpan.Minutes == 1 ? "min" : "mins";
+
+                return $"{timeSpan.Minutes} {m} ago";
+            }
+            else if (timeSpan.TotalHours < 24)
+            {
+                string h = timeSpan.Hours == 1 ? "hour" : "hours";
+
+                return $"{timeSpan.Hours} {h} ago";
             }
             else if (now.Year == localTime.Year)
             {

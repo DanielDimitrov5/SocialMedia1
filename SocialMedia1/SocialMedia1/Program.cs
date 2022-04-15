@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SocialMedia1.Areas.Admin.Services;
 using SocialMedia1.Data;
 using SocialMedia1.Hubs;
+using SocialMedia1.Services;
 using SocialMedia1.Services.Common;
-using SocialMedia1.Services.Groups;
-using SocialMedia1.Services.Posts;
-using SocialMedia1.Services.Users;
+using SocialMedia1.Services.Common.MailSender;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,22 +26,19 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<IUserProfileService, UserProfileService>();
-builder.Services.AddTransient<IUserActionsService, UserActionsService>();
+var apiKey = builder.Configuration.GetValue<string>("SendGrid");
 
-builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender(apiKey));
 
-builder.Services.AddTransient<IGroupService, GroupService>();
-builder.Services.AddTransient<IGroupMemberActionsService, GroupMemberActionsService>();
-
-builder.Services.AddTransient<IIndexService, IndexService>();
-builder.Services.AddTransient<INavBarService, NavBarService>();
-builder.Services.AddTransient<ISearchService, SearchService>();
-builder.Services.AddTransient<IImageService, ImageService>();
-
-builder.Services.AddTransient<IReportService, ReportService>();
+builder.Services
+    .Scan(builder => builder
+    .FromAssemblies(Assembly.GetExecutingAssembly())
+    .AddClasses(a => a.AssignableTo(typeof(IService)))
+    .AsMatchingInterface()
+    .WithTransientLifetime());
 
 builder.Services.AddSignalR();
 

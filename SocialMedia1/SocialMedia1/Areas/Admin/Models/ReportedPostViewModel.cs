@@ -19,6 +19,8 @@ namespace SocialMedia1.Areas.Admin.Models
 
         public string Author { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public int ReportsCount { get; set; }
     }
 }

@@ -1,12 +1,10 @@
 ﻿namespace SocialMedia1.Services.Users
 {
-    public interface IUserActionsService
+    public interface IUserActionsService : IService
     {
         Task FollowUserAsync(string id, string currentUserId);
 
         Task UnfollowUserAsync(string id, string currentUserId);
-
-        //Task SendFollowRequest(string id, string currentUserId);
 
         Task<bool> IsUserFollowingAsync(string currentUserId, string userId);
 

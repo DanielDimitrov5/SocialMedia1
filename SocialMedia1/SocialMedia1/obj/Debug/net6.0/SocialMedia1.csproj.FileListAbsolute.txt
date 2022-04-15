@@ -349,10 +349,13 @@ C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Debug\net6.0\So
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\SocialMedia1.pdb
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\wwwroot\css\chat.css
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\wwwroot\img\ProfilePictures\9af12897-a9cb-46f1-b8c1-80b9d2bea803.jpg
-C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Client.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.Azure.SignalR.Common.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.Azure.SignalR.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.Azure.SignalR.Protocols.dll
 C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\obj\Debug\net6.0\refint\SocialMedia1.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\Scrutor.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\SendGrid.dll
+C:\Users\USER\Desktop\SocialMedia1\SocialMedia1\SocialMedia1\bin\Debug\net6.0\StarkbankEcdsa.dll

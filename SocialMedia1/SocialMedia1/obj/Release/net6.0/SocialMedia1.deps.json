@@ -9,7 +9,6 @@
       "SocialMedia1/1.0.0": {
         "dependencies": {
           "CloudinaryDotNet": "1.17.0",
-          "Microsoft.AspNetCore.Authentication.Facebook": "6.0.3",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.3",
           "Microsoft.AspNetCore.Identity.UI": "6.0.3",
@@ -71,14 +70,6 @@
         }
       },
       "MessagePackAnalyzer/2.1.152": {},
-      "Microsoft.AspNetCore.Authentication.Facebook/6.0.3": {
-        "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {
-            "assemblyVersion": "6.0.3.0",
-            "fileVersion": "6.0.322.12401"
-          }
-        }
-      },
       "Microsoft.AspNetCore.Connections.Abstractions/3.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "3.0.0",
@@ -2448,13 +2439,6 @@
       "sha512": "sha512-uJhZlGMkXDaFYsH8V9S6o1EyvsUqB9mpU4DVBXNr0DXZVzZMhuLP1IkLj5xK3EKlaAcvkFkZv3eSvuz360wb3Q==",
       "path": "messagepackanalyzer/2.1.152",
       "hashPath": "messagepackanalyzer.2.1.152.nupkg.sha512"
-    },
-    "Microsoft.AspNetCore.Authentication.Facebook/6.0.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-l5Q+hXTXpn33l3oC4l/L0E1vAshCnRAH3N0UOc0ecVNNzV8tw4o5aPIWzqEF25xi9DAm10TB0MAHaU6Bqh6WLw==",
-      "path": "microsoft.aspnetcore.authentication.facebook/6.0.3",
-      "hashPath": "microsoft.aspnetcore.authentication.facebook.6.0.3.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Connections.Abstractions/3.0.0": {
       "type": "package",

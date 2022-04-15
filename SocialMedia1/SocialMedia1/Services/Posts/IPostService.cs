@@ -3,7 +3,7 @@ using SocialMedia1.Models.Posts;
 
 namespace SocialMedia1.Services.Posts
 {
-    public interface IPostService
+    public interface IPostService : IService
     {
         Task CreatePostAsync(string userId, string content);
 

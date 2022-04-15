@@ -140,5 +140,12 @@ namespace SocialMedia1.Services.Users
 
             return model;
         }
+
+        public async Task<string> GetUsernameAsync(string id)
+        {
+            var user = await context.UserProfiles.FindAsync(id);
+
+            return user.Nickname;
+        }
     }
 }

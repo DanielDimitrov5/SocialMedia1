@@ -3,7 +3,7 @@ using SocialMedia1.Models.Common;
 
 namespace SocialMedia1.Services.Common
 {
-    public interface IIndexService
+    public interface IIndexService : IService
     {
         IndexViewModel GetIndexView(string userId);
 

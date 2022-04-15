@@ -22,9 +22,6 @@ namespace SocialMedia1.Models.Users
         [Display(Name = "Private Profile")]
         public bool IsPrivate { get; set; }
 
-        //[Display(Name = "Email Address")]
-        //public string? EmailAddress { get; set; }
-
         public string? Bio { get; set; }
 
         public ICollection<PostViewModel> Posts { get; set; }

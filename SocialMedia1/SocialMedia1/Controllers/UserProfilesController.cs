@@ -35,10 +35,6 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public async Task<IActionResult> EditUserProfile(ProfileViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    throw new Exception("aloo");
-            //}
 
             var user = userManager.GetUserId(HttpContext.User);
 
