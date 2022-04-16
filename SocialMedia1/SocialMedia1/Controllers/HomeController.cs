@@ -49,17 +49,6 @@ namespace SocialMedia1.Controllers
                 return Redirect("Home/Landing");
             }
 
-            //string content = System.IO.File.ReadAllText(@"C:\Users\USER\Desktop\emailSender.html");
-
-            //await sender.SendEmailAsync(GlobalConstants.email, "Dani", "dani_dimitrov2003@abv.bg", "Здр", content);
-
-            //await roleManager.CreateAsync(new IdentityRole
-            //{
-            //    Name = "Admin"
-            //});
-
-            //await userManager.AddToRoleAsync(await userManager.GetUserAsync(this.User), "Admin");
-
             var model = indexService.GetIndexView(userId);
 
             return View(model);

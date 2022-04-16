@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using SocialMedia1.Data;
 using SocialMedia1.Hubs;
 using SocialMedia1.Services;
-using SocialMedia1.Services.Common;
 using SocialMedia1.Services.Common.MailSender;
 using System.Reflection;
 

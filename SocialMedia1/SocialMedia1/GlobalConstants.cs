@@ -7,5 +7,7 @@
         public const string SecondEmail = "dani_dimitrov03@abv.bg";
 
         public const string FromNameEmailSender = "SocialMedia1Support";
+
+        public const string AdminRole = "Admin";
     }
 }

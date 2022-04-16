@@ -5,7 +5,7 @@ using SocialMedia1.Areas.Admin.Services;
 namespace SocialMedia1.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = GlobalConstants.AdminRole)]
     public class ReportsController : Controller
     {
         private readonly IReportService reportService;
