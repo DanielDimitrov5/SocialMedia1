@@ -4,7 +4,7 @@ namespace SocialMedia1.Models.Common
 {
     public class FeedbackInputModel
     {
-        [MinLength(10)]
+        [MinLength(10, ErrorMessage = GlobalConstants.FeedbackFormErrorMessage)]
         [MaxLength(600)]
         public string Message { get; set; }
 

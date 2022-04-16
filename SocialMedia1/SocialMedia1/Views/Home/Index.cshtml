@@ -14,7 +14,7 @@
 }
 
 @{
-    await Html.RenderPartialAsync("CreatePost", Model.CreatePost);
+    <partial name="CreatePost" model="Model.CreatePost" />
 }
 
 <div class="col-sm-6 offset-sm-3">

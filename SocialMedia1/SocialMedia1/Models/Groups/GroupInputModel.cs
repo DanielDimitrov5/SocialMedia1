@@ -9,10 +9,11 @@ namespace SocialMedia1.Models.Groups
 
         public string Name { get; set; }
 
-        [MinLength(5, ErrorMessage = "Description should be at lest 5 characters long.")]
-        [MaxLength(500, ErrorMessage = "Description should be under 500 characters long.")]
+        [MinLength(5, ErrorMessage = GlobalConstants.GroupDescpriptionMinCharException)]
+        [MaxLength(500, ErrorMessage = GlobalConstants.GroupDescpriptionMaxCharException)]
         public string Description { get; set; }
 
+        [Display(Name = "Private")]
         public bool IsPrivate { get; set; }
     }
 }
