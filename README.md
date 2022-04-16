@@ -7,7 +7,7 @@ https://socialmedia1.azurewebsites.net/ (Beta Version 1.0)
 
 # 🛠 Built with:
 * [.NET 6](https://github.com/dotnet/core)
-* [ASP.NET Core 6](https://github.com/dotnet/aspnetcore)
+* [ASP.NET Core](https://github.com/dotnet/aspnetcore)
 * [Entity Framework Core 6.0.3](https://github.com/dotnet/efcore)
 * [SignalR](https://github.com/SignalR/SignalR)
 * [SendGrid](https://github.com/sendgrid)
