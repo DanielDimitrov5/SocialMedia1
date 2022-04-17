@@ -24,9 +24,9 @@
     <br />
 
     <p class="lead">
-        @if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
+        @if (await groupMemberActionsService.IsUserGroupMemberAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
         {
-            @if (groupMemberActionsService.IsJoinRequstSent(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            @if (await groupMemberActionsService.IsJoinRequstSentAsync(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 <button class="btn btn-info btn-pill btn-sm ml-3 mt-1" disabled>Request Sent</button>
             }
@@ -37,7 +37,7 @@
         }
         else
         {
-            if (groupMemberActionsService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+            if (groupMemberActionsService.IsUserGroupCreatorAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
             {
                 <a href="/Groups/JoinRequests/@Model.Id" class="btn btn-outline-info btn-pill">Join Requests: @Model.JoinRequests</a>
             }
@@ -49,7 +49,7 @@
     </p>
 </div>
 
-@if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
+@if (await groupMemberActionsService.IsUserGroupMemberAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
 {
 
     <div class="row">

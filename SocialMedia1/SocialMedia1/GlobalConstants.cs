@@ -19,5 +19,11 @@
         public const string GroupDescpriptionMinCharException = "Description should be at lest 5 characters long.";
 
         public const string GroupDescpriptionMaxCharException = "Description should be under 500 characters long.";
+
+        public const string CloudinaryName = "dani03";
+
+        public const string CloudinaryApiKey = "714726182434833";
+
+        public const string CloudinaryApiSecret = "BuFfSQmUk6tZXXZk0tM88CZM3nM"; //hidden
     }
 }

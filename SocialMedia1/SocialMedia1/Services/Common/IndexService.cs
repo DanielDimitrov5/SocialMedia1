@@ -31,8 +31,6 @@ namespace SocialMedia1.Services.Common
             };
         }
 
-
-        //TODO: Tests
         public string TimeSpanCalculator(DateTime dateTime)
         {
             var localTime = dateTime.ToLocalTime();

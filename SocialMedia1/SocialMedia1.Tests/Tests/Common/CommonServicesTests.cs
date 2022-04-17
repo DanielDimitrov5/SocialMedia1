@@ -7,6 +7,7 @@ using SocialMedia1.Models.Users;
 using SocialMedia1.Services.Common;
 using SocialMedia1.Services.Posts;
 using SocialMedia1.Tests.Data;
+using System;
 using System.Linq;
 
 namespace SocialMedia1.Tests.Tests.Common
@@ -130,6 +131,71 @@ namespace SocialMedia1.Tests.Tests.Common
 
             Assert.AreEqual(expected.Posts.Count, actual.Posts.Count);
             Assert.AreEqual(expected.GroupPosts.Count, actual.GroupPosts.Count);
+        }
+
+        [Test]
+        [TestCase(-1)]
+        [TestCase(-20)]
+        [TestCase(-59)]
+        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan60Seconds(int secondsBifore)
+        {
+            var postedOnDate = DateTime.Now.AddSeconds(secondsBifore);
+
+            var timeSpan = indexService.TimeSpanCalculator(postedOnDate);
+
+            string formated = "now";
+
+            Assert.IsTrue(timeSpan == formated);
+        }
+
+        [Test]
+        [TestCase(-1)]
+        [TestCase(-45)]
+        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan60Minutes(int minutesBifore)
+        {
+            var postedOnDate = DateTime.Now.AddMinutes(minutesBifore);
+
+            var timeSpan = indexService.TimeSpanCalculator(postedOnDate);
+
+            string minute = minutesBifore == -1 ? "min" : "mins";
+
+            string formated = $"{(DateTime.Now - postedOnDate).Minutes} {minute} ago";
+
+            Assert.IsTrue(timeSpan == formated);
+        }
+
+
+
+        [Test]
+        [TestCase(-1)]
+        [TestCase(-20)]
+        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan24Hours(int hoursBefore)
+        {
+            var postedOnDate = DateTime.Now.AddHours(hoursBefore);
+
+            var timeSpan = indexService.TimeSpanCalculator(postedOnDate);
+
+            string hour = hoursBefore == -1 ? "hour" : "hours";
+
+            string formated = $"{(DateTime.Now - postedOnDate).Hours} {hour} ago";
+
+            Assert.IsTrue(timeSpan == formated);
+        }
+
+        [Test]
+        [TestCase(-5)]
+        [TestCase(-370)]
+        public void TimeSpanCalculatorReturnsCorrectStringWhenInputDateDifferWithMoreThanADay(int daysBefore)
+        {
+            var postedOnDate = DateTime.Now.AddDays(daysBefore);
+
+            var timeSpan = indexService.TimeSpanCalculator(postedOnDate);
+
+            string year = postedOnDate.Year != DateTime.Now.Year ? $".{postedOnDate.Year}" : string.Empty;
+
+            string formated = $"{postedOnDate.Day:d2}.{postedOnDate.Month:d2}{year}";
+
+            Assert.IsTrue(timeSpan == formated);
         }
 
         [OneTimeTearDown]

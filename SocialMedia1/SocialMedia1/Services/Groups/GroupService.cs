@@ -76,10 +76,10 @@ namespace SocialMedia1.Services.Groups
                 context.Entry(group).Reference(x => x.Group).Load();
 
                 var name = group.Group.Name.Length > 40
-                    ? string.Concat(group.Group.Name.Substring(0, 40), "...") : group.Group.Name;
+                    ? string.Concat(group.Group.Name[..40], "...") : group.Group.Name;
 
                 var description = group.Group.Description.Length > 300
-                    ? string.Concat(group.Group.Description.Substring(0, 300), "...") : group.Group.Description;
+                    ? string.Concat(group.Group.Description[..300], "...") : group.Group.Description;
 
                 model.Add(new GroupViewModel
                 {
@@ -167,7 +167,6 @@ namespace SocialMedia1.Services.Groups
         }
 
         // private methods:
-
         private ICollection<PostViewModel> GetPosts(string groupId)
         {
             var posts = context.Posts.Where(x => x.GroupId == groupId && !x.IsDeleted).Select(x => new PostViewModel

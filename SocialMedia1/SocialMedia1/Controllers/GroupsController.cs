@@ -51,9 +51,9 @@ namespace SocialMedia1.Controllers
         {
             var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            if (groupMemberActionsService.IsGroupPrivate(id))
+            if (await groupMemberActionsService.IsGroupPrivateAsync(id))
             {
-                if (groupMemberActionsService.IsJoinRequstSent(id, userId) == false)
+                if (await groupMemberActionsService.IsJoinRequstSentAsync(id, userId) == false)
                 {
                     await groupMemberActionsService.SendJoinRequestAsync(id, userId);
 
@@ -83,7 +83,7 @@ namespace SocialMedia1.Controllers
         {
             var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            if (groupMemberActionsService.IsUserGroupCreator(userId, id) == false)
+            if (groupMemberActionsService.IsUserGroupCreatorAsync(userId, id) == false)
             {
                 return Redirect($"/Group/{id}");
             }
@@ -96,17 +96,17 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public async Task<IActionResult> ApproveJoinRequest(string requesterId, string groupId)
         {
-            if (groupMemberActionsService.IsGroupPrivate(groupId) == false)
+            if (await groupMemberActionsService.IsGroupPrivateAsync(groupId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupMemberActionsService.IsUserGroupMember(requesterId, groupId))
+            if (await groupMemberActionsService.IsUserGroupMemberAsync(requesterId, groupId))
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupMemberActionsService.IsJoinRequstSent(groupId, requesterId) == false)
+            if (await groupMemberActionsService.IsJoinRequstSentAsync(groupId, requesterId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
@@ -119,17 +119,17 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteJoinRequest(string requesterId, string groupId)
         {
-            if (groupMemberActionsService.IsGroupPrivate(groupId) == false)
+            if (await groupMemberActionsService.IsGroupPrivateAsync(groupId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupMemberActionsService.IsUserGroupMember(requesterId, groupId))
+            if (await groupMemberActionsService.IsUserGroupMemberAsync(requesterId, groupId))
             {
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (groupMemberActionsService.IsJoinRequstSent(groupId, requesterId) == false)
+            if (await groupMemberActionsService.IsJoinRequstSentAsync(groupId, requesterId) == false)
             {
                 return Redirect($"/Group/{groupId}");
             }

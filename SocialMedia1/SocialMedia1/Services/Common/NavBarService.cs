@@ -1,4 +1,5 @@
 ﻿using SocialMedia1.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SocialMedia1.Services.Common
 {

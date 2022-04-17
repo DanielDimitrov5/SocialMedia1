@@ -104,7 +104,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var actual = context.Groups.Find(groupId).IsPrivate;
 
-            var expected = groupMemberActionsService.IsGroupPrivate(groupId);
+            var expected = groupMemberActionsService.IsGroupPrivateAsync(groupId);
 
             Assert.AreEqual(expected, actual);
         }
@@ -118,7 +118,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var expected = context.JoinGroupRequest.Any(x => x.UserProfileId == requesterId && x.GroupId == groupId);
 
-            var actual = groupMemberActionsService.IsJoinRequstSent(groupId, requesterId);
+            var actual = groupMemberActionsService.IsJoinRequstSentAsync(groupId, requesterId);
 
             Assert.AreEqual(expected, actual);
         }
@@ -130,7 +130,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var creatorId = context.Groups.Find(group.Id).CreaterId;
 
-            var actualCreatorId = groupMemberActionsService.IsUserGroupCreator(creatorId, group.Id);
+            var actualCreatorId = groupMemberActionsService.IsUserGroupCreatorAsync(creatorId, group.Id);
 
             Assert.IsTrue(actualCreatorId);
         }
@@ -142,7 +142,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var user = DataSeeder.UserProfiles()[1]; //group member
 
-            Assert.IsTrue(groupMemberActionsService.IsUserGroupMember(user.Id, group.Id));
+            Assert.IsTrue(groupMemberActionsService.IsUserGroupMemberAsync(user.Id, group.Id));
         }
 
         [Test]

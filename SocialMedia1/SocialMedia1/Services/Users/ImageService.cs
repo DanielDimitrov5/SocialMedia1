@@ -12,9 +12,9 @@ namespace SocialMedia1.Services.Users
         public ImageService()
         {
             account = new Account(
-            "dani03",
-            "714726182434833",
-            "BuFfSQmUk6tZXXZk0tM88CZM3nM");
+            GlobalConstants.CloudinaryName,
+            GlobalConstants.CloudinaryApiKey,
+            GlobalConstants.CloudinaryApiSecret);
 
             cloudinary = new Cloudinary(account);
         }

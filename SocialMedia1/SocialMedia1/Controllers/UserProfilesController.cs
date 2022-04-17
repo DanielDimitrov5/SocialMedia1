@@ -35,7 +35,6 @@ namespace SocialMedia1.Controllers
         [Authorize]
         public async Task<IActionResult> EditUserProfile(ProfileViewModel model)
         {
-
             var user = userManager.GetUserId(HttpContext.User);
 
             var imageUrl = await imageService.UploadImageToCloudinary(model.Image, user);
@@ -45,8 +44,13 @@ namespace SocialMedia1.Controllers
                 imageUrl = model.ImageUrl;
             }
 
-            await userProfileService
+            bool isChanged = await userProfileService
                 .EditUserProfileAsync(user, model.Nickname, model.Name, model.Surname, model.IsPrivate, model.Bio, imageUrl);
+
+            if (isChanged)
+            {
+                TempData["changed"] = "changed";
+            }
 
             return View();
         }
@@ -112,9 +116,9 @@ namespace SocialMedia1.Controllers
         }
 
         [Authorize]
-        public IActionResult Followers(string id)
+        public async Task<IActionResult> Followers(string id)
         {
-            var model = userProfileService.GetAllFollowersAsync(id);
+            var model = await userProfileService.GetAllFollowersAsync(id);
 
             return View(model);
         }

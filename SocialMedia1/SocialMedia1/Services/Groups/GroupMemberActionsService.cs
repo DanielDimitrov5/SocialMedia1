@@ -1,5 +1,6 @@
 ﻿using SocialMedia1.Data;
 using SocialMedia1.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SocialMedia1.Services.Groups
 {
@@ -33,7 +34,7 @@ namespace SocialMedia1.Services.Groups
 
         public async Task DeleteJoinRequestAsync(string requesterId, string groupId)
         {
-            var request = context.JoinGroupRequest.FirstOrDefault(x => x.UserProfileId == requesterId && x.GroupId == groupId);
+            var request = await context.JoinGroupRequest.FirstOrDefaultAsync(x => x.UserProfileId == requesterId && x.GroupId == groupId);
 
             if (request == null)
             {
@@ -45,24 +46,26 @@ namespace SocialMedia1.Services.Groups
             await context.SaveChangesAsync();
         }
 
-        public bool IsGroupPrivate(string groupId)
+        public async Task<bool> IsGroupPrivateAsync(string groupId)
         {
-            return context.Groups.FirstOrDefault(x => x.Id == groupId).IsPrivate;
+            var group = await context.Groups.FirstOrDefaultAsync(x => x.Id == groupId);
+
+            return group.IsPrivate;
         }
 
-        public bool IsJoinRequstSent(string groupId, string userId)
+        public async Task<bool> IsJoinRequstSentAsync(string groupId, string userId)
         {
-            return context.JoinGroupRequest.Any(x => x.UserProfileId == userId && x.GroupId == groupId);
+            return await context.JoinGroupRequest.AnyAsync(x => x.UserProfileId == userId && x.GroupId == groupId);
         }
 
-        public bool IsUserGroupCreator(string userId, string groupId)
+        public bool IsUserGroupCreatorAsync(string userId, string groupId)
         {
             return context.Groups.Any(x => x.Id == groupId && x.CreaterId == userId);
         }
 
-        public bool IsUserGroupMember(string userId, string groupId)
+        public async Task<bool> IsUserGroupMemberAsync(string userId, string groupId)
         {
-            return context.UserProfilesGroups.Any(x => x.GroupId == groupId && x.UserProfileId == userId);
+            return await context.UserProfilesGroups.AnyAsync(x => x.GroupId == groupId && x.UserProfileId == userId);
         }
 
         public async Task JoinGroupAsync(string groupId, string userId)

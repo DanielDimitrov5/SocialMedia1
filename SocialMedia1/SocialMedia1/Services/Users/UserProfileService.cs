@@ -1,7 +1,5 @@
 ﻿using SocialMedia1.Data;
 using SocialMedia1.Data.Models;
-using SocialMedia1.Models;
-using Microsoft.AspNetCore.Identity;
 using SocialMedia1.Services.Posts;
 using SocialMedia1.Models.Users;
 using Microsoft.EntityFrameworkCore;
@@ -31,9 +29,18 @@ namespace SocialMedia1.Services.Users
             await context.SaveChangesAsync();
         }
 
-        public async Task EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string bio, string image)
+        public async Task<bool> EditUserProfileAsync(string id, string nickname, string name, string surename, bool IsPrivate, string bio, string image)
         {
             UserProfile userProfile = await context.UserProfiles.FirstAsync(x => x.Id == id);
+
+            bool isChanged =
+                userProfile.Nickname != nickname || userProfile.Name != name || userProfile.Surname != surename ||
+                userProfile.IsPrivate != IsPrivate || userProfile.Bio != bio || image != null;
+
+            if (!isChanged)
+            {
+                return false;
+            }
 
             userProfile.Nickname = nickname;
             userProfile.Name = name;
@@ -47,6 +54,8 @@ namespace SocialMedia1.Services.Users
             }
 
             await context.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<ProfileViewModel> GetUserProfileDataAsync(string id)
