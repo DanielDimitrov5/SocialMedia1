@@ -12,12 +12,12 @@
 
         Task LeaveGroupAsync(string groupId, string userId);
 
-        Task<bool> IsUserGroupMemberAsync(string userId, string groupId);
+        bool IsUserGroupMember(string userId, string groupId);
 
         Task<bool> IsGroupPrivateAsync(string groupId);
 
         Task<bool> IsJoinRequstSentAsync(string groupId, string userId);
 
-        bool IsUserGroupCreatorAsync(string userId, string groupId);
+        bool IsUserGroupCreator(string userId, string groupId);
     }
 }

@@ -24,7 +24,7 @@
     <br />
 
     <p class="lead">
-        @if (await groupMemberActionsService.IsUserGroupMemberAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
+        @if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id) == false)
         {
             @if (await groupMemberActionsService.IsJoinRequstSentAsync(Model.Id, @User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
@@ -37,7 +37,7 @@
         }
         else
         {
-            if (groupMemberActionsService.IsUserGroupCreatorAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
+            if (groupMemberActionsService.IsUserGroupCreator(@User.FindFirstValue(ClaimTypes.NameIdentifier), @Model.Id))
             {
                 <a href="/Groups/JoinRequests/@Model.Id" class="btn btn-outline-info btn-pill">Join Requests: @Model.JoinRequests</a>
             }
@@ -49,7 +49,7 @@
     </p>
 </div>
 
-@if (await groupMemberActionsService.IsUserGroupMemberAsync(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
+@if (groupMemberActionsService.IsUserGroupMember(@User.FindFirstValue(ClaimTypes.NameIdentifier), Model.Id))
 {
 
     <div class="row">

@@ -6,6 +6,7 @@ using SocialMedia1.Tests.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialMedia1.Tests.Tests.GroupTests
 {
@@ -98,19 +99,19 @@ namespace SocialMedia1.Tests.Tests.GroupTests
         [Test]
         [TestCase(0)] //private
         [TestCase(1)] //public
-        public void IsGroupPrivateReturnsCorrectResponse(int index)
+        public async Task IsGroupPrivateReturnsCorrectResponse(int index)
         {
             var groupId = DataSeeder.Groups()[0].Id;
 
             var actual = context.Groups.Find(groupId).IsPrivate;
 
-            var expected = groupMemberActionsService.IsGroupPrivateAsync(groupId);
+            var expected = await groupMemberActionsService.IsGroupPrivateAsync(groupId);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void IsJoinRequstSentReturnsCorrectData()
+        public async Task IsJoinRequstSentReturnsCorrectData()
         {
             var requesterId = DataSeeder.JoinGroupRequests().First().UserProfileId;
 
@@ -118,7 +119,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var expected = context.JoinGroupRequest.Any(x => x.UserProfileId == requesterId && x.GroupId == groupId);
 
-            var actual = groupMemberActionsService.IsJoinRequstSentAsync(groupId, requesterId);
+            var actual = await groupMemberActionsService.IsJoinRequstSentAsync(groupId, requesterId);
 
             Assert.AreEqual(expected, actual);
         }
@@ -130,7 +131,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var creatorId = context.Groups.Find(group.Id).CreaterId;
 
-            var actualCreatorId = groupMemberActionsService.IsUserGroupCreatorAsync(creatorId, group.Id);
+            var actualCreatorId = groupMemberActionsService.IsUserGroupCreator(creatorId, group.Id);
 
             Assert.IsTrue(actualCreatorId);
         }
@@ -142,7 +143,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 
             var user = DataSeeder.UserProfiles()[1]; //group member
 
-            Assert.IsTrue(groupMemberActionsService.IsUserGroupMemberAsync(user.Id, group.Id));
+            Assert.IsTrue(groupMemberActionsService.IsUserGroupMember(user.Id, group.Id));
         }
 
         [Test]

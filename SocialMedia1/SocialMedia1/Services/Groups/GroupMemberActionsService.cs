@@ -58,14 +58,14 @@ namespace SocialMedia1.Services.Groups
             return await context.JoinGroupRequest.AnyAsync(x => x.UserProfileId == userId && x.GroupId == groupId);
         }
 
-        public bool IsUserGroupCreatorAsync(string userId, string groupId)
+        public bool IsUserGroupCreator(string userId, string groupId)
         {
             return context.Groups.Any(x => x.Id == groupId && x.CreaterId == userId);
         }
 
-        public async Task<bool> IsUserGroupMemberAsync(string userId, string groupId)
+        public bool IsUserGroupMember(string userId, string groupId)
         {
-            return await context.UserProfilesGroups.AnyAsync(x => x.GroupId == groupId && x.UserProfileId == userId);
+            return context.UserProfilesGroups.Any(x => x.GroupId == groupId && x.UserProfileId == userId);
         }
 
         public async Task JoinGroupAsync(string groupId, string userId)

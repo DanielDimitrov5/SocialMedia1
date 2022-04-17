@@ -83,7 +83,7 @@ namespace SocialMedia1.Controllers
         {
             var userId = await userManager.GetUserIdAsync(await userManager.GetUserAsync(User));
 
-            if (groupMemberActionsService.IsUserGroupCreatorAsync(userId, id) == false)
+            if (groupMemberActionsService.IsUserGroupCreator(userId, id) == false)
             {
                 return Redirect($"/Group/{id}");
             }
@@ -101,7 +101,7 @@ namespace SocialMedia1.Controllers
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (await groupMemberActionsService.IsUserGroupMemberAsync(requesterId, groupId))
+            if (groupMemberActionsService.IsUserGroupMember(requesterId, groupId))
             {
                 return Redirect($"/Group/{groupId}");
             }
@@ -124,7 +124,7 @@ namespace SocialMedia1.Controllers
                 return Redirect($"/Group/{groupId}");
             }
 
-            if (await groupMemberActionsService.IsUserGroupMemberAsync(requesterId, groupId))
+            if (groupMemberActionsService.IsUserGroupMember(requesterId, groupId))
             {
                 return Redirect($"/Group/{groupId}");
             }

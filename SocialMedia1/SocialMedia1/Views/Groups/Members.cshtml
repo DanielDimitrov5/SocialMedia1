@@ -18,12 +18,12 @@
                 <div class="people-nearby">
 
                     @foreach (var member in Model.Members
-                    .OrderByDescending(x => groupMemberActionsService.IsUserGroupCreatorAsync(x.Id, Model.GroupId))
+                    .OrderByDescending(x => groupMemberActionsService.IsUserGroupCreator(x.Id, Model.GroupId))
                     .ThenByDescending(x => x.Id == @User.FindFirstValue(ClaimTypes.NameIdentifier)))
                     {
                         if (Model.GroupCreatorId == @User.FindFirstValue(ClaimTypes.NameIdentifier))
                         {
-                            if (groupMemberActionsService.IsUserGroupCreatorAsync(member.Id, Model.GroupId))
+                            if (groupMemberActionsService.IsUserGroupCreator(member.Id, Model.GroupId))
                             {
 
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
@@ -60,7 +60,7 @@
                         }
                         else
                         {
-                            if (groupMemberActionsService.IsUserGroupCreatorAsync(member.Id, Model.GroupId))
+                            if (groupMemberActionsService.IsUserGroupCreator(member.Id, Model.GroupId))
                             {
 
                                 <div class="nearby-user" onclick="window.location='/UserProfiles/Profile/@member.Id';">
