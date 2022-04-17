@@ -95,9 +95,6 @@
     <Content Update="wwwroot\img\dog-9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\favicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\img\landing_devices.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

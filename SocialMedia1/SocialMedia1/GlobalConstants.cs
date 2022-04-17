@@ -24,6 +24,6 @@
 
         public const string CloudinaryApiKey = "714726182434833";
 
-        public const string CloudinaryApiSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXX"; //hidden
+        public const string CloudinaryApiSecret = "BuFfSQmUk6tZXXZk0tM88CZM3nM"; //hidden
     }
 }

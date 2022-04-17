@@ -29,8 +29,10 @@
                         <a href="/UserProfiles/Followers/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowersCount</b> followers</p></div></a>
                         <a href="/UserProfiles/Following/@Model.Id"><div class="posts"><p class="lead"><b>@Model.FollowingCount</b> following</p></div></a>
                     </div>
-                    <p class="lead mb-0 mt-2"><b>@Model.Name</b></p>
-                    <p class="lead text-center text-lg-left">@Model.Bio</p>
+                    <p class="lead mb-0 mt-2"><b>@Model.Name @Model.Surname</b></p>
+                    <div class="lead mb-0 mt-2 col-12 col-md-6 text-center">
+                        <p class="lead text-center text-lg-left">@Model.Bio</p>
+                    </div>
                 </div>
             </div>
         </div>
