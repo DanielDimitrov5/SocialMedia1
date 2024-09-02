@@ -28,9 +28,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 builder.Services.AddControllersWithViews();
 
-var apiKey = builder.Configuration.GetValue<string>("SendGrid");
+// var apiKey = builder.Configuration.GetValue<string>("SendGrid");
 
-builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender("apiKey")); // change with your SendGrid API key
+//builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender("apiKey")); // change with your SendGrid API key
+builder.Services.AddTransient<IEmailSender>(x => new SmtpEmailSender("<{smpt>}", "*******")); 
 
 builder.Services
     .Scan(builder => builder
