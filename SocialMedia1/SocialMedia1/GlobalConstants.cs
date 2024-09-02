@@ -4,7 +4,7 @@
     {
         public const string MainEmail = "socialmedia1clients@gmail.com";
 
-        public const string SecondEmail = "dani_dimitrov03@abv.bg";
+        public const string SecondEmail = "7b5385001@smtp-brevo.com";
 
         public const string FromNameEmailSender = "SocialMedia1Support";
 
