@@ -45,7 +45,7 @@ namespace SocialMedia1.Tests.Tests.Common
 
         [Test]
         [TestCase("group")] // should retrun both group
-        [TestCase("...---...")] //dani's group description
+        [TestCase("...---...")] // dani's group description
         public void GetGroupsBySearchTermReturnsCorrectModel(string searchTerm)
         {
             var expected = context.Groups

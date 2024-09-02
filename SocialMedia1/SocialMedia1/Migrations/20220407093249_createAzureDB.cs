@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SocialMedia1.Migrations
 {
-    public partial class createAzureDB : Migration
+    public partial class CreateAzureDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

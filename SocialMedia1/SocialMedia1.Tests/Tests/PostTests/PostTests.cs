@@ -3,13 +3,8 @@ using NUnit.Framework;
 using SocialMedia1.Data;
 using SocialMedia1.Models.Posts;
 using SocialMedia1.Services.Posts;
-using SocialMedia1.Services.Users;
 using SocialMedia1.Tests.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialMedia1.Tests.Tests.PostTests
 {
