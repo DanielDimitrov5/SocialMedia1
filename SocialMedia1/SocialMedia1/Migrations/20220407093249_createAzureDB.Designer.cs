@@ -13,7 +13,7 @@ namespace SocialMedia1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220407093249_createAzureDB")]
-    partial class createAzureDB
+    partial class CreateAzureDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,8 +2,8 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-    <ul class="navbar-nav">
+<div>
+    <ul class="navbar-nav ml-auto">
         @if (SignInManager.IsSignedIn(User))
         {
             <li class="nav-item">

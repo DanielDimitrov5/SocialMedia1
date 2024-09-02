@@ -30,7 +30,7 @@ builder.Services.AddControllersWithViews();
 
 var apiKey = builder.Configuration.GetValue<string>("SendGrid");
 
-builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender(apiKey));
+builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender("apiKey")); // change with your SendGrid API key
 
 builder.Services
     .Scan(builder => builder
