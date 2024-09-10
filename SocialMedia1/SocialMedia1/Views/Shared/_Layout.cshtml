@@ -4,12 +4,12 @@
 @using SocialMedia1.Services.Common
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@inject INavBarService navBarService
+@inject INavBarService NavBarService
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@ViewData["Title"] - SocialMedia1</title>
+    <title>@ViewData["Title"] SocialMedia1</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,7 +55,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" href="/Home/FollowRequests">
-                                    Follow Requests <sup><span class="badge badge-pill badge-danger">@navBarService.FollowRequestsCount(@User.FindFirstValue(ClaimTypes.NameIdentifier))</span></sup>
+                                    Follow Requests <sup><span class="badge badge-pill badge-danger">@NavBarService.FollowRequestsCount(@User.FindFirstValue(ClaimTypes.NameIdentifier))</span></sup>
                                 </a>
                             </li>
                             <li class="nav-item">
