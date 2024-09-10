@@ -16,7 +16,7 @@ namespace SocialMedia1.Services.Posts
 
         public async Task CreatePostAsync(string userId, string content)
         {
-            if (await context.UserProfiles.FindAsync(userId) == null)
+            if (await context.UserProfiles.FindAsync(userId) == null || string.IsNullOrWhiteSpace(content))
             {
                 return;
             }
