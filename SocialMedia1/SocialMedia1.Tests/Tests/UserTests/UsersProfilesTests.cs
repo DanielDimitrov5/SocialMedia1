@@ -11,7 +11,7 @@ namespace SocialMedia1.Tests.Tests.UsersTests
     [TestFixture]
     public class UsersProfilesTests
     {
-        public static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+        private static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase("SocialMedia1Tests")
             .Options;
 

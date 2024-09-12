@@ -14,7 +14,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
     [TestFixture]
     public class GroupTests
     {
-        public static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+        private static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
            .UseInMemoryDatabase("SocialMedia1Tests")
            .Options;
 

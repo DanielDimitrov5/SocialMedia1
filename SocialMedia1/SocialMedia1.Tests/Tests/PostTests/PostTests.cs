@@ -11,7 +11,7 @@ namespace SocialMedia1.Tests.Tests.PostTests
     [TestFixture]
     public class PostTests
     {
-        public static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+        private static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
           .UseInMemoryDatabase("SocialMedia1Tests")
           .Options;
 
@@ -73,7 +73,7 @@ namespace SocialMedia1.Tests.Tests.PostTests
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(3)]
-        public void GetAllPostsRetrunsAllPostFromUserWhichAreNotDeleted(int index)
+        public void GetAllPostsReturnsAllPostFromUserWhichAreNotDeleted(int index)
         {
             var user = DataSeeder.UserProfiles()[0];
 
@@ -198,13 +198,13 @@ namespace SocialMedia1.Tests.Tests.PostTests
         {
             var report = DataSeeder.PostCommunityReports()[0];
 
-            var IntialreportsCount = context.PostCommunityReports.Count();
+            var initialReportsCount = context.PostCommunityReports.Count();
 
             postService.ReportPostAsync(report.PostId, report.ReporterId);
 
             var actualReportsCount = context.PostCommunityReports.Count();
 
-            Assert.AreEqual(IntialreportsCount, actualReportsCount);
+            Assert.AreEqual(initialReportsCount, actualReportsCount);
         }
 
         [Test]
@@ -213,13 +213,13 @@ namespace SocialMedia1.Tests.Tests.PostTests
             var post = DataSeeder.Posts()[1];
             var user = DataSeeder.UserProfiles()[1];
 
-            var IntialreportsCount = context.PostCommunityReports.Count();
+            var intialReportsCount = context.PostCommunityReports.Count();
 
             postService.ReportPostAsync(post.Id, user.Id);
 
             var actualReportsCount = context.PostCommunityReports.Count();
 
-            Assert.IsTrue(IntialreportsCount == actualReportsCount - 1);
+            Assert.IsTrue(intialReportsCount == actualReportsCount - 1);
             Assert.IsTrue(context.PostCommunityReports.Any(x => x.PostId == post.Id && x.ReporterId == user.Id));
         }
 
