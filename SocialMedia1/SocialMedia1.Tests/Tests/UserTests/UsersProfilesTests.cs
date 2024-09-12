@@ -5,6 +5,7 @@ using SocialMedia1.Services.Posts;
 using SocialMedia1.Services.Users;
 using SocialMedia1.Tests.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialMedia1.Tests.Tests.UsersTests
 {
@@ -20,12 +21,12 @@ namespace SocialMedia1.Tests.Tests.UsersTests
         private IUserProfileService userProfileService;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             context = new ApplicationDbContext(dbOptions);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            DataSeeder.Seed(context);
+            await DataSeeder.SeedAsync(context);
 
             userProfileService = new UserProfileService(context, new PostService(context));
         }

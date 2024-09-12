@@ -34,7 +34,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender>(x => new SmtpEmailSender("<{smpt>}", "*******")); 
 
 builder.Services
-    .Scan(builder => builder
+    .Scan(b => b
     .FromAssemblies(Assembly.GetExecutingAssembly())
     .AddClasses(a => a.AssignableTo(typeof(IService)))
     .AsMatchingInterface()

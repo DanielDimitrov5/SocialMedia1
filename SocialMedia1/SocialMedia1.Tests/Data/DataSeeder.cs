@@ -292,19 +292,19 @@ namespace SocialMedia1.Tests.Data
             };
         }
 
-        public static void Seed(ApplicationDbContext context)
+        public static async Task SeedAsync(ApplicationDbContext context)
         {
-            context.Users.Add(User());
+            await context.Users.AddAsync(User());
 
             var users = UserProfiles();
 
-            context.UserProfiles.AddRange(users);
+            await context.UserProfiles.AddRangeAsync(users);
 
             users.First(x => x.Id == privateUserId).Follows.Add(users[1]);
             users.First(x => x.Id == privateUserId).FollowedBy.Add(users[1]);
             users.First(x => x.Id == privateUserId).FollowedBy.Add(users[2]);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             var privateUser = users[0];
 
@@ -313,22 +313,22 @@ namespace SocialMedia1.Tests.Data
                 privateUser.FollowRequests.Add(req);
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
-            context.Groups.AddRange(Groups());
+            await context.Groups.AddRangeAsync(Groups());
 
-            context.JoinGroupRequest.AddRange(JoinGroupRequests());
+            await context.JoinGroupRequest.AddRangeAsync(JoinGroupRequests());
 
-            context.UserProfilesGroups.AddRange(UserProfilesGroups());
+            await context.UserProfilesGroups.AddRangeAsync(UserProfilesGroups());
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
-            context.Posts.AddRange(Posts());
-            context.Posts.AddRange(GroupPosts());
+            await context.Posts.AddRangeAsync(Posts());
+            await context.Posts.AddRangeAsync(GroupPosts());
 
-            context.PostCommunityReports.AddRange(PostCommunityReports());
+            await context.PostCommunityReports.AddRangeAsync(PostCommunityReports());
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }
