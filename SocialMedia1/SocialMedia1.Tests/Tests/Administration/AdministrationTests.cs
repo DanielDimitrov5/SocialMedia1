@@ -5,6 +5,7 @@ using SocialMedia1.Areas.Admin.Services;
 using SocialMedia1.Data;
 using SocialMedia1.Tests.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialMedia1.Tests.Tests.Administration
 {
@@ -20,12 +21,12 @@ namespace SocialMedia1.Tests.Tests.Administration
         private IReportService reportService;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             context = new ApplicationDbContext(dbOptions);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            DataSeeder.Seed(context);
+            await DataSeeder.SeedAsync(context);
 
             reportService = new ReportService(context);
         }

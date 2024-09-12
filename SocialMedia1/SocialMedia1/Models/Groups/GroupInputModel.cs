@@ -9,8 +9,8 @@ namespace SocialMedia1.Models.Groups
 
         public string Name { get; set; }
 
-        [MinLength(5, ErrorMessage = GlobalConstants.GroupDescpriptionMinCharException)]
-        [MaxLength(500, ErrorMessage = GlobalConstants.GroupDescpriptionMaxCharException)]
+        [MinLength(5, ErrorMessage = GlobalConstants.GroupDescriptionMinCharException)]
+        [MaxLength(500, ErrorMessage = GlobalConstants.GroupDescriptionMaxCharException)]
         public string Description { get; set; }
 
         [Display(Name = "Private")]

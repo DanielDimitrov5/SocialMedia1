@@ -21,12 +21,12 @@ namespace SocialMedia1.Tests.Tests.GroupTests
         private IGroupMemberActionsService groupMemberActionsService;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             context = new ApplicationDbContext(dbOptions);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            DataSeeder.Seed(context);
+            await DataSeeder.SeedAsync(context);
 
             groupMemberActionsService = new GroupMemberActionsService(context);
         }

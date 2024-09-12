@@ -9,6 +9,7 @@ using SocialMedia1.Services.Posts;
 using SocialMedia1.Tests.Data;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialMedia1.Tests.Tests.Common
 {
@@ -28,12 +29,12 @@ namespace SocialMedia1.Tests.Tests.Common
         private IPostService postService;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             context = new ApplicationDbContext(dbOptions);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            DataSeeder.Seed(context);
+            await DataSeeder.SeedAsync(context);
 
             searchService = new SearchService(context);
             navBarService = new NavBarService(context);

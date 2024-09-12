@@ -16,9 +16,9 @@
 
         public const string ExtensionAttributeError = "This file extension should be {0}!";
 
-        public const string GroupDescpriptionMinCharException = "Description should be at lest 5 characters long.";
+        public const string GroupDescriptionMinCharException = "Description should be at lest 5 characters long.";
 
-        public const string GroupDescpriptionMaxCharException = "Description should be under 500 characters long.";
+        public const string GroupDescriptionMaxCharException = "Description should be under 500 characters long.";
 
         public const string CloudinaryName = "dani03";
 

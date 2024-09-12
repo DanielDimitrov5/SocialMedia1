@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SocialMedia1.Data;
 using SocialMedia1.Services.Users;
@@ -18,12 +19,12 @@ namespace SocialMedia1.Tests.Tests.UsersTests
         private IUserActionsService userActionsService;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             context = new ApplicationDbContext(dbOptions);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            DataSeeder.Seed(context);
+            await DataSeeder.SeedAsync(context);
 
             userActionsService = new UserActionsService(context);
         }

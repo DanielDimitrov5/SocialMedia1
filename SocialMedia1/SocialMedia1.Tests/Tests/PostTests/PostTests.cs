@@ -5,6 +5,7 @@ using SocialMedia1.Models.Posts;
 using SocialMedia1.Services.Posts;
 using SocialMedia1.Tests.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialMedia1.Tests.Tests.PostTests
 {
@@ -15,17 +16,16 @@ namespace SocialMedia1.Tests.Tests.PostTests
           .UseInMemoryDatabase("SocialMedia1Tests")
           .Options;
 
-
         private ApplicationDbContext context;
         private IPostService postService;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public async Task SetUp()
         {
             context = new ApplicationDbContext(dbOptions);
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
-            DataSeeder.Seed(context);
+            await DataSeeder.SeedAsync(context);
 
             postService = new PostService(context);
         }
@@ -37,13 +37,13 @@ namespace SocialMedia1.Tests.Tests.PostTests
         }
 
         [Test]
-        public void CreatePostAsyncCreatesPost()
+        public async Task CreatePostAsyncCreatesPost()
         {
             var user = DataSeeder.UserProfiles()[0];
 
             var content = "test post";
 
-            postService.CreatePostAsync(user.Id, content);
+            await postService.CreatePostAsync(user.Id, content);
 
             Assert.True(context.Posts.Any(x => x.UserProfileId == user.Id && x.Content == content));
         }
@@ -51,11 +51,11 @@ namespace SocialMedia1.Tests.Tests.PostTests
         [Test]
         public void CreateGroupPostAsyncHandlesInvalidData()
         {
-            Assert.DoesNotThrowAsync(() => postService.CreateGroupPostAsync("fake", "fake", "fake"));
+            Assert.DoesNotThrowAsync(async () => await postService.CreateGroupPostAsync("fake", "fake", "fake"));
         }
 
         [Test]
-        public void CreateGroupPostAsyncAddPostIntoGroups()
+        public async Task CreateGroupPostAsyncAddPostIntoGroups()
         {
             var user = DataSeeder.UserProfiles()[0];
 
@@ -63,7 +63,7 @@ namespace SocialMedia1.Tests.Tests.PostTests
 
             var content = "funny content";
 
-            postService.CreateGroupPostAsync(group.Id, user.Id, content);
+            await postService.CreateGroupPostAsync(group.Id, user.Id, content);
 
             Assert.True(context.Posts.Any(x => x.UserProfileId == user.Id && x.GroupId == group.Id && x.Content == content));
         }
