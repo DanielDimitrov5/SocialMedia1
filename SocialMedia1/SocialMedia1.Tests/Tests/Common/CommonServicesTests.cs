@@ -15,7 +15,7 @@ namespace SocialMedia1.Tests.Tests.Common
     [TestFixture]
     public class CommonServicesTests
     {
-        public static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+        private static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
            .UseInMemoryDatabase("SocialMedia1Tests")
            .Options;
 
@@ -96,7 +96,7 @@ namespace SocialMedia1.Tests.Tests.Common
         [Test]
         [TestCase(0)] //3
         [TestCase(1)] //0
-        public void FollowRequestsCountRetunrsCorrectValue(int index)
+        public void FollowRequestsCountReturnsCorrectValue(int index)
         {
             var user = DataSeeder.UserProfiles()[index];
 
@@ -137,9 +137,9 @@ namespace SocialMedia1.Tests.Tests.Common
         [TestCase(-1)]
         [TestCase(-20)]
         [TestCase(-59)]
-        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan60Seconds(int secondsBifore)
+        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan60Seconds(int secondsBefore)
         {
-            var postedOnDate = DateTime.Now.AddSeconds(secondsBifore);
+            var postedOnDate = DateTime.Now.AddSeconds(secondsBefore);
 
             var timeSpan = indexService.TimeSpanCalculator(postedOnDate);
 
@@ -151,13 +151,13 @@ namespace SocialMedia1.Tests.Tests.Common
         [Test]
         [TestCase(-1)]
         [TestCase(-45)]
-        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan60Minutes(int minutesBifore)
+        public void TimeSpanCalculatorReturnCorrectStringWhenDateDifferWithLessThan60Minutes(int minutesBefore)
         {
-            var postedOnDate = DateTime.Now.AddMinutes(minutesBifore);
+            var postedOnDate = DateTime.Now.AddMinutes(minutesBefore);
 
             var timeSpan = indexService.TimeSpanCalculator(postedOnDate);
 
-            string minute = minutesBifore == -1 ? "min" : "mins";
+            string minute = minutesBefore == -1 ? "min" : "mins";
 
             string formated = $"{(DateTime.Now - postedOnDate).Minutes} {minute} ago";
 

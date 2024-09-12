@@ -12,7 +12,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
 {
     public class GroupMemberActionsTests
     {
-        public static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+        private static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
            .UseInMemoryDatabase("SocialMedia1Tests")
            .Options;
 
@@ -97,8 +97,8 @@ namespace SocialMedia1.Tests.Tests.GroupTests
         }
 
         [Test]
-        [TestCase(0)] //private
-        [TestCase(1)] //public
+        [TestCase(0)] // private
+        [TestCase(1)] // public
         public async Task IsGroupPrivateReturnsCorrectResponse(int index)
         {
             var groupId = DataSeeder.Groups()[0].Id;
@@ -111,7 +111,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
         }
 
         [Test]
-        public async Task IsJoinRequstSentReturnsCorrectData()
+        public async Task IsJoinRequestSentReturnsCorrectData()
         {
             var requesterId = DataSeeder.JoinGroupRequests().First().UserProfileId;
 
@@ -141,7 +141,7 @@ namespace SocialMedia1.Tests.Tests.GroupTests
         {
             var group = DataSeeder.Groups()[1];
 
-            var user = DataSeeder.UserProfiles()[1]; //group member
+            var user = DataSeeder.UserProfiles()[1]; // group member
 
             Assert.IsTrue(groupMemberActionsService.IsUserGroupMember(user.Id, group.Id));
         }

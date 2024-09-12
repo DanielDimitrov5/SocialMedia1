@@ -9,7 +9,7 @@ namespace SocialMedia1.Tests.Tests.UsersTests
     [TestFixture]
     public class UserActionsTests
     {
-        public static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+        private static DbContextOptions<ApplicationDbContext> dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
            .UseInMemoryDatabase("SocialMedia1Tests")
            .Options;
 
@@ -230,7 +230,7 @@ namespace SocialMedia1.Tests.Tests.UsersTests
         }
 
         [Test]
-        public void IsUserFollowingAsyncRetunsCorrectData()
+        public void IsUserFollowingAsyncReturnsCorrectData()
         {
             var user = context.UserProfiles.Find(DataSeeder.UserProfiles()[0].Id); //Does not follow uesr[2]
             var followedUser = context.UserProfiles.Find(DataSeeder.UserProfiles()[2].Id); //Follows user[0]
