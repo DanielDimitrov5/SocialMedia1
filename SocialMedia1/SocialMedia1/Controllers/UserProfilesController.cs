@@ -9,7 +9,6 @@ namespace SocialMedia1.Controllers
 {
     public class UserProfilesController : Controller
     {
-
         private readonly IUserProfileService userProfileService;
         private readonly IUserActionsService userActionsService;
         private readonly IImageService imageService;

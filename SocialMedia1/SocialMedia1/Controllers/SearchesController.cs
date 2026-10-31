@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SocialMedia1.Models;
 using SocialMedia1.Models.Common;
 using SocialMedia1.Services.Common;
 
