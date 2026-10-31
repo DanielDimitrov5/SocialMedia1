@@ -3,7 +3,6 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7258",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -11,7 +10,6 @@
     "SocialMedia1App": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "https://0.0.0.0:7258;http://0.0.0.0:5258",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
